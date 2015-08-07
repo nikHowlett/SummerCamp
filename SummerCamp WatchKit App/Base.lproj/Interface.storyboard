@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="i2n-mq-MI4">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="SummerCamp_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="813" y="214"/>
+        </scene>
+        <!--1/3-->
+        <scene sceneID="3w8-Rr-N78">
+            <objects>
+                <controller identifier="YesNo" title="1/3" id="hdp-jL-az6">
+                    <items>
+                        <group width="1" alignment="left" id="S3m-7O-e2i">
+                            <items>
+                                <label width="136" height="14" alignment="center" text="Question #1" textAlignment="center" id="2ps-CY-56f"/>
+                            </items>
+                        </group>
+                        <imageView width="40" height="40" alignment="center" image="Noise_to_Signal" id="f8Z-iM-nWk"/>
+                        <group width="1" alignment="left" id="0wf-tD-Lj0">
+                            <items>
+                                <label width="136" height="91" alignment="center" text="Did you find the presentation to be applicable to your role with UCB?" textAlignment="center" numberOfLines="7" id="We5-pd-Jxr">
+                                    <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                            <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <group width="1" alignment="left" id="IqH-op-XNg">
+                            <items>
+                                <button width="49" height="30" alignment="center" title="Yes" id="ppX-6c-clW">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="Open" destination="AgC-eL-Hgc" id="N0q-3q-uoe"/>
+                                    </connections>
+                                </button>
+                                <button width="51" height="30" alignment="center" title="No" id="fCr-B3-rQy">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.80392163991928101" green="0.20000001788139343" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="Open" destination="AgC-eL-Hgc" id="ueA-ss-H6X"/>
+                                        <segue destination="ekW-Fy-6MV" kind="push" id="RT5-R2-HuH"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="478" y="507"/>
+        </scene>
+        <!--3/3-->
+        <scene sceneID="Od6-ty-Qku">
+            <objects>
+                <controller identifier="Slider" title="3/3" id="qxf-nA-zMY">
+                    <items>
+                        <group width="1" alignment="left" id="FgR-s0-F9W">
+                            <items>
+                                <label width="136" height="14" alignment="center" text="Question #3" textAlignment="center" id="i8z-Sb-yt9"/>
+                            </items>
+                        </group>
+                        <imageView width="40" height="40" alignment="center" image="Task_to_Value.png" id="jVR-Dl-nxd"/>
+                        <group width="134" height="47" alignment="left" id="S8d-6V-NRh">
+                            <items>
+                                <label width="136" height="49" alignment="center" text="Indicate your level of engagement" textAlignment="center" numberOfLines="7" id="biA-7E-eGi">
+                                    <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                            <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <label alignment="center" text="Highly Interested" numberOfLines="2" id="xbR-BC-oYq"/>
+                        <slider width="1" alignment="left" value="3" maximum="5" steps="5" id="mKI-6E-nv0"/>
+                        <group width="1" alignment="left" id="d7S-Gw-Brg">
+                            <items>
+                                <button width="66" height="29" alignment="center" title="Submit" id="1vu-Sc-AIo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="Open" destination="AgC-eL-Hgc" id="s40-1m-DYr"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="877" y="514.25"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="5k4-aJ-LTI">
+            <objects>
+                <controller id="i2n-mq-MI4" customClass="InterfaceController" customModule="SummerCamp_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Loading Activies..." id="Qlv-8I-EZU"/>
+                        <group width="1" alignment="left" id="Uan-1K-fdm">
+                            <items>
+                                <label alignment="left" text="0" id="Ebr-Pq-b7W"/>
+                                <label alignment="left" text="Activities." id="FYs-mO-c7l"/>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" title="Go" id="v61-YC-8G6"/>
+                    </items>
+                    <connections>
+                        <outlet property="number" destination="Ebr-Pq-b7W" id="oeD-DO-BsG"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="250" y="347"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="BOz-TT-tkC">
+            <objects>
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="SummerCamp_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group alignment="left" id="t8f-Gd-c4y"/>
+                        <group alignment="left" id="uCw-4Q-Ouw"/>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="235" y="672"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                        <segue destination="gdX-wl-uQE" kind="relationship" relationship="dynamicNotificationInterface" id="fKh-qV-3T2"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="235" y="1001"/>
+        </scene>
+        <!--2/3-->
+        <scene sceneID="LiJ-N9-0DR">
+            <objects>
+                <controller identifier="Activity" title="2/3" id="ekW-Fy-6MV">
+                    <items>
+                        <group width="1" alignment="center" id="B4v-hg-fly">
+                            <items>
+                                <label width="136" height="14" alignment="center" text="Activity #2" textAlignment="center" id="tYq-IZ-SOS"/>
+                            </items>
+                        </group>
+                        <imageView width="40" height="40" alignment="center" image="Space_w_Consistency" id="BnO-GZ-7dx"/>
+                        <group width="134" height="86" alignment="center" id="dUq-CG-okx">
+                            <items>
+                                <label width="136" height="89" alignment="center" text="Post your expectations for the day in 3 words." textAlignment="center" numberOfLines="7" id="A4j-fS-iSz">
+                                    <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                            <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <button width="108" height="30" alignment="center" title="Open Yammer" id="A9a-Sc-hlU">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="Open" destination="AgC-eL-Hgc" id="7Uo-xd-GH2"/>
+                                <segue destination="qxf-nA-zMY" kind="push" id="GQ1-Zy-y0F"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="681" y="506.5"/>
+        </scene>
+        <!--2/5-->
+        <scene sceneID="zuZ-N3-Akb">
+            <objects>
+                <controller identifier="Emoji" title="2/5" id="XXM-ip-LTf">
+                    <items>
+                        <group width="1" alignment="left" id="fjr-qu-yoU">
+                            <items>
+                                <label width="136" height="49" alignment="center" text="How are you feeling?" textAlignment="center" numberOfLines="7" id="Fe3-SM-ObG">
+                                    <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                            </items>
+                            <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <group width="1" height="85" alignment="left" id="niO-cF-tml">
+                            <items>
+                                <button width="30" alignment="left" verticalAlignment="center" title="&lt;" id="AKe-vD-Pjo">
+                                    <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="33" height="40" alignment="right" verticalAlignment="center" title="&gt;" id="LOu-32-8CX">
+                                    <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <button width="66" height="29" alignment="center" title="Submit" id="wds-17-1MZ">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="Open" destination="AgC-eL-Hgc" id="W7Y-X2-HGY"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="677" y="750"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="KIl-fV-djm">
+            <objects>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="SummerCamp_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="553" y="1001"/>
+        </scene>
+        <!--First Window Interface Controller-->
+        <scene sceneID="fRz-gz-1Ms">
+            <objects>
+                <controller id="Dn2-NJ-gYh" customClass="FirstWindowInterfaceController" customModule="thirdSurvey_WatchKit_Extension">
+                    <items>
+                        <label width="136" alignment="left" text="No activities to show." textAlignment="center" numberOfLines="3" id="l3e-fC-7q6"/>
+                        <button width="1" alignment="left" title="Begin Activities" id="rnj-5v-nPJ">
+                            <connections>
+                                <segue destination="bAd-Pt-R96" kind="push" id="Ogh-7F-Yyz"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="View Activity Log" id="XOd-CK-FV4">
+                            <connections>
+                                <segue destination="IGp-uF-BAD" kind="push" id="qy5-hu-2u9"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="noats" destination="l3e-fC-7q6" id="n0i-rC-uMj"/>
+                        <outlet property="plural" destination="rnj-5v-nPJ" id="lhD-hT-7zA"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="242" y="-96"/>
+        </scene>
+        <!--1/3-->
+        <scene sceneID="6j8-02-C4j">
+            <objects>
+                <controller title="1/3" id="bAd-Pt-R96" customClass="dInterfaceController" customModule="thirdSurvey_WatchKit_Extension">
+                    <items>
+                        <label width="136" height="22" alignment="left" text="ActivityLabel" textAlignment="center" numberOfLines="13" id="3O3-Th-Nt2"/>
+                        <group width="1" alignment="left" id="aUw-wD-BDN">
+                            <items>
+                                <button width="66" alignment="left" title="Yes" id="05L-4t-vH0"/>
+                                <button width="67" alignment="left" title="No" id="QlM-9G-cEq">
+                                    <color key="backgroundColor" red="0.80392163991928101" green="0.20000001788139343" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                </button>
+                                <button width="66" alignment="left" title="Yes" id="ajf-jo-YYA"/>
+                                <button width="67" alignment="left" title="No" id="J9Y-tQ-1Xt"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="xbf-r6-0ki">
+                            <items>
+                                <button width="66" alignment="left" title="Now" id="ZXV-F8-2P8">
+                                    <connections>
+                                        <action selector="nowpress" destination="bAd-Pt-R96" id="Qop-Im-L85"/>
+                                    </connections>
+                                </button>
+                                <button width="67" alignment="left" title="Later" id="Rtx-d8-4gl"/>
+                            </items>
+                        </group>
+                        <label width="136" height="20" alignment="left" text="SliderValue" textAlignment="center" id="RXk-M5-aYj"/>
+                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="ERA-Wl-SdB"/>
+                        <separator alignment="left" id="LxN-jL-2ct"/>
+                        <dateLabel width="1" alignment="left" textAlignment="center" minimumScaleFactor="0.70000000000000007" id="MDC-wu-2dz">
+                            <dateFormatterStyle key="dateStyle" none="YES" short="YES" medium="YES" long="YES"/>
+                        </dateLabel>
+                    </items>
+                    <connections>
+                        <outlet property="later" destination="Rtx-d8-4gl" id="GDR-rz-XHd"/>
+                        <outlet property="messageLabel" destination="3O3-Th-Nt2" id="hhq-O6-8XB"/>
+                        <outlet property="no" destination="QlM-9G-cEq" id="ccL-m0-j8n"/>
+                        <outlet property="now" destination="ZXV-F8-2P8" id="o9x-rn-CAF"/>
+                        <outlet property="slider" destination="ERA-Wl-SdB" id="O2a-bk-0ei"/>
+                        <outlet property="sliderLabel" destination="RXk-M5-aYj" id="2wK-4P-FtO"/>
+                        <outlet property="yes" destination="05L-4t-vH0" id="GNP-jF-eRe"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="488" y="-185.5"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="rJA-9Z-fsY">
+            <objects>
+                <controller id="Oge-HK-opn">
+                    <items>
+                        <group width="1" alignment="left" id="ydi-dx-S46">
+                            <items>
+                                <button width="66" alignment="left" title="Now" id="DdB-IP-EPg">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="nowpress" destination="bAd-Pt-R96" id="ybc-RZ-4Qm"/>
+                                    </connections>
+                                </button>
+                                <button width="67" alignment="left" title="Later" id="FO8-7b-lv0">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.80392163991928101" green="0.20000001788139343" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                </button>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" title="Submit" id="vFc-wE-QmZ">
+                            <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="662" y="-210"/>
+        </scene>
+        <!--Activity Table2-->
+        <scene sceneID="KEW-WA-3MG">
+            <objects>
+                <controller id="IGp-uF-BAD" customClass="ActivityTable2" customModule="thirdSurvey_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" id="NQg-VQ-AB0">
+                            <items>
+                                <tableRow id="aZY-3v-RWQ">
+                                    <group key="rootItem" width="1" alignment="left" id="wBS-p9-l4D"/>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <label width="136" alignment="left" text="No activities to show." textAlignment="center" numberOfLines="3" id="s5n-9H-NX6"/>
+                        <button width="1" alignment="left" title="Begin Activities" id="PjS-v7-29J"/>
+                        <button width="1" alignment="left" title="View Activity Log" id="T3V-TH-kxf"/>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="NQg-VQ-AB0" id="Tm7-dZ-b3i"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="488" y="67"/>
+        </scene>
+    </scenes>
+</document>

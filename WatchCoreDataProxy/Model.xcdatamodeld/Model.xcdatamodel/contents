@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Activity" representedClassName="Activity" syncable="YES">
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Results" representedClassName="Results" syncable="YES">
+        <attribute name="q1" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="q2" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="q3" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="Session" representedClassName="Session" syncable="YES">
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="presenter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="UCBEmployee" representedClassName="UCBEmployee" syncable="YES">
+        <attribute name="corporateAccount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="presenter" optional="YES" attributeType="Boolean" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Results" positionX="-27" positionY="18" width="128" height="90"/>
+        <element name="Activity" positionX="18" positionY="63" width="128" height="90"/>
+        <element name="Session" positionX="54" positionY="99" width="128" height="105"/>
+        <element name="UCBEmployee" positionX="18" positionY="63" width="128" height="90"/>
+    </elements>
+</model>
