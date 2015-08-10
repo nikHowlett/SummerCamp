@@ -25,7 +25,7 @@ class yesno: WKInterfaceController {
     @IBOutlet weak var thisText: WKInterfaceLabel!
     @IBOutlet weak var activitylabel: WKInterfaceLabel!
     var thisSingleActivityInAnArray = []
-    var globalArray = []
+    var globalArray: NSArray = []
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -38,6 +38,26 @@ class yesno: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         psilocybin = []
+        titles = []
+        activityTitles = []
+        globalArray = []
+        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        defaults?.synchronize()
+        globalArray = defaults?.objectForKey("globalActivities") as! NSMutableArray
+        var firstobject: NSArray = globalArray[0] as! NSArray
+        var firstobjectype: String = firstobject[2] as! String
+        thisSingleActivityInAnArray = firstobject
+        if firstobject == thisPageType {
+            loadThisPage()
+        } else if firstobject[2] as! String == "activity" {
+            self.pushControllerWithName("activity", context: self)
+        } else if firstobject[2] as! String == "slider-engagement" {
+            self.pushControllerWithName("slider-engagement", context: self)
+        } else if firstobject[2] as! String == "slider1-5" {
+            self.pushControllerWithName("slider1-5", context: self)
+        }
+
+        /*psilocybin = []
         titles = []
         activityTitles = []
         var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
@@ -93,21 +113,40 @@ class yesno: WKInterfaceController {
                 self.pushControllerWithName("slider1-5", context: self)
             }
             
+        }*/
+    }
+    
+    
+    func openNext() {
+        if globalArray.count > 0 {
+            var nextObj = globalArray[1] as! NSArray
+            var nextType = nextObj[2] as! String
+            pushControllerWithName("\(nextType)", context: self)
+        } else {
+            pushControllerWithName("NoMore", context: self)
         }
     }
     
     @IBAction func pressNo() {
         var id = thisSingleActivityInAnArray[3] as? String
         var whole = "Activity \(id!)"
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("Activity \(id!)")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(whole)
+        //globalArray.removeObjectAtIndex(0)
+        globalArray.delete(thisSingleActivityInAnArray)
+        defaults?.setObject(globalArray, forKey: "globalActivities")
+        openNext()
+        /*NSUserDefaults.standardUserDefaults().removeObjectForKey("Activity \(id!)")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(whole)*/
     }
     
     @IBAction func pressYes() {
         var id = thisSingleActivityInAnArray[3] as? String
         var whole = "Activity \(id!)"
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("Activity \(id!)")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(whole)
+        //globalArray.removeObjectAtIndex(0)
+        globalArray.delete(thisSingleActivityInAnArray)
+        defaults?.setObject(globalArray, forKey: "globalActivities")
+        openNext()
+        /*NSUserDefaults.standardUserDefaults().removeObjectForKey("Activity \(id!)")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(whole)*/
     }
     
     

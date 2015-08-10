@@ -147,13 +147,22 @@ class middle2ViewController: UIViewController {
                     var shit = "\(id!)"
                 var array = [text, icon, type, shit] as NSArray
                 var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
-                var globalActivities: NSMutableArray = []
-                if defaults?.objectForKey("globalActivities") != nil {
-                    globalActivities = defaults?.objectForKey("globalActivities") as! NSMutableArray
+                var globalActivities: NSArray = []
+                var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
+                for (var p = 0; p < activitytitlearray!.count-1; p++) {
+                    var thisobjectatindexp = activitytitlearray![p] as? String
+                    if thisobjectatindexp! == "globalActivities" {
+                        globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
+                    }
                 }
-                defaults?.setObject(array, forKey: "Activity \(id!)")
+                /*if defaults?.objectForKey("globalActivities") != nil {
+                    globalActivities = defaults?.objectForKey("globalActivities") as! NSMutableArray
+                }*/
+                //defaults?.setObject(array, forKey: "Activity \(id!)")
                 //globalActivities.append(array)
-                globalActivities.addObject(array)
+                //globalActivities.append("hello")
+                globalActivities.arrayByAddingObject(array)
+                    //globalActivities.addObject([text, icon, type, shit])
                 defaults?.setObject(globalActivities, forKey: "globalActivities")
                 //defaults?.synchronize()
                 //var thethingusaved = defaults?.objectForKey("Activity \(id)") as! NSArray

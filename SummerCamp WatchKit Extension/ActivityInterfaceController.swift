@@ -29,8 +29,7 @@ class ActivityInterfaceController: WKInterfaceController {
         @IBOutlet weak var activitylabel: WKInterfaceLabel!
         var thisSingleActivityInAnArray = []
         @IBOutlet weak var openYammer: WKInterfaceButton!
-        var globalArray = []
-        var currentIndexinGlobal = 0
+        var globalArray: NSMutableArray = []
         
         override func awakeWithContext(context: AnyObject?) {
             super.awakeWithContext(context)
@@ -47,7 +46,8 @@ class ActivityInterfaceController: WKInterfaceController {
             })
             //var id = thisSingleActivityInAnArray[3] as! String
             //defaults?.removeObjectForKey("Activity \(id)")
-            
+            //globalArray.delete(thisSingleActivityInAnArray)
+            //var globalArrayChicken = globalArray as NSMutableArray
             globalArray.removeObjectAtIndex(0)
             defaults?.setObject(globalArray, forKey: "globalActivities")
             openNext()
@@ -65,7 +65,7 @@ class ActivityInterfaceController: WKInterfaceController {
         globalArray = []
         var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
         defaults?.synchronize()
-        globalArray = defaults?.objectForKey("globalActivities") as! NSArray
+        globalArray = defaults?.objectForKey("globalActivities") as! NSMutableArray
         var firstobject: NSArray = globalArray[0] as! NSArray
         var firstobjectype: String = firstobject[2] as! String
         thisSingleActivityInAnArray = firstobject
@@ -132,7 +132,7 @@ class ActivityInterfaceController: WKInterfaceController {
     
     func openNext() {
         if globalArray.count > 0 {
-            var nextObj = globalArray[1] as! NSArray
+            var nextObj = globalArray[0] as! NSArray
             var nextType = nextObj[2] as! String
             pushControllerWithName("\(nextType)", context: self)
         } else {

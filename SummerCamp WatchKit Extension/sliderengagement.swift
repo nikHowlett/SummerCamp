@@ -22,7 +22,7 @@ class sliderengagement: WKInterfaceController {
     var thisPageType = "slider"
     var Nub = 3
     var janet = "Update"
-    @IBOutlet weak var iconOutlet: WKInterfaceImage!
+    //@IBOutlet weak var iconOutlet: WKInterfaceImage!
     //@IBOutlet weak var number: WKInterfaceLabel!
     @IBOutlet weak var thisslider: WKInterfaceSlider!
     @IBOutlet weak var thisText: WKInterfaceLabel!
@@ -34,14 +34,14 @@ class sliderengagement: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         //go to the correct interface based on the closest activity's title
-        openNextPage()
+        //openNextPage()
     }
     
     func loadThisPage() {
         thisText.setText(thisSingleActivityInAnArray[0] as? String)
         var outletimage = thisSingleActivityInAnArray[1] as? String
         //iconOutlet.setImage(outletimage!)
-        iconOutlet.setImageNamed(outletimage!)
+        //iconOutlet.setImageNamed(outletimage!)
     }
     
     func openNextPage() {
@@ -84,28 +84,21 @@ class sliderengagement: WKInterfaceController {
     @IBAction func sleepSliderDidMove(value: Float) {
         Nub = Int(value)
         if Nub == 0 {
-            janet = "Unengaging"
+            janet = "0"
         } else if Nub == 1 {
-            janet = "Uninteresting"
+            janet = "1"
         } else if Nub == 2 {
-            janet = "Sub-Par"
+            janet = "2"
         } else if Nub == 3 {
-            janet = "Good"
+            janet = "3"
         } else if Nub == 4 {
-            janet = "Very Good"
+            janet = "4"
         } else if Nub == 5 {
-            janet = "Extremely Engaging"
+            janet = "5"
         }
         activitylabel.setText(janet)
         //sqLabelText = "Quality: \(sliderValue)"
         //sqLabel.setText(sqLabelText)
-    }
-    
-    @IBAction func Open() {
-        let dict: Dictionary = ["message": "Yammer"]
-        print("dataisbeensent", appendNewline: false)
-        WKInterfaceController.openParentApplication(dict, reply: {(reply, error) -> Void in print("Data has been sent to target: parent iOS app - UCB Pharma", appendNewline: false)
-        })
     }
     
     override func willActivate() {
@@ -115,7 +108,7 @@ class sliderengagement: WKInterfaceController {
         activityTitles = []
         var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
         defaults?.synchronize()
-        loadActivites()
+        //loadActivites()
         var activitescount = psilocybin.count
         if activitescount == 0 {
             print("try again")
@@ -130,7 +123,7 @@ class sliderengagement: WKInterfaceController {
         super.didDeactivate()
     }
     
-    func loadActivites() {
+   /* func loadActivites() {
         var charlie = false;
         for (var i = 0; i < 275; i++) {
             charlie = false
@@ -151,7 +144,7 @@ class sliderengagement: WKInterfaceController {
         //in another for loop, loop throught the titles, and pull them
         titlesCount = titles.count
         activitesCount = psilocybin.count
-    }
+    }*/
     
     
 }//types
