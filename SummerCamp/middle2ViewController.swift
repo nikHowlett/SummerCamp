@@ -143,13 +143,23 @@ class middle2ViewController: UIViewController {
                 print(text)
                 print(type)
                 print(icon)
-                self.saveActivity(id!, icon: icon, type: type, text: text)
-                var array = [text, icon, type]
+                //self.saveActivity(id!, icon: icon, type: type, text: text)
+                    var shit = "\(id!)"
+                var array = [text, icon, type, shit] as NSArray
                 var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
-                defaults?.setObject(array, forKey: "Activity \(id)")
+                var globalActivities: NSMutableArray = []
+                if defaults?.objectForKey("globalActivities") != nil {
+                    globalActivities = defaults?.objectForKey("globalActivities") as! NSMutableArray
+                }
+                defaults?.setObject(array, forKey: "Activity \(id!)")
+                //globalActivities.append(array)
+                globalActivities.addObject(array)
+                defaults?.setObject(globalActivities, forKey: "globalActivities")
                 //defaults?.synchronize()
-                var thethingusaved = NSUserDefaults.standardUserDefaults().objectForKey("Activity \(id)") as! NSArray
-                var thingtext: AnyObject = thethingusaved[2]
+                //var thethingusaved = defaults?.objectForKey("Activity \(id)") as! NSArray
+                var thingtext: AnyObject = array[2]
+                var iconstring = array[1] as? String
+                self.notifysomeone(iconstring!)
                 print(thingtext)
                     print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
                 }
@@ -189,13 +199,19 @@ class middle2ViewController: UIViewController {
         }
     }
     
-    func notifysomeone() {
+    func notifysomeone(icIm: String) {
+        print("SENDINGNOTIFICATION")
         let localNotification = UILocalNotification()
         localNotification.soundName = "beep-01a.wav"
+        if icIm == "activity" {
+            localNotification.alertTitle = "New Activity!"
+            localNotification.alertBody = "Yammer Feedback Requested."
+        } else {
         localNotification.alertTitle = "An activity has been sent to you!"
         localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+        }
         localNotification.alertAction = "Now"
-        localNotification.category = "surveySession"
+        localNotification.category = icIm
         //print(seconds, appendNewline: false)
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 2)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)

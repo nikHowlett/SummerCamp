@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0243E841B793202001C5738 /* NoiseNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E831B793202001C5738 /* NoiseNotificationController.swift */; };
+		D0243E861B793211001C5738 /* HelpfulnessNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */; };
+		D0243E881B79321E001C5738 /* SpaceNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E871B79321E001C5738 /* SpaceNotificationController.swift */; };
+		D0243E8A1B793226001C5738 /* TaskNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E891B793226001C5738 /* TaskNotificationController.swift */; };
 		D0C444701B73C6150084111F /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4446F1B73C6150084111F /* Activity.swift */; };
+		D0D80A991B78DEA800EB11FA /* sliderengagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D80A981B78DEA800EB11FA /* sliderengagement.swift */; };
 		D0E0F9CE1B73B4CF00CDDB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F9CD1B73B4CF00CDDB0A /* AppDelegate.swift */; };
 		D0E0F9D11B73B4CF00CDDB0A /* SummerCamp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F9CF1B73B4CF00CDDB0A /* SummerCamp.xcdatamodeld */; };
 		D0E0F9D31B73B4CF00CDDB0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F9D21B73B4CF00CDDB0A /* ViewController.swift */; };
@@ -16,7 +21,7 @@
 		D0E0F9DB1B73B4CF00CDDB0A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E0F9D91B73B4CF00CDDB0A /* LaunchScreen.xib */; };
 		D0E0F9E71B73B4CF00CDDB0A /* SummerCampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F9E61B73B4CF00CDDB0A /* SummerCampTests.swift */; };
 		D0E0FA001B73B4DB00CDDB0A /* WatchCoreDataProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E0F9F51B73B4DB00CDDB0A /* WatchCoreDataProxy.framework */; };
-		D0E0FA1F1B73B4E500CDDB0A /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0FA1E1B73B4E500CDDB0A /* InterfaceController.swift */; };
+		D0E0FA1F1B73B4E500CDDB0A /* slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0FA1E1B73B4E500CDDB0A /* slider.swift */; };
 		D0E0FA211B73B4E500CDDB0A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0FA201B73B4E500CDDB0A /* NotificationController.swift */; };
 		D0E0FA231B73B4E500CDDB0A /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0FA221B73B4E500CDDB0A /* GlanceController.swift */; };
 		D0E0FA251B73B4E500CDDB0A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E0FA241B73B4E500CDDB0A /* Images.xcassets */; };
@@ -91,9 +96,9 @@
 		D0E223461B75029800319A0B /* Noise_to_Signal.gif in Resources */ = {isa = PBXBuildFile; fileRef = D0E223071B74F11700319A0B /* Noise_to_Signal.gif */; };
 		D0E223471B75029800319A0B /* HelpfulnessGenerosity.gif in Resources */ = {isa = PBXBuildFile; fileRef = D0E223081B74F11700319A0B /* HelpfulnessGenerosity.gif */; };
 		D0E2234B1B7517FD00319A0B /* ActivityScreenInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E2234A1B7517FD00319A0B /* ActivityScreenInterfaceController.swift */; };
-		D0E2234D1B75180700319A0B /* YesNoInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E2234C1B75180700319A0B /* YesNoInterfaceController.swift */; };
+		D0E2234D1B75180700319A0B /* yesno.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E2234C1B75180700319A0B /* yesno.swift */; };
 		D0E2234F1B75181400319A0B /* SliderInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E2234E1B75181400319A0B /* SliderInterfaceController.swift */; };
-		D0E223511B75181D00319A0B /* EmojiInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E223501B75181D00319A0B /* EmojiInterfaceController.swift */; };
+		D0E223511B75181D00319A0B /* emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E223501B75181D00319A0B /* emoji.swift */; };
 		D0E223531B75182600319A0B /* ActivityInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E223521B75182600319A0B /* ActivityInterfaceController.swift */; };
 		D0E223551B75285B00319A0B /* loadInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E223541B75285B00319A0B /* loadInterfaceController.swift */; };
 		D0E223571B752CEA00319A0B /* middle2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E223561B752CEA00319A0B /* middle2ViewController.swift */; };
@@ -153,9 +158,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D0243E831B793202001C5738 /* NoiseNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseNotificationController.swift; sourceTree = "<group>"; };
+		D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpfulnessNotificationController.swift; sourceTree = "<group>"; };
+		D0243E871B79321E001C5738 /* SpaceNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceNotificationController.swift; sourceTree = "<group>"; };
+		D0243E891B793226001C5738 /* TaskNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNotificationController.swift; sourceTree = "<group>"; };
 		D0C4446F1B73C6150084111F /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = ../WatchCoreDataProxy/Activity.swift; sourceTree = "<group>"; };
 		D0C444731B73C76A0084111F /* SummerCamp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SummerCamp.entitlements; sourceTree = "<group>"; };
 		D0C444741B73C7820084111F /* SummerCamp WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "SummerCamp WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		D0D80A981B78DEA800EB11FA /* sliderengagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sliderengagement.swift; sourceTree = "<group>"; };
 		D0E0F9C81B73B4CF00CDDB0A /* SummerCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SummerCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E0F9CC1B73B4CF00CDDB0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0E0F9CD1B73B4CF00CDDB0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,7 +182,7 @@
 		D0E0FA191B73B4E500CDDB0A /* SummerCamp WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SummerCamp WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E0FA1C1B73B4E500CDDB0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0E0FA1D1B73B4E500CDDB0A /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		D0E0FA1E1B73B4E500CDDB0A /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		D0E0FA1E1B73B4E500CDDB0A /* slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slider.swift; sourceTree = "<group>"; };
 		D0E0FA201B73B4E500CDDB0A /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		D0E0FA221B73B4E500CDDB0A /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		D0E0FA241B73B4E500CDDB0A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -211,9 +221,9 @@
 		D0E223091B74F11700319A0B /* bg-w-title.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "bg-w-title.jpg"; path = "../../../../Downloads/bg-w-title.jpg"; sourceTree = "<group>"; };
 		D0E2230A1B74F11700319A0B /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bg.jpg; path = ../../../../Downloads/bg.jpg; sourceTree = "<group>"; };
 		D0E2234A1B7517FD00319A0B /* ActivityScreenInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityScreenInterfaceController.swift; sourceTree = "<group>"; };
-		D0E2234C1B75180700319A0B /* YesNoInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesNoInterfaceController.swift; sourceTree = "<group>"; };
+		D0E2234C1B75180700319A0B /* yesno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yesno.swift; sourceTree = "<group>"; };
 		D0E2234E1B75181400319A0B /* SliderInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderInterfaceController.swift; sourceTree = "<group>"; };
-		D0E223501B75181D00319A0B /* EmojiInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiInterfaceController.swift; sourceTree = "<group>"; };
+		D0E223501B75181D00319A0B /* emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = emoji.swift; sourceTree = "<group>"; };
 		D0E223521B75182600319A0B /* ActivityInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityInterfaceController.swift; sourceTree = "<group>"; };
 		D0E223541B75285B00319A0B /* loadInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loadInterfaceController.swift; sourceTree = "<group>"; };
 		D0E223561B752CEA00319A0B /* middle2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = middle2ViewController.swift; sourceTree = "<group>"; };
@@ -338,12 +348,17 @@
 			isa = PBXGroup;
 			children = (
 				D0C444741B73C7820084111F /* SummerCamp WatchKit Extension.entitlements */,
-				D0E0FA1E1B73B4E500CDDB0A /* InterfaceController.swift */,
-				D0E2234C1B75180700319A0B /* YesNoInterfaceController.swift */,
-				D0E223501B75181D00319A0B /* EmojiInterfaceController.swift */,
+				D0E0FA1E1B73B4E500CDDB0A /* slider.swift */,
+				D0E2234C1B75180700319A0B /* yesno.swift */,
+				D0D80A981B78DEA800EB11FA /* sliderengagement.swift */,
+				D0E223501B75181D00319A0B /* emoji.swift */,
 				D0E2234A1B7517FD00319A0B /* ActivityScreenInterfaceController.swift */,
 				D0E223521B75182600319A0B /* ActivityInterfaceController.swift */,
 				D0E2234E1B75181400319A0B /* SliderInterfaceController.swift */,
+				D0243E891B793226001C5738 /* TaskNotificationController.swift */,
+				D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */,
+				D0243E831B793202001C5738 /* NoiseNotificationController.swift */,
+				D0243E871B79321E001C5738 /* SpaceNotificationController.swift */,
 				D0E223541B75285B00319A0B /* loadInterfaceController.swift */,
 				D0E0FA201B73B4E500CDDB0A /* NotificationController.swift */,
 				D0E0FA221B73B4E500CDDB0A /* GlanceController.swift */,
@@ -758,15 +773,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0E0FA211B73B4E500CDDB0A /* NotificationController.swift in Sources */,
+				D0D80A991B78DEA800EB11FA /* sliderengagement.swift in Sources */,
 				D0E223551B75285B00319A0B /* loadInterfaceController.swift in Sources */,
 				D0E223531B75182600319A0B /* ActivityInterfaceController.swift in Sources */,
-				D0E0FA1F1B73B4E500CDDB0A /* InterfaceController.swift in Sources */,
-				D0E223511B75181D00319A0B /* EmojiInterfaceController.swift in Sources */,
+				D0243E8A1B793226001C5738 /* TaskNotificationController.swift in Sources */,
+				D0E0FA1F1B73B4E500CDDB0A /* slider.swift in Sources */,
+				D0E223511B75181D00319A0B /* emoji.swift in Sources */,
 				D0E2234F1B75181400319A0B /* SliderInterfaceController.swift in Sources */,
-				D0E2234D1B75180700319A0B /* YesNoInterfaceController.swift in Sources */,
+				D0243E861B793211001C5738 /* HelpfulnessNotificationController.swift in Sources */,
+				D0243E841B793202001C5738 /* NoiseNotificationController.swift in Sources */,
+				D0E2234D1B75180700319A0B /* yesno.swift in Sources */,
 				D0E223221B75011000319A0B /* Activity.swift in Sources */,
 				D0E2234B1B7517FD00319A0B /* ActivityScreenInterfaceController.swift in Sources */,
 				D0E0FA231B73B4E500CDDB0A /* GlanceController.swift in Sources */,
+				D0243E881B79321E001C5738 /* SpaceNotificationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,7 +1080,7 @@
 				INFOPLIST_FILE = "SummerCamp WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
@@ -1074,7 +1094,7 @@
 				INFOPLIST_FILE = "SummerCamp WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
