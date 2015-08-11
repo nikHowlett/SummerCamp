@@ -51,8 +51,12 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:UITableViewCell=UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "mycell")
-        cell.textLabel!.text = activitiesonly[indexPath.row][0] as? String
-        cell.detailTextLabel!.text = activitiesonly[indexPath.row][3] as? String
+        var shrinkage = activitiesonly[indexPath.row][0] as? String
+        var indexer = "What elements from the workpl"
+        var shrinkage2 = shrinkage!.substringToIndex(indexer.endIndex)
+        var shrinkage3 = "\(shrinkage2)..."
+        cell.textLabel!.text = activitiesonly[indexPath.row][3] as? String
+        cell.detailTextLabel!.text = activitiesonly[indexPath.row][0] as? String
         
         //var image : UIImage = UIImage(named: activitiesonly[indexPath.row])!
         //cell.imageView!.image = image
@@ -72,6 +76,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             employees = managedObjectContext?.executeFetchRequest(fetchRequest2, error: nil)
                 as! [Employee]
         }*/
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
         activities = []
         employees = []
         activitiesonly = []

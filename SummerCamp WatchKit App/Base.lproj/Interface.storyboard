@@ -115,7 +115,7 @@
                                 <label width="136" height="14" alignment="center" text="Question #4" textAlignment="center" id="TCN-oG-U3E"/>
                             </items>
                         </group>
-                        <group width="1" height="47" alignment="left" id="Y1n-kM-Jjg">
+                        <group width="1" alignment="left" id="Y1n-kM-Jjg">
                             <items>
                                 <label width="1" height="49" alignment="center" text="Five being the best, rate your chef." textAlignment="center" numberOfLines="7" id="wP1-3K-Rdh">
                                     <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
@@ -150,12 +150,12 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1053" y="513.25"/>
+            <point key="canvasLocation" x="1053" y="522.5"/>
         </scene>
         <!--NoMore-->
         <scene sceneID="1sa-L2-Uuh">
             <objects>
-                <controller identifier="NoMore" id="8jc-VW-Fu4">
+                <controller identifier="NoMore" id="8jc-VW-Fu4" customClass="ActivityScreenInterfaceController" customModule="SummerCamp_WatchKit_Extension">
                     <items>
                         <label width="136" height="132" alignment="left" text="No more activites to show" textAlignment="center" numberOfLines="6" id="o4C-OA-qlC"/>
                     </items>
@@ -270,6 +270,22 @@
             </objects>
             <point key="canvasLocation" x="235" y="1646"/>
         </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="Inf-9l-qgh">
+            <objects>
+                <notificationController id="yqg-9b-dPC">
+                    <items>
+                        <label alignment="center" text="Herman Alert" textAlignment="center" id="UCY-PK-FWw"/>
+                        <imageView width="80" height="92" alignment="center" image="default_herman_question" id="pE7-iv-2hp"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="default" id="44e-EN-16c"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="UCY-PK-FWw" id="n9Z-mf-JKl"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="488" y="1264"/>
+        </scene>
         <!--2/3-->
         <scene sceneID="LiJ-N9-0DR">
             <objects>
@@ -280,7 +296,7 @@
                                 <label width="136" height="14" alignment="center" text="Activity #2" textAlignment="center" id="tYq-IZ-SOS"/>
                             </items>
                         </group>
-                        <group height="86" alignment="center" id="dUq-CG-okx">
+                        <group alignment="center" id="dUq-CG-okx">
                             <items>
                                 <label width="136" height="89" alignment="center" text="Post your expectations for the day in 3 words." textAlignment="center" numberOfLines="7" id="A4j-fS-iSz">
                                     <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>

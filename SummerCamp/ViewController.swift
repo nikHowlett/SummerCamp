@@ -217,15 +217,15 @@ class ViewController: UIViewController {
             if name2.length > 1 {
                 var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
                 defaults?.synchronize()
-                NSUserDefaults.standardUserDefaults().setObject(self.theirname, forKey: "Name")
-                NSUserDefaults.standardUserDefaults().setObject(self.theircorp, forKey: "CorpID")
+                defaults?.setObject(self.theirname, forKey: "Name")
+                defaults?.setObject(self.theircorp, forKey: "CorpID")
                 print("<<<<<Name and CORPID saved>>>>>")
                 self.saveEmployee(self.theircorp, name: self.theirname)
                 //var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
                 //defaults?.synchronize()
                 self.performSegueWithIdentifier("login", sender: self)
             }
-           /* var serverResponse = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+            /* var serverResponse = NSString(data: data!, encoding: NSUTF8StringEncoding)!
             print("RAW: \(serverResponse)")
             var jeanie = serverResponse.stringByReplacingOccurrencesOfString("\\", withString: " ")*/
             let ero2323 = json["response"].stringValue
