@@ -157,7 +157,7 @@
             <objects>
                 <controller identifier="NoMore" id="8jc-VW-Fu4" customClass="ActivityScreenInterfaceController" customModule="SummerCamp_WatchKit_Extension">
                     <items>
-                        <label width="136" height="132" alignment="left" text="No more activites to show" textAlignment="center" numberOfLines="6" id="o4C-OA-qlC"/>
+                        <label width="136" height="132" alignment="center" text="No more activites to show" textAlignment="center" numberOfLines="6" id="o4C-OA-qlC"/>
                     </items>
                 </controller>
             </objects>
