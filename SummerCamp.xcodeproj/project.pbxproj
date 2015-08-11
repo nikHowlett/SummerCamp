@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D01FE14E1B7A5A5A00425F31 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01FE14D1B7A5A5900425F31 /* SwiftyJSON.swift */; };
+		D01FE1581B7A6C9A00425F31 /* AdHocAlert_generic.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE14F1B7A6C9A00425F31 /* AdHocAlert_generic.png */; };
+		D01FE1591B7A6C9A00425F31 /* default_herman_question.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1501B7A6C9A00425F31 /* default_herman_question.png */; };
+		D01FE15A1B7A6C9A00425F31 /* AdHocAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1511B7A6C9A00425F31 /* AdHocAlert.png */; };
+		D01FE15B1B7A6C9A00425F31 /* AdHocActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1521B7A6C9A00425F31 /* AdHocActivity.png */; };
+		D01FE15C1B7A6C9A00425F31 /* 05_knocked_out.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1531B7A6C9A00425F31 /* 05_knocked_out.png */; };
+		D01FE15D1B7A6C9A00425F31 /* 04_happy.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1541B7A6C9A00425F31 /* 04_happy.png */; };
+		D01FE15E1B7A6C9A00425F31 /* 03_content.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1551B7A6C9A00425F31 /* 03_content.png */; };
+		D01FE15F1B7A6C9A00425F31 /* 02_neutral.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1561B7A6C9A00425F31 /* 02_neutral.png */; };
+		D01FE1601B7A6C9A00425F31 /* 01_sleeping.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1571B7A6C9A00425F31 /* 01_sleeping.png */; };
 		D0243E841B793202001C5738 /* NoiseNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E831B793202001C5738 /* NoiseNotificationController.swift */; };
 		D0243E861B793211001C5738 /* HelpfulnessNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */; };
 		D0243E881B79321E001C5738 /* SpaceNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E871B79321E001C5738 /* SpaceNotificationController.swift */; };
@@ -158,6 +168,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D01FE14D1B7A5A5900425F31 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		D01FE14F1B7A6C9A00425F31 /* AdHocAlert_generic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AdHocAlert_generic.png; path = ../../../../Downloads/AdHocAlert_generic.png; sourceTree = "<group>"; };
+		D01FE1501B7A6C9A00425F31 /* default_herman_question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_herman_question.png; path = ../../../../Downloads/default_herman_question.png; sourceTree = "<group>"; };
+		D01FE1511B7A6C9A00425F31 /* AdHocAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AdHocAlert.png; path = ../../../../Downloads/AdHocAlert.png; sourceTree = "<group>"; };
+		D01FE1521B7A6C9A00425F31 /* AdHocActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AdHocActivity.png; path = ../../../../Downloads/AdHocActivity.png; sourceTree = "<group>"; };
+		D01FE1531B7A6C9A00425F31 /* 05_knocked_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 05_knocked_out.png; path = ../../../../Downloads/05_knocked_out.png; sourceTree = "<group>"; };
+		D01FE1541B7A6C9A00425F31 /* 04_happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 04_happy.png; path = ../../../../Downloads/04_happy.png; sourceTree = "<group>"; };
+		D01FE1551B7A6C9A00425F31 /* 03_content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 03_content.png; path = ../../../../Downloads/03_content.png; sourceTree = "<group>"; };
+		D01FE1561B7A6C9A00425F31 /* 02_neutral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 02_neutral.png; path = ../../../../Downloads/02_neutral.png; sourceTree = "<group>"; };
+		D01FE1571B7A6C9A00425F31 /* 01_sleeping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 01_sleeping.png; path = ../../../../Downloads/01_sleeping.png; sourceTree = "<group>"; };
 		D0243E831B793202001C5738 /* NoiseNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseNotificationController.swift; sourceTree = "<group>"; };
 		D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpfulnessNotificationController.swift; sourceTree = "<group>"; };
 		D0243E871B79321E001C5738 /* SpaceNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceNotificationController.swift; sourceTree = "<group>"; };
@@ -355,6 +375,7 @@
 				D0E2234A1B7517FD00319A0B /* ActivityScreenInterfaceController.swift */,
 				D0E223521B75182600319A0B /* ActivityInterfaceController.swift */,
 				D0E2234E1B75181400319A0B /* SliderInterfaceController.swift */,
+				D01FE14D1B7A5A5900425F31 /* SwiftyJSON.swift */,
 				D0243E891B793226001C5738 /* TaskNotificationController.swift */,
 				D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */,
 				D0243E831B793202001C5738 /* NoiseNotificationController.swift */,
@@ -400,6 +421,15 @@
 			isa = PBXGroup;
 			children = (
 				D0E222E41B73FC3400319A0B /* SummerCamp_Login3.png */,
+				D01FE14F1B7A6C9A00425F31 /* AdHocAlert_generic.png */,
+				D01FE1501B7A6C9A00425F31 /* default_herman_question.png */,
+				D01FE1511B7A6C9A00425F31 /* AdHocAlert.png */,
+				D01FE1521B7A6C9A00425F31 /* AdHocActivity.png */,
+				D01FE1531B7A6C9A00425F31 /* 05_knocked_out.png */,
+				D01FE1541B7A6C9A00425F31 /* 04_happy.png */,
+				D01FE1551B7A6C9A00425F31 /* 03_content.png */,
+				D01FE1561B7A6C9A00425F31 /* 02_neutral.png */,
+				D01FE1571B7A6C9A00425F31 /* 01_sleeping.png */,
 				D0E222E51B73FC3400319A0B /* sunny_san_francisco.jpg */,
 				D0E222E61B73FC3400319A0B /* Space_w_Consistency.png */,
 				D0E222E71B73FC3400319A0B /* background.png */,
@@ -679,16 +709,23 @@
 			files = (
 				D0E223291B75011000319A0B /* send.png in Resources */,
 				D0E223191B75011000319A0B /* Space_w_Consistency.png in Resources */,
+				D01FE15D1B7A6C9A00425F31 /* 04_happy.png in Resources */,
 				D0E223201B75011000319A0B /* ucb_pharma.png15474615 (2).png in Resources */,
 				D0E223231B75011000319A0B /* ucbwhitelogofrommedicalvideos copy 2.png in Resources */,
+				D01FE1601B7A6C9A00425F31 /* 01_sleeping.png in Resources */,
+				D01FE1581B7A6C9A00425F31 /* AdHocAlert_generic.png in Resources */,
 				D0E0FA291B73B4E500CDDB0A /* SummerCamp WatchKit App.app in Resources */,
+				D01FE15A1B7A6C9A00425F31 /* AdHocAlert.png in Resources */,
 				D0E2232D1B75011000319A0B /* HelpfulnessGenerosity.gif in Resources */,
 				D0E0FA251B73B4E500CDDB0A /* Images.xcassets in Resources */,
 				D0E223211B75011000319A0B /* ucb_pharma.png15474615 (3).png in Resources */,
+				D01FE1591B7A6C9A00425F31 /* default_herman_question.png in Resources */,
 				D0E223261B75011000319A0B /* Task_to_Value.gif in Resources */,
 				D0E2232B1B75011000319A0B /* reset.png in Resources */,
 				D0E2231E1B75011000319A0B /* HelpfulnessGenerosity.png in Resources */,
 				D0E2231C1B75011000319A0B /* Task_to_Value.png in Resources */,
+				D01FE15E1B7A6C9A00425F31 /* 03_content.png in Resources */,
+				D01FE15B1B7A6C9A00425F31 /* AdHocActivity.png in Resources */,
 				D0E223271B75011000319A0B /* ucb-logo (2).jpg in Resources */,
 				D0E2231B1B75011000319A0B /* Noise_to_Signal.png in Resources */,
 				D0E2232C1B75011000319A0B /* Noise_to_Signal.gif in Resources */,
@@ -696,6 +733,8 @@
 				D0E223241B75011000319A0B /* ucbwhitelogofrommedicalvideos copy.png in Resources */,
 				D0E223251B75011000319A0B /* Space_w_Consistency.gif in Resources */,
 				D0E2232A1B75011000319A0B /* results.png in Resources */,
+				D01FE15F1B7A6C9A00425F31 /* 02_neutral.png in Resources */,
+				D01FE15C1B7A6C9A00425F31 /* 05_knocked_out.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,6 +822,7 @@
 				D0243E861B793211001C5738 /* HelpfulnessNotificationController.swift in Sources */,
 				D0243E841B793202001C5738 /* NoiseNotificationController.swift in Sources */,
 				D0E2234D1B75180700319A0B /* yesno.swift in Sources */,
+				D01FE14E1B7A5A5A00425F31 /* SwiftyJSON.swift in Sources */,
 				D0E223221B75011000319A0B /* Activity.swift in Sources */,
 				D0E2234B1B7517FD00319A0B /* ActivityScreenInterfaceController.swift in Sources */,
 				D0E0FA231B73B4E500CDDB0A /* GlanceController.swift in Sources */,

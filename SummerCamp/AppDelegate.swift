@@ -20,13 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier:String?, forLocalNotification notification:UILocalNotification, completionHandler: (() -> Void)){
-            if (identifier == "MORE_ACTION"){
-                NSNotificationCenter.defaultCenter().postNotificationName("actionMorePressed", object: nil)
-            } else if (identifier == "A_ACTION"){
-                NSNotificationCenter.defaultCenter().postNotificationName("actionAPressed", object: nil)
+            if (identifier == "helpful"){
+                NSNotificationCenter.defaultCenter().postNotificationName("hlpeful", object: nil)
+            } else if (identifier == "space"){
+                NSNotificationCenter.defaultCenter().postNotificationName("space", object: nil)
                 
-            } else if (identifier == "B_ACTION"){
-                NSNotificationCenter.defaultCenter().postNotificationName("actionBPressed", object: nil)
+            } else if (identifier == "signal"){
+                NSNotificationCenter.defaultCenter().postNotificationName("signal", object: nil)
+            } else if (identifier == "value"){
+                NSNotificationCenter.defaultCenter().postNotificationName("value", object: nil)
             }
             completionHandler()
     }
@@ -34,19 +36,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundUpdateTask: UIBackgroundTaskIdentifier = 0
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType members
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType members\
+        
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
         var snoozeAction = UIMutableUserNotificationAction()
         snoozeAction.identifier = "Later"
         snoozeAction.title = "Later"
         snoozeAction.activationMode = .Background
-        snoozeAction.destructive = false
+        snoozeAction.destructive = true
         snoozeAction.authenticationRequired = false
         
+        var boozeAction = UIMutableUserNotificationAction()
+        boozeAction.identifier = "Now"
+        boozeAction.title = "Now"
+        boozeAction.activationMode = .Foreground
+        boozeAction.destructive = false
+        boozeAction.authenticationRequired = false
+        
         // Notification category
-        let defaultActions = [snoozeAction]
-        let minimalActions = [snoozeAction]
+        let defaultActions = [boozeAction, snoozeAction]
+        let minimalActions = [boozeAction, snoozeAction]
         var mainCategory = UIMutableUserNotificationCategory()
         mainCategory.identifier = "space"
         var someCategory = UIMutableUserNotificationCategory()

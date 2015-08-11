@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qxf-nA-zMY">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ekW-Fy-6MV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
@@ -78,7 +78,7 @@
                             <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
                         <label alignment="center" text="Good" numberOfLines="2" id="xbR-BC-oYq"/>
-                        <slider width="1" alignment="center" value="3" maximum="5" steps="5" id="mKI-6E-nv0">
+                        <slider width="1" alignment="center" value="3" minimum="1" maximum="5" steps="5" id="mKI-6E-nv0">
                             <connections>
                                 <action selector="sleepSliderDidMove:" destination="qxf-nA-zMY" id="0qB-bG-qnb"/>
                             </connections>
@@ -89,7 +89,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
-                                        <action selector="Open" destination="AgC-eL-Hgc" id="s40-1m-DYr"/>
+                                        <action selector="Submit" destination="qxf-nA-zMY" id="xaY-JG-bRW"/>
                                     </connections>
                                 </button>
                             </items>
@@ -103,21 +103,21 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="877" y="514.25"/>
+            <point key="canvasLocation" x="865" y="512.5"/>
         </scene>
-        <!--slider1-5-->
+        <!--4/5-->
         <scene sceneID="ihi-Jy-ckV">
             <objects>
-                <controller identifier="slider1-5" id="YLd-H9-QKI" customClass="sliderengagement" customModule="SummerCamp_WatchKit_Extension">
+                <controller identifier="slider1-5" title="4/5" id="YLd-H9-QKI" customClass="sliderengagement" customModule="SummerCamp_WatchKit_Extension">
                     <items>
                         <group width="1" alignment="left" id="pvH-Gm-Suc">
                             <items>
                                 <label width="136" height="14" alignment="center" text="Question #4" textAlignment="center" id="TCN-oG-U3E"/>
                             </items>
                         </group>
-                        <group width="134" height="47" alignment="left" id="Y1n-kM-Jjg">
+                        <group width="1" height="47" alignment="left" id="Y1n-kM-Jjg">
                             <items>
-                                <label width="136" height="49" alignment="center" text="Five being the best, rate your chef." textAlignment="center" numberOfLines="7" id="wP1-3K-Rdh">
+                                <label width="1" height="49" alignment="center" text="Five being the best, rate your chef." textAlignment="center" numberOfLines="7" id="wP1-3K-Rdh">
                                     <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
                                     <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                 </label>
@@ -125,14 +125,18 @@
                             <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
                         <label alignment="center" text="3" numberOfLines="2" id="7qT-aq-Asr"/>
-                        <slider width="1" alignment="left" value="3" maximum="5" steps="5" id="OhT-vQ-Mtd"/>
+                        <slider width="1" alignment="left" value="3" maximum="5" steps="5" id="OhT-vQ-Mtd">
+                            <connections>
+                                <action selector="sleepSliderDidMove:" destination="YLd-H9-QKI" id="p2n-Hb-ypx"/>
+                            </connections>
+                        </slider>
                         <group width="1" alignment="left" id="wVV-1G-UgJ">
                             <items>
                                 <button width="66" height="29" alignment="center" title="Submit" id="crp-pN-mpD">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
-                                        <action selector="Open" destination="AgC-eL-Hgc" id="Z5t-Lp-WE4"/>
+                                        <action selector="submit" destination="YLd-H9-QKI" id="1iM-Ov-blm"/>
                                     </connections>
                                 </button>
                             </items>
@@ -147,6 +151,17 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="1053" y="513.25"/>
+        </scene>
+        <!--NoMore-->
+        <scene sceneID="1sa-L2-Uuh">
+            <objects>
+                <controller identifier="NoMore" id="8jc-VW-Fu4">
+                    <items>
+                        <label width="136" height="132" alignment="left" text="No more activites to show" textAlignment="center" numberOfLines="6" id="o4C-OA-qlC"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="969" y="748"/>
         </scene>
         <!--Interface Controller-->
         <scene sceneID="5k4-aJ-LTI">
@@ -187,7 +202,7 @@
             <objects>
                 <notificationController id="YCC-NB-fut">
                     <items>
-                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
+                        <label alignment="left" text="Alert Label" numberOfLines="4" id="XkS-y5-khE"/>
                         <imageView width="86" height="88" alignment="center" image="Space_w_Consistency" id="tSW-Pq-hfc"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="space" id="JfB-70-Muf">
@@ -206,7 +221,7 @@
             <objects>
                 <notificationController id="a54-7O-J9d">
                     <items>
-                        <label alignment="left" text="Alert Label" id="BmY-YP-kyJ"/>
+                        <label alignment="left" text="Alert Label" numberOfLines="4" id="BmY-YP-kyJ"/>
                         <imageView width="63" height="82" alignment="center" image="Noise_to_Signal" id="ngr-Ii-rz3"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="signal" id="322-9k-zA1">
@@ -224,7 +239,7 @@
             <objects>
                 <notificationController id="Ncq-N8-cao">
                     <items>
-                        <label alignment="left" text="Alert Label" id="T0I-cj-yvJ"/>
+                        <label alignment="left" text="Alert Label" numberOfLines="4" id="T0I-cj-yvJ"/>
                         <imageView width="80" height="92" alignment="center" image="Task_to_Value" id="GS8-zc-aU0"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="value" id="evs-Sj-Iw4">
@@ -242,7 +257,7 @@
             <objects>
                 <notificationController id="DTe-yi-aDj">
                     <items>
-                        <label alignment="left" text="Alert Label" id="UuQ-DQ-ykB"/>
+                        <label alignment="left" text="Alert Label" numberOfLines="4" id="UuQ-DQ-ykB"/>
                         <imageView width="87" height="75" alignment="center" image="HelpfulnessGenerosity" id="4id-ae-czm"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="helpful" id="R2f-gL-bOl">
@@ -265,7 +280,7 @@
                                 <label width="136" height="14" alignment="center" text="Activity #2" textAlignment="center" id="tYq-IZ-SOS"/>
                             </items>
                         </group>
-                        <group width="134" height="86" alignment="center" id="dUq-CG-okx">
+                        <group height="86" alignment="center" id="dUq-CG-okx">
                             <items>
                                 <label width="136" height="89" alignment="center" text="Post your expectations for the day in 3 words." textAlignment="center" numberOfLines="7" id="A4j-fS-iSz">
                                     <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
@@ -306,6 +321,7 @@
             <objects>
                 <controller identifier="emoji" title="2/5" id="XXM-ip-LTf" customClass="emoji" customModule="SummerCamp_WatchKit_Extension">
                     <items>
+                        <label alignment="center" text="Question #2" textAlignment="center" id="GpU-HK-msS"/>
                         <group width="1" alignment="left" id="fjr-qu-yoU">
                             <items>
                                 <label width="136" height="49" alignment="center" text="How are you feeling?" textAlignment="center" numberOfLines="7" id="Fe3-SM-ObG">
@@ -315,13 +331,20 @@
                             </items>
                             <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
-                        <group width="1" height="85" alignment="left" id="niO-cF-tml">
+                        <group width="134" height="85" alignment="left" id="niO-cF-tml">
                             <items>
                                 <button width="30" alignment="left" verticalAlignment="center" title="&lt;" id="AKe-vD-Pjo">
                                     <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="minus" destination="XXM-ip-LTf" id="641-9T-J0P"/>
+                                    </connections>
                                 </button>
-                                <button width="33" height="40" alignment="right" verticalAlignment="center" title="&gt;" id="LOu-32-8CX">
+                                <imageView alignment="center" verticalAlignment="center" image="03_content" id="8Oy-rJ-FnX"/>
+                                <button width="30" alignment="right" verticalAlignment="center" title="&gt;" id="LOu-32-8CX">
                                     <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="plus" destination="XXM-ip-LTf" id="c4A-hu-bUP"/>
+                                    </connections>
                                 </button>
                             </items>
                             <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
@@ -330,10 +353,17 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="Open" destination="AgC-eL-Hgc" id="W7Y-X2-HGY"/>
+                                <action selector="Submit" destination="XXM-ip-LTf" id="I5v-A1-4Ds"/>
                             </connections>
                         </button>
                     </items>
+                    <connections>
+                        <outlet property="activityLabel" destination="GpU-HK-msS" id="aY6-8f-dKi"/>
+                        <outlet property="emojiImage" destination="8Oy-rJ-FnX" id="w8N-G7-ALG"/>
+                        <outlet property="mbut" destination="AKe-vD-Pjo" id="2s3-bD-jY5"/>
+                        <outlet property="pbut" destination="LOu-32-8CX" id="r7F-3X-qjK"/>
+                        <outlet property="thisText" destination="Fe3-SM-ObG" id="nfg-yo-OaO"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="677" y="750"/>

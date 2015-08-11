@@ -9,16 +9,18 @@
 import UIKit
 import CoreData
 
-class middle2ViewController: UIViewController {
+class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     var corpAcc: String?
     var thereforeName: String?
     var people = [NSManagedObject]()
-    var activities: [Activity] = [Activity]()
+    var activities: [NSArray] = [NSArray]()
     var employees: [Employee] = [Employee]()
-    var activitiesonly: [Activity] = [Activity]()
+    var activitiesonly: [NSArray] = [NSArray]()
     var magikString: String?
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var tableOutlet: UITableView!
     
     func handleWatchKitNotification(notification: NSNotification) {
         if let userInfo = notification.object as? [String : String] {
@@ -41,30 +43,58 @@ class middle2ViewController: UIViewController {
         }
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return activitiesonly.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell:UITableViewCell=UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "mycell")
+        cell.textLabel!.text = activitiesonly[indexPath.row][0] as? String
+        cell.detailTextLabel!.text = activitiesonly[indexPath.row][3] as? String
+        
+        //var image : UIImage = UIImage(named: activitiesonly[indexPath.row])!
+        //cell.imageView!.image = image
+        
+        return cell
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Activities"
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        /*let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let fetchRequest : NSFetchRequest = NSFetchRequest(entityName: "Activity")
         let fetchRequest2 : NSFetchRequest = NSFetchRequest(entityName: "Employee")
-        activities = []
-        employees = []
-        activitiesonly = []
-        if (activitiesonly.count == 0) {
             activitiesonly = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
                 as! [Activity]
             employees = managedObjectContext?.executeFetchRequest(fetchRequest2, error: nil)
                 as! [Employee]
-        }
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleWatchKitNotification:"), name: "WatchKitReq", object: nil)
+        }*/
+        activities = []
+        employees = []
+        activitiesonly = []
         var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
         defaults?.synchronize()
+        var globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+        if (activitiesonly.count == 0) {
+            for (var y = 0; y < globalShave.count-1; y++) {
+                var wattype = (globalShave[y][2] as! String)
+                if wattype == "activity" {
+                    activitiesonly.append(globalShave[y] as! NSArray)
+                }
+            }
+        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleWatchKitNotification:"), name: "WatchKitReq", object: nil)
+        thereforeName = defaults?.objectForKey("Name") as? String
+        corpAcc = (defaults?.objectForKey("CorpID") as! String)
+        welcomeLabel.text = "Welcome \(thereforeName!)!"
         //corpAcc = defaults!.stringForKey("CorpID")!;
         //corpAcc = defaults!.valueForKey("CorpID")! as? String;
-        corpAcc = employees[employees.count-1].corpID
-        defaults?.synchronize()
-        print(corpAcc)
+        //corpAcc = employees[employees.count-1].corpID
+        //defaults?.synchronize()
+        //print(corpAcc)
         checkServer()
         backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
             UIApplication.sharedApplication().endBackgroundTask(self.backgroundTaskIdentifier!)
@@ -155,22 +185,26 @@ class middle2ViewController: UIViewController {
                         globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
                     }
                 }
+                print("CURRENT GLOBAL")
+                    print(globalActivities)
                 /*if defaults?.objectForKey("globalActivities") != nil {
                     globalActivities = defaults?.objectForKey("globalActivities") as! NSMutableArray
                 }*/
                 //defaults?.setObject(array, forKey: "Activity \(id!)")
                 //globalActivities.append(array)
                 //globalActivities.append("hello")
-                globalActivities.arrayByAddingObject(array)
+                var jeanie = globalActivities.arrayByAddingObject(array)
+                    print("SAVING THIS AS NEW GLOBAL")
+                    print(jeanie)
                     //globalActivities.addObject([text, icon, type, shit])
-                defaults?.setObject(globalActivities, forKey: "globalActivities")
+                defaults?.setObject(jeanie, forKey: "globalActivities")
                 //defaults?.synchronize()
                 //var thethingusaved = defaults?.objectForKey("Activity \(id)") as! NSArray
-                var thingtext: AnyObject = array[2]
-                var iconstring = array[1] as? String
-                self.notifysomeone(iconstring!)
-                print(thingtext)
-                    print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
+                //var thingtext: AnyObject = array[2]
+                //var iconstring = array[1] as? String
+                self.notifysomeone(icon, type: type)
+                //print(thingtext)
+                print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
                 }
             }
             /* println("Textfield Text: \(usernameTextfield.text)")
@@ -187,7 +221,7 @@ class middle2ViewController: UIViewController {
         task.resume()
     }
 
-    private func saveActivity(id: Int, icon: String, type: String, text: String) {
+    /*private func saveActivity(id: Int, icon: String, type: String, text: String) {
         if managedObjectContext != nil {
             let entity = NSEntityDescription.entityForName("Activity", inManagedObjectContext: managedObjectContext!)
             let ucb = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedObjectContext!) as! SummerCamp.Activity
@@ -206,21 +240,39 @@ class middle2ViewController: UIViewController {
         } else {
             print("Could not get managed object context")
         }
-    }
+    }*/
     
-    func notifysomeone(icIm: String) {
+    func notifysomeone(icon: String, type: String) {
         print("SENDINGNOTIFICATION")
         let localNotification = UILocalNotification()
         localNotification.soundName = "beep-01a.wav"
-        if icIm == "activity" {
-            localNotification.alertTitle = "New Activity!"
-            localNotification.alertBody = "Yammer Feedback Requested."
+        if icon == "signal.png" {
+            localNotification.alertTitle = "Yammer Feedback Requested."
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "signal"
+        } else if icon == "value.png" {
+            localNotification.alertTitle = "Yammer Feedback Requested."
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "value"
+        } else if icon == "helpful.png" {
+            localNotification.alertTitle = "Yammer Feedback Requested."
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "helpful"
+        } else if icon == "space.png" {
+            localNotification.alertTitle = "Yammer Feedback Requested."
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "space"
         } else {
         localNotification.alertTitle = "An activity has been sent to you!"
         localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+        localNotification.category = "Default"
+        }
+        if type != "activity" {
+            localNotification.alertTitle = "New Question!"
+            localNotification.alertBody = "Please complete the Question on the Apple Watch! Thank you!"
         }
         localNotification.alertAction = "Now"
-        localNotification.category = icIm
+        
         //print(seconds, appendNewline: false)
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 2)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)

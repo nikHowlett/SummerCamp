@@ -22,34 +22,63 @@ class ActivityInterfaceController: WKInterfaceController {
         var thisPageType = "activity"
         var Nub = 3
         var janet = "Update"
-        //@IBOutlet weak var number: WKInterfaceLabel!
-        @IBOutlet weak var thisslider: WKInterfaceSlider!
         @IBOutlet weak var thisText: WKInterfaceLabel!
-        @IBOutlet weak var sliderUpdater: WKInterfaceLabel!
         @IBOutlet weak var activitylabel: WKInterfaceLabel!
         var thisSingleActivityInAnArray = []
         @IBOutlet weak var openYammer: WKInterfaceButton!
-        var globalArray: NSMutableArray = []
-        
-        override func awakeWithContext(context: AnyObject?) {
-            super.awakeWithContext(context)
-        }
+        var globalArray = []
+        var thisName = ""
+        var thisCorpac = ""
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        defaults?.synchronize()
+        thisName = defaults?.objectForKey("Name") as! String
+        thisCorpac = defaults?.objectForKey("CorpID") as! String
+    }
     
         func loadThisPage() {
             thisText.setText(thisSingleActivityInAnArray[0] as? String)
         }
+    
+    func responses2Server() {
+        let thisCorpacc = thisCorpac
+        let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
+        var quesid = thisSingleActivityInAnArray[3] as! String
+        let firstpart = "?u=\(thisCorpacc)&a=r&id=\(quesid)&r=1"
+        print(thisCorpacc)
+        let url = NSURL(string: "\(superfirst)\(firstpart)")
+        print(url)
+        print("THAT IS THE URL")
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            let json = JSON(data: data)
+        }
+    }
     
         @IBAction func Open() {
             let dict: Dictionary = ["message": "Yammer"]
             print("opening yammer...", appendNewline: false)
             WKInterfaceController.openParentApplication(dict, reply: {(reply, error) -> Void in print("Data has been sent to target: parent iOS app - UCB Pharma", appendNewline: false)
             })
+            responses2Server()
             //var id = thisSingleActivityInAnArray[3] as! String
             //defaults?.removeObjectForKey("Activity \(id)")
             //globalArray.delete(thisSingleActivityInAnArray)
             //var globalArrayChicken = globalArray as NSMutableArray
-            globalArray.removeObjectAtIndex(0)
-            defaults?.setObject(globalArray, forKey: "globalActivities")
+            //globalArray.removeObjectAtIndex(0)
+            print("GLOBAL")
+            print(globalArray)
+            var newArray = [] as NSArray
+            for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
+                newArray = newArray.arrayByAddingObject(globalArray[miguel])
+            }
+            //var jankRay = newArray as! NSMutableArray
+            print("Replacing global with this!")
+            print(newArray)
+            var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+            defaults?.setObject(newArray, forKey: "globalActivities")
+            defaults?.synchronize()
             openNext()
         }
     
@@ -65,12 +94,25 @@ class ActivityInterfaceController: WKInterfaceController {
         globalArray = []
         var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
         defaults?.synchronize()
-        globalArray = defaults?.objectForKey("globalActivities") as! NSMutableArray
+        globalArray = defaults?.objectForKey("globalActivities") as! NSArray
+        if globalArray.count > 0 {
+            thisText.setText(globalArray[0][0] as? String)
+            self.setTitle("1 / \(globalArray.count)")
+            activitylabel.setText("Activity \(globalArray[0][3])")
+        } else if globalArray.count == 0 {
+            pushControllerWithName("NoMore", context: self)
+        }
+        print("Load GLOBAL")
+        print(globalArray)
         var firstobject: NSArray = globalArray[0] as! NSArray
+        //print("L FIRST")
+        //print(firstobject)
         var firstobjectype: String = firstobject[2] as! String
         thisSingleActivityInAnArray = firstobject
         if firstobject == thisPageType {
+            thisText.setText(thisSingleActivityInAnArray[0] as? String)
             loadThisPage()
+            thisText.setText(thisSingleActivityInAnArray[0] as? String)
         } else if firstobject[2] as! String == "yes-no" {
             self.pushControllerWithName("yes-no", context: self)
         } else if firstobject[2] as! String == "slider-engagement" {
@@ -131,9 +173,17 @@ class ActivityInterfaceController: WKInterfaceController {
     }
     
     func openNext() {
+        print("opening next")
         if globalArray.count > 0 {
             var nextObj = globalArray[0] as! NSArray
+            print("NEXT OBJ ")
+            print(nextObj)
             var nextType = nextObj[2] as! String
+            if nextType == thisPageType {
+                thisSingleActivityInAnArray = nextObj
+                loadThisPage()
+            }
+            print(nextType)
             pushControllerWithName("\(nextType)", context: self)
         } else {
             pushControllerWithName("NoMore", context: self)

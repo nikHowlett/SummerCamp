@@ -28,9 +28,15 @@ class slider: WKInterfaceController {
     @IBOutlet weak var activitylabel: WKInterfaceLabel!
     var thisSingleActivityInAnArray = []
     var globalArray = []
+    var thisName = ""
+    var thisCorpac = ""
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        defaults?.synchronize()
+        thisName = defaults?.objectForKey("Name") as! String
+        thisCorpac = defaults?.objectForKey("CorpID") as! String
     }
     
     func loadThisPage() {
@@ -38,43 +44,35 @@ class slider: WKInterfaceController {
     }
     
     func openNextPage() {
-        var thisType = ""
-        if titlesCount == 0 {
-            self.pushControllerWithName("NoMore", context: self)
+        if globalArray.count > 0 {
+            var nextObj = globalArray[0] as! NSArray
+            var nextType = nextObj[2] as! String
+            pushControllerWithName("\(nextType)", context: self)
         } else {
-            var thisActivityID = titles[0]
-            var thisActObj = []
-            for (var p = 0; p < psilocybin.count-1; p++) {
-                thisActObj = psilocybin[p]
-                var thisID: String = thisActObj[3] as! String
-                if thisID == thisActivityID {
-                    //get the type
-                    thisType = thisActObj[2] as! String
-                }
-            }
-            if thisType != thisPageType {
-                thisSingleActivityInAnArray = thisActObj
-                loadThisPage()
-            } else {
-                pushControllerWithName("\(thisType)", context: self)
-            }
+            pushControllerWithName("NoMore", context: self)
         }
     }
     
     @IBAction func sleepSliderDidMove(value: Float) {
         Nub = Int(value)
         if Nub == 0 {
-            janet = "Unengaging"
+            //janet = "Unengaging"
+            janet = "Bored"
         } else if Nub == 1 {
-            janet = "Uninteresting"
+            //janet = "Uninteresting"
+            janet = "Bored"
         } else if Nub == 2 {
-            janet = "Sub-Par"
+            //janet = "Sub-Par"
+            janet = "Not Interested"
         } else if Nub == 3 {
-            janet = "Good"
+            //janet = "Good"
+            janet = "Neutral"
         } else if Nub == 4 {
-            janet = "Very Good"
+            //janet = "Very Good"
+            janet = "Interested"
         } else if Nub == 5 {
-            janet = "Extremely Engaging"
+            //janet = "Extremely Engaging"
+            janet = "Highly Interested"
         }
         sliderUpdater.setText(janet)
     }
@@ -150,6 +148,53 @@ class slider: WKInterfaceController {
                 self.pushControllerWithName("activity", context: self)
             }
         }*/
+    }
+    
+    func openNext() {
+        print("opening next")
+        if globalArray.count > 0 {
+            var nextObj = globalArray[0] as! NSArray
+            print("NEXT OBJ ")
+            print(nextObj)
+            var nextType = nextObj[2] as! String
+            if nextType == thisPageType {
+                thisSingleActivityInAnArray = nextObj
+                loadThisPage()
+            }
+            print(nextType)
+            pushControllerWithName("\(nextType)", context: self)
+        } else {
+            pushControllerWithName("NoMore", context: self)
+        }
+    }
+
+    @IBAction func Submit() {
+        responses2Server()
+        var newArray = [] as NSArray
+        for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
+            newArray = newArray.arrayByAddingObject(globalArray[miguel])
+        }
+        //var jankRay = newArray as! NSMutableArray
+        print("Replacing global with this!")
+        print(newArray)
+        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        defaults?.setObject(newArray, forKey: "globalActivities")
+        defaults?.synchronize()
+        openNext()
+    }
+    
+    func responses2Server() {
+        let thisCorpacc = thisCorpac
+        let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
+        var quesid = thisSingleActivityInAnArray[3] as! String
+        let firstpart = "?u=\(thisCorpacc)&a=r&id=\(quesid)&r=\(Nub)"
+        print(thisCorpacc)
+        let url = NSURL(string: "\(superfirst)\(firstpart)")
+        print(url)
+        print("THAT IS THE URL")
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            let json = JSON(data: data)
+        }
     }
     
     override func didDeactivate() {

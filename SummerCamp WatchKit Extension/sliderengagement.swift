@@ -30,22 +30,75 @@ class sliderengagement: WKInterfaceController {
     @IBOutlet weak var activitylabel: WKInterfaceLabel!
     var thisSingleActivityInAnArray = []
     var globalArray = []
+    var thisName = ""
+    var thisCorpac = ""
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         //go to the correct interface based on the closest activity's title
         //openNextPage()
+        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        defaults?.synchronize()
+        thisName = defaults?.objectForKey("Name") as! String
+        thisCorpac = defaults?.objectForKey("CorpID") as! String
     }
     
     func loadThisPage() {
         thisText.setText(thisSingleActivityInAnArray[0] as? String)
-        var outletimage = thisSingleActivityInAnArray[1] as? String
-        //iconOutlet.setImage(outletimage!)
-        //iconOutlet.setImageNamed(outletimage!)
+    }
+    
+    @IBAction func submit() {
+        responses2Server()
+        var newArray = [] as NSArray
+        for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
+            newArray = newArray.arrayByAddingObject(globalArray[miguel])
+        }
+        //var jankRay = newArray as! NSMutableArray
+        print("Replacing global with this!")
+        print(newArray)
+        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        defaults?.setObject(newArray, forKey: "globalActivities")
+        defaults?.synchronize()
+        openNext()
+    }
+    
+    func openNext() {
+        print("opening next")
+        if globalArray.count > 0 {
+            var nextObj = globalArray[0] as! NSArray
+            print("NEXT OBJ ")
+            print(nextObj)
+            var nextType = nextObj[2] as! String
+            if nextType == thisPageType {
+                thisSingleActivityInAnArray = nextObj
+                loadThisPage()
+            }
+            print(nextType)
+            pushControllerWithName("\(nextType)", context: self)
+        } else {
+            pushControllerWithName("NoMore", context: self)
+        }
     }
     
     func openNextPage() {
-        var thisType = ""
+        func openNext() {
+            print("opening next")
+            if globalArray.count > 0 {
+                var nextObj = globalArray[0] as! NSArray
+                print("NEXT OBJ ")
+                print(nextObj)
+                var nextType = nextObj[2] as! String
+                if nextType == thisPageType {
+                    thisSingleActivityInAnArray = nextObj
+                    loadThisPage()
+                }
+                print(nextType)
+                pushControllerWithName("\(nextType)", context: self)
+            } else {
+                pushControllerWithName("NoMore", context: self)
+            }
+        }
+        /*var thisType = ""
         if titlesCount == 0 {
             //update the interface to go to the screen that says no more activites, a congratulations screen
             //maybe this needs a self.
@@ -74,7 +127,7 @@ class sliderengagement: WKInterfaceController {
             } else {
                 pushControllerWithName("\(thisType)", context: self)
             }
-        }
+        }*/
         //ok so this is watch nav so its different than phone nav
         //instead of passing the activity object to the next page like usual,
         //we're gonna load the activites the same way we did on this page, but its gonna be the right page, each page will have a type
@@ -96,7 +149,7 @@ class sliderengagement: WKInterfaceController {
         } else if Nub == 5 {
             janet = "5"
         }
-        activitylabel.setText(janet)
+        sliderUpdater.setText(janet)
         //sqLabelText = "Quality: \(sliderValue)"
         //sqLabel.setText(sqLabelText)
     }
@@ -104,6 +157,38 @@ class sliderengagement: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         psilocybin = []
+        titles = []
+        activityTitles = []
+        globalArray = []
+        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        defaults?.synchronize()
+        globalArray = defaults?.objectForKey("globalActivities") as! NSArray
+        if globalArray.count > 0 {
+            thisText.setText(globalArray[0][0] as? String)
+            self.setTitle("1 / \(globalArray.count)")
+            activitylabel.setText("Question \(globalArray[0][3])")
+        } else if globalArray.count == 0 {
+            pushControllerWithName("NoMore", context: self)
+        }
+        print("Load GLOBAL")
+        print(globalArray)
+        var firstobject: NSArray = globalArray[0] as! NSArray
+        //print("L FIRST")
+        //print(firstobject)
+        var firstobjectype: String = firstobject[2] as! String
+        thisSingleActivityInAnArray = firstobject
+        if firstobject == thisPageType {
+            thisText.setText(thisSingleActivityInAnArray[0] as? String)
+            loadThisPage()
+            thisText.setText(thisSingleActivityInAnArray[0] as? String)
+        } else if firstobject[2] as! String == "yes-no" {
+            self.pushControllerWithName("yes-no", context: self)
+        } else if firstobject[2] as! String == "slider-engagement" {
+            self.pushControllerWithName("slider-engagement", context: self)
+        } else if firstobject[2] as! String == "activity" {
+            self.pushControllerWithName("activity", context: self)
+        }
+        /*psilocybin = []
         titles = []
         activityTitles = []
         var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
@@ -116,11 +201,25 @@ class sliderengagement: WKInterfaceController {
             //number.setText("\(activitescount)")
             print(activitescount)
         }
-        self.setTitle("1 / \(activitescount)")
+        self.setTitle("1 / \(activitescount)")*/
     }
     
     override func didDeactivate() {
         super.didDeactivate()
+    }
+    
+    func responses2Server() {
+        let thisCorpacc = thisCorpac
+        let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
+        var quesid = thisSingleActivityInAnArray[3] as! String
+        let firstpart = "?u=\(thisCorpacc)&a=r&id=\(quesid)&r=\(Nub)"
+        print(thisCorpacc)
+        let url = NSURL(string: "\(superfirst)\(firstpart)")
+        print(url)
+        print("THAT IS THE URL")
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            let json = JSON(data: data)
+        }
     }
     
    /* func loadActivites() {
