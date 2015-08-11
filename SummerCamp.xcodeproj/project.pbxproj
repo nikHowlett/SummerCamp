@@ -17,6 +17,8 @@
 		D01FE15E1B7A6C9A00425F31 /* 03_content.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1551B7A6C9A00425F31 /* 03_content.png */; };
 		D01FE15F1B7A6C9A00425F31 /* 02_neutral.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1561B7A6C9A00425F31 /* 02_neutral.png */; };
 		D01FE1601B7A6C9A00425F31 /* 01_sleeping.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1571B7A6C9A00425F31 /* 01_sleeping.png */; };
+		D01FE1641B7A967D00425F31 /* App Icon [Rounded] in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1621B7A967D00425F31 /* App Icon [Rounded] */; };
+		D01FE1651B7A967D00425F31 /* App Icon [Squared] in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1631B7A967D00425F31 /* App Icon [Squared] */; };
 		D0243E841B793202001C5738 /* NoiseNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E831B793202001C5738 /* NoiseNotificationController.swift */; };
 		D0243E861B793211001C5738 /* HelpfulnessNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */; };
 		D0243E881B79321E001C5738 /* SpaceNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E871B79321E001C5738 /* SpaceNotificationController.swift */; };
@@ -178,6 +180,8 @@
 		D01FE1551B7A6C9A00425F31 /* 03_content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 03_content.png; path = ../../../../Downloads/03_content.png; sourceTree = "<group>"; };
 		D01FE1561B7A6C9A00425F31 /* 02_neutral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 02_neutral.png; path = ../../../../Downloads/02_neutral.png; sourceTree = "<group>"; };
 		D01FE1571B7A6C9A00425F31 /* 01_sleeping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 01_sleeping.png; path = ../../../../Downloads/01_sleeping.png; sourceTree = "<group>"; };
+		D01FE1621B7A967D00425F31 /* App Icon [Rounded] */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "App Icon [Rounded]"; path = "../../../../Downloads/App-Icons-Bridge-Options/Option2/App Icon [Rounded]"; sourceTree = "<group>"; };
+		D01FE1631B7A967D00425F31 /* App Icon [Squared] */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "App Icon [Squared]"; path = "../../../../Downloads/App-Icons-Bridge-Options/Option2/App Icon [Squared]"; sourceTree = "<group>"; };
 		D0243E831B793202001C5738 /* NoiseNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseNotificationController.swift; sourceTree = "<group>"; };
 		D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpfulnessNotificationController.swift; sourceTree = "<group>"; };
 		D0243E871B79321E001C5738 /* SpaceNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceNotificationController.swift; sourceTree = "<group>"; };
@@ -292,6 +296,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D01FE1611B7A966600425F31 /* appiconb4dploy */ = {
+			isa = PBXGroup;
+			children = (
+				D01FE1621B7A967D00425F31 /* App Icon [Rounded] */,
+				D01FE1631B7A967D00425F31 /* App Icon [Squared] */,
+			);
+			name = appiconb4dploy;
+			sourceTree = "<group>";
+		};
 		D0E0F9BF1B73B4CF00CDDB0A = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +355,7 @@
 		D0E0F9CB1B73B4CF00CDDB0A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D01FE1611B7A966600425F31 /* appiconb4dploy */,
 				D0E0F9CC1B73B4CF00CDDB0A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -659,6 +673,7 @@
 				D0E2230B1B74F11700319A0B /* Space_w_Consistency.gif in Resources */,
 				D0E222EE1B73FC3400319A0B /* Space_w_Consistency.png in Resources */,
 				D0E222D31B73CA1D00319A0B /* ucbwhitelogofrommedicalvideos copy 2.png in Resources */,
+				D01FE1651B7A967D00425F31 /* App Icon [Squared] in Resources */,
 				D0E222CF1B73CA1D00319A0B /* ucb_pharma.png15474615 (1).png in Resources */,
 				D0E223111B74F11700319A0B /* reset.png in Resources */,
 				D0E222D01B73CA1D00319A0B /* ucb_pharma.png15474615 (2).png in Resources */,
@@ -677,6 +692,7 @@
 				D0E2230F1B74F11700319A0B /* send.png in Resources */,
 				D0E223121B74F11700319A0B /* Noise_to_Signal.gif in Resources */,
 				D0E0F9D81B73B4CF00CDDB0A /* Images.xcassets in Resources */,
+				D01FE1641B7A967D00425F31 /* App Icon [Rounded] in Resources */,
 				D0E222F31B73FC3400319A0B /* HelpfulnessGenerosity.png in Resources */,
 				D0E222EC1B73FC3400319A0B /* SummerCamp_Login3.png in Resources */,
 			);

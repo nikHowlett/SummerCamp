@@ -18,7 +18,7 @@ class ActivityInterfaceController: WKInterfaceController {
         var activityNumbers: [Int] = [Int]()
         var titlesCount = 0
         var activitesCount = 0
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         var thisPageType = "activity"
         var Nub = 3
         var janet = "Update"
@@ -32,7 +32,7 @@ class ActivityInterfaceController: WKInterfaceController {
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         thisName = defaults?.objectForKey("Name") as! String
         thisCorpac = defaults?.objectForKey("CorpID") as! String
@@ -76,7 +76,7 @@ class ActivityInterfaceController: WKInterfaceController {
             //var jankRay = newArray as! NSMutableArray
             print("Replacing global with this!")
             print(newArray)
-            var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+            var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
             defaults?.setObject(newArray, forKey: "globalActivities")
             defaults?.synchronize()
             openNext()
@@ -92,7 +92,7 @@ class ActivityInterfaceController: WKInterfaceController {
         titles = []
         activityTitles = []
         globalArray = []
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         globalArray = defaults?.objectForKey("globalActivities") as! NSArray
         if globalArray.count > 0 {
@@ -119,6 +119,8 @@ class ActivityInterfaceController: WKInterfaceController {
             self.pushControllerWithName("slider-engagement", context: self)
         } else if firstobject[2] as! String == "slider1-5" {
             self.pushControllerWithName("slider1-5", context: self)
+        } else if firstobject[2] as! String == "emoji" {
+            self.pushControllerWithName("emoji", context: self)
         }
         /*psilocybin = []
         titles = []

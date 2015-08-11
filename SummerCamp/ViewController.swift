@@ -100,7 +100,7 @@ class ViewController: UIViewController {
         loginButton.layer.cornerRadius = 5
         loginButton.clipsToBounds = true
         let ucbmedicalvideocolor = uicolorFromHex(0x062134)
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         UIView.animateWithDuration(0.7, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
             self.corporateAccountField.alpha = 1.0
@@ -215,7 +215,7 @@ class ViewController: UIViewController {
             self.theircorp = thisCorpacc
             let name2 = name as NSString
             if name2.length > 1 {
-                var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+                var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
                 defaults?.synchronize()
                 defaults?.setObject(self.theirname, forKey: "Name")
                 defaults?.setObject(self.theircorp, forKey: "CorpID")

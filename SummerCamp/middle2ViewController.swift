@@ -80,9 +80,12 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         activities = []
         employees = []
         activitiesonly = []
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
-        var globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+        var globalShave = []
+        if (defaults?.objectForKey("globalActivities") != nil) {
+            globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+        }
         if (activitiesonly.count == 0) {
             for (var y = 0; y < globalShave.count-1; y++) {
                 var wattype = (globalShave[y][2] as! String)
@@ -181,7 +184,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 //self.saveActivity(id!, icon: icon, type: type, text: text)
                     var shit = "\(id!)"
                 var array = [text, icon, type, shit] as NSArray
-                var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+                var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
                 var globalActivities: NSArray = []
                 var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
                 for (var p = 0; p < activitytitlearray!.count-1; p++) {

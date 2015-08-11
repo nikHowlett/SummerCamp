@@ -18,7 +18,7 @@ class slider: WKInterfaceController {
     var activityNumbers: [Int] = [Int]()
     var titlesCount = 0
     var activitesCount = 0
-    var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+    var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
     var thisPageType = "slider"
     var Nub = 3
     var janet = "Update"
@@ -33,7 +33,7 @@ class slider: WKInterfaceController {
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         thisName = defaults?.objectForKey("Name") as! String
         thisCorpac = defaults?.objectForKey("CorpID") as! String
@@ -82,7 +82,7 @@ class slider: WKInterfaceController {
         psilocybin = []
         titles = []
         activityTitles = []
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         globalArray = defaults?.objectForKey("globalActivities") as! NSArray
         var firstobject: NSArray = globalArray[0] as! NSArray
@@ -96,6 +96,8 @@ class slider: WKInterfaceController {
             self.pushControllerWithName("activity", context: self)
         } else if firstobject[2] as! String == "slider1-5" {
             self.pushControllerWithName("slider1-5", context: self)
+        } else if firstobject[2] as! String == "emoji" {
+            self.pushControllerWithName("emoji", context: self)
         }
         /*var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
         print(activitytitlearray!)
@@ -177,7 +179,7 @@ class slider: WKInterfaceController {
         //var jankRay = newArray as! NSMutableArray
         print("Replacing global with this!")
         print(newArray)
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.setObject(newArray, forKey: "globalActivities")
         defaults?.synchronize()
         openNext()

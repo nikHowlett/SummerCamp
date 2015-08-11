@@ -18,7 +18,7 @@ class sliderengagement: WKInterfaceController {
     var activityNumbers: [Int] = [Int]()
     var titlesCount = 0
     var activitesCount = 0
-    var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+    var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
     var thisPageType = "slider"
     var Nub = 3
     var janet = "Update"
@@ -37,7 +37,7 @@ class sliderengagement: WKInterfaceController {
         super.awakeWithContext(context)
         //go to the correct interface based on the closest activity's title
         //openNextPage()
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         thisName = defaults?.objectForKey("Name") as! String
         thisCorpac = defaults?.objectForKey("CorpID") as! String
@@ -56,7 +56,7 @@ class sliderengagement: WKInterfaceController {
         //var jankRay = newArray as! NSMutableArray
         print("Replacing global with this!")
         print(newArray)
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.setObject(newArray, forKey: "globalActivities")
         defaults?.synchronize()
         openNext()
@@ -160,7 +160,7 @@ class sliderengagement: WKInterfaceController {
         titles = []
         activityTitles = []
         globalArray = []
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         globalArray = defaults?.objectForKey("globalActivities") as! NSArray
         if globalArray.count > 0 {
@@ -187,6 +187,8 @@ class sliderengagement: WKInterfaceController {
             self.pushControllerWithName("slider-engagement", context: self)
         } else if firstobject[2] as! String == "activity" {
             self.pushControllerWithName("activity", context: self)
+        } else if firstobject[2] as! String == "emoji" {
+            self.pushControllerWithName("emoji", context: self)
         }
         /*psilocybin = []
         titles = []
