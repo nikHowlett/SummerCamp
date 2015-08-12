@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         }
         return enabled ? enable() : disable()
     }
+    @IBOutlet weak var backgroundMaybe: UIImageView!
     @IBOutlet weak var corporateAccountField: UITextField!
     //@IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -102,13 +103,32 @@ class ViewController: UIViewController {
         let ucbmedicalvideocolor = uicolorFromHex(0x062134)
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
+        if (defaults?.objectForKey("Name") != nil) {
+            theirname = (defaults?.objectForKey("Name") as? String)!
+            if (defaults?.objectForKey("CorpID") != nil) {
+                theircorp = (defaults?.objectForKey("CorpID") as! String)
+                self.login2()
+                /*let alertController = UIAlertController(title: "Corporate ID found!", message:
+                    "Your corporate ID was found, would you like to use this previously saved information to auto-login?", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                alertController.addAction(UIAlertAction(title:"Auto-Login", style: UIAlertActionStyle.Default,handler: {alertAction in
+                self.login2()
+                }))
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })*/
+            }
+        }
         UIView.animateWithDuration(0.7, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
             self.corporateAccountField.alpha = 1.0
             //self.passwordField.alpha = 1.0
             self.loginButton.alpha   = 0.9
             }, completion: nil)
-        self.view.backgroundColor = ucbmedicalvideocolor
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+        //self.view.backgroundColor = ucbmedicalvideocolor
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+        //backgroundMaybe.contentMode = .Redraw
+        backgroundMaybe.clipsToBounds = true
+        backgroundMaybe.sendSubviewToBack(backgroundMaybe)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         self.loginButton(false)
@@ -124,6 +144,7 @@ class ViewController: UIViewController {
             //print(employees.count)
 */
         // Do any additional setup after loading the view, typically from a nib.
+        backgroundMaybe.sendSubviewToBack(backgroundMaybe)
     }
 
     override func didReceiveMemoryWarning() {
@@ -251,6 +272,74 @@ class ViewController: UIViewController {
             }*/
         }
         task.resume()
+    }
+    func login2() {
+            //u=U026686&a=gi
+            let thisCorpacc = theircorp
+            let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
+            //let superfirstpart = "http://172.17.8.66:8080/DocuSign2/dsPollingServlet"
+            let firstpart = "?u=\(thisCorpacc)&a=gi"
+            let url = NSURL(string: "\(superfirst)\(firstpart)")
+            print(url)
+            var parseError: NSError?
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+                //let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
+                //options: NSJSONReadingOptions.AllowFragments,
+                //error:&parseError)
+                //let name3 = json["name"].stringValue
+                ////print("ParsedOBJ: \(parsedObject)")
+                //let topApps = parsedObject as? NSDictionary
+                //if let appName = topApps["name"] as? NSDictionary {
+                //let name4 = "\(appName)"
+                //print(name4)
+                //print("<--name4")
+                //}
+                let json = JSON(data: data)
+                print("JSONServerResponse: \(json)")
+                let name = json["name"].stringValue
+                print("JSONNAME: \(name)")
+                print("name once again: ")
+                print(name)
+                self.theirname = name
+                self.theircorp = thisCorpacc
+                let name2 = name as NSString
+                if name2.length > 1 {
+                    var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+                    defaults?.synchronize()
+                    defaults?.setObject(self.theirname, forKey: "Name")
+                    defaults?.setObject(self.theircorp, forKey: "CorpID")
+                    print("<<<<<Name and CORPID saved>>>>>")
+                    self.saveEmployee(self.theircorp, name: self.theirname)
+                    //var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+                    //defaults?.synchronize()
+                    self.performSegueWithIdentifier("login", sender: self)
+                }
+                /* var serverResponse = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+                print("RAW: \(serverResponse)")
+                var jeanie = serverResponse.stringByReplacingOccurrencesOfString("\\", withString: " ")*/
+                let ero2323 = json["response"].stringValue
+                let ero3 = ero2323 as NSString
+                if ero3.length > 1 {
+                    let alertController = UIAlertController(title: "Corporate ID Not Found!", message:
+                        "Remember to include first character in the Corporate ID and delete all extra spaces. Please make sure you have entered it correctly and try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                /*var serverResponseStr = serverResponse as! String
+                if serverResponseStr == "null" {
+                let alertController = UIAlertController(title: "Corporate ID Not Found!", message:
+                "Remember to include first character in the Corporate ID.  Please make sure you have entered it correctly and try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                } else if let range = serverResponseStr.rangeOfString("n=") {
+                var lettuce = (serverResponseStr.substringToIndex(range.startIndex))
+                var jeanie = "n="
+                self.theirname = lettuce.substringFromIndex(jeanie.endIndex)
+                self.theircorp = thisCorpacc
+                self.performSegueWithIdentifier("login", sender: self)
+                }*/
+            }
+            task.resume()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

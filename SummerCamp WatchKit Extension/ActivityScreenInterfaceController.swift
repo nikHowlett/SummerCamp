@@ -11,10 +11,29 @@ import Foundation
 
 
 class ActivityScreenInterfaceController: WKInterfaceController {
-
+    
+    var activitiesLeft = []
+    var globalArray = []
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
+        activitiesLeft = []
+        globalArray = []
+        var globalArray1 = []
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        defaults?.synchronize()
+        if (defaults?.objectForKey("activitiesOnly") != nil) {
+            activitiesLeft = defaults?.objectForKey("activitiesOnly") as! NSArray
+        }
+        if (defaults?.objectForKey("globalActivities") != nil) {
+            globalArray1 = defaults?.objectForKey("globalActivities") as! NSArray
+        }
+        if activitiesLeft.count > 0 {
+            globalArray = globalArray.arrayByAddingObjectsFromArray(activitiesLeft as! [NSArray])
+        }
+        if globalArray.count > 0 {
+            pushControllerWithName("activity", context: self)
+        }
         // Configure interface objects here.
     }
 

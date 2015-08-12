@@ -115,9 +115,9 @@
                                 <label width="136" height="14" alignment="center" text="Question #4" textAlignment="center" id="TCN-oG-U3E"/>
                             </items>
                         </group>
-                        <group width="1" alignment="left" id="Y1n-kM-Jjg">
+                        <group alignment="left" id="Y1n-kM-Jjg">
                             <items>
-                                <label width="1" height="49" alignment="center" text="Five being the best, rate your chef." textAlignment="center" numberOfLines="7" id="wP1-3K-Rdh">
+                                <label width="1" alignment="center" text="Five being the best, rate your chef." textAlignment="center" numberOfLines="7" id="wP1-3K-Rdh">
                                     <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
                                     <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                 </label>
@@ -347,7 +347,7 @@
                             </items>
                             <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
-                        <group width="134" height="85" alignment="left" id="niO-cF-tml">
+                        <group alignment="left" id="niO-cF-tml">
                             <items>
                                 <button width="30" alignment="left" verticalAlignment="center" title="&lt;" id="AKe-vD-Pjo">
                                     <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>

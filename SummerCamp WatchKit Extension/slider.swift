@@ -85,6 +85,9 @@ class slider: WKInterfaceController {
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         globalArray = defaults?.objectForKey("globalActivities") as! NSArray
+        if globalArray.count == 0 {
+            self.pushControllerWithName("NoMore", context: self)
+        }
         var firstobject: NSArray = globalArray[0] as! NSArray
         var firstobjectype: String = firstobject[2] as! String
         thisSingleActivityInAnArray = firstobject

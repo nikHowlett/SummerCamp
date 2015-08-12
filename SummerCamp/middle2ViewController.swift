@@ -21,6 +21,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var tableOutlet: UITableView!
+    var globalActivites = []
     
     func handleWatchKitNotification(notification: NSNotification) {
         if let userInfo = notification.object as? [String : String] {
@@ -63,10 +64,77 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            var indx = 0
+            var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+            var newArray = []
+            if globalActivites.containsObject(activitiesonly[indexPath.row]) {
+                indx = globalActivites.indexOfObject(activitiesonly[indexPath.row])
+                for (var u = 0; u < globalActivites.count-1; u++) {
+                    var thisObj = globalActivites[u] as! NSArray
+                    newArray = newArray.arrayByAddingObject(thisObj)
+                }
+                defaults?.setObject(newArray, forKey: "globalActivities")
+            }
+            activitiesonly.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var rownumber = indexPath.row
+        var sdf = indexPath
+        let alertController = UIAlertController(title: "Activity Selected", message:
+            "Have you completed this Activity and would like to remove it from your Activity List?", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default,handler: nil))
+        alertController.addAction(UIAlertAction(title:"Yes", style: UIAlertActionStyle.Default,handler: {alertAction in
+            self.deletedat(rownumber, sdf: sdf)
+        }))
+        dispatch_async(dispatch_get_main_queue(), {
+            self.presentViewController(alertController, animated: true, completion: nil)
+        })
+
+        /*if   dataToDisplay[rownumber] == sampleData[0] {
+            println("red")
+        }*/
+    }
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        return refreshControl
+        }()
+    
+    func deletedat(rownumber: Int, sdf: NSIndexPath) {
+        var indx = 0
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        var newArray = []
+        if self.globalActivites.containsObject(self.activitiesonly[rownumber]) {
+            indx = self.globalActivites.indexOfObject(self.activitiesonly[rownumber])
+            for (var u = 0; u < self.globalActivites.count-1; u++) {
+                var thisObj = self.globalActivites[u] as! NSArray
+                newArray = newArray.arrayByAddingObject(thisObj)
+            }
+            defaults?.setObject(newArray, forKey: "globalActivities")
+        }
+        self.activitiesonly.removeAtIndex(rownumber)
+        self.tableOutlet.reloadData()
+    }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        self.tableOutlet.reloadData()
+        refreshControl.endRefreshing()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Activities"
+        self.tableOutlet.addSubview(self.refreshControl)
         /*let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let fetchRequest : NSFetchRequest = NSFetchRequest(entityName: "Activity")
@@ -76,21 +144,27 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             employees = managedObjectContext?.executeFetchRequest(fetchRequest2, error: nil)
                 as! [Employee]
         }*/
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         activities = []
         employees = []
         activitiesonly = []
+        globalActivites = []
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         var globalShave = []
         if (defaults?.objectForKey("globalActivities") != nil) {
             globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+            globalActivites = defaults?.objectForKey("globalActivities") as! NSArray
         }
         if (activitiesonly.count == 0) {
             for (var y = 0; y < globalShave.count-1; y++) {
                 var wattype = (globalShave[y][2] as! String)
                 if wattype == "activity" {
-                    activitiesonly.append(globalShave[y] as! NSArray)
+                    var activz = activitiesonly as NSArray
+                    if activz.containsObject(globalShave[y] as! NSArray) {
+                    } else {
+                        activitiesonly.append(globalShave[y] as! NSArray)
+                    }
                 }
             }
         }
@@ -98,6 +172,11 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         thereforeName = defaults?.objectForKey("Name") as? String
         corpAcc = (defaults?.objectForKey("CorpID") as! String)
         welcomeLabel.text = "Welcome \(thereforeName!)!"
+        if corpAcc != nil {
+            if thereforeName != nil {
+                
+            }
+        }
         //corpAcc = defaults!.stringForKey("CorpID")!;
         //corpAcc = defaults!.valueForKey("CorpID")! as? String;
         //corpAcc = employees[employees.count-1].corpID

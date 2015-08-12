@@ -59,6 +59,9 @@ class yesno: WKInterfaceController {
         }
         print("Load GLOBAL")
         print(globalArray)
+        if globalArray.count == 0 {
+            self.pushControllerWithName("NoMore", context: self)
+        }
         var firstobject: NSArray = globalArray[0] as! NSArray
         //print("L FIRST")
         //print(firstobject)
@@ -92,8 +95,10 @@ class yesno: WKInterfaceController {
                 loadThisPage()
             }
             print(nextType)
+            dismissController()
             pushControllerWithName("\(nextType)", context: self)
         } else {
+            dismissController()
             pushControllerWithName("NoMore", context: self)
         }
     }

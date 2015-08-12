@@ -27,6 +27,7 @@ class ActivityInterfaceController: WKInterfaceController {
         var thisSingleActivityInAnArray = []
         @IBOutlet weak var openYammer: WKInterfaceButton!
         var globalArray = []
+        var activitiesLeft = []
         var thisName = ""
         var thisCorpac = ""
     
@@ -34,8 +35,12 @@ class ActivityInterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
-        thisName = defaults?.objectForKey("Name") as! String
-        thisCorpac = defaults?.objectForKey("CorpID") as! String
+        if (defaults?.objectForKey("Name") != nil) {
+            thisName = defaults?.objectForKey("Name") as! String
+            thisCorpac = defaults?.objectForKey("CorpID") as! String
+        } else {
+            pushControllerWithName("NoMore", context: self)
+        }
     }
     
         func loadThisPage() {
@@ -83,6 +88,16 @@ class ActivityInterfaceController: WKInterfaceController {
         }
     
     @IBAction func Later() {
+        var thisObj = globalArray[0] as! NSArray
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        activitiesLeft = activitiesLeft.arrayByAddingObject(thisObj)
+        defaults?.setObject(activitiesLeft, forKey: "activitiesOnly")
+        var newArray = [] as NSArray
+        for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
+            newArray = newArray.arrayByAddingObject(globalArray[miguel])
+        }
+        defaults?.setObject(newArray, forKey: "globalActivities")
+        defaults?.synchronize()
         openNext()
     }
     
@@ -91,10 +106,21 @@ class ActivityInterfaceController: WKInterfaceController {
         psilocybin = []
         titles = []
         activityTitles = []
+        activitiesLeft = []
         globalArray = []
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
-        globalArray = defaults?.objectForKey("globalActivities") as! NSArray
+        if (defaults?.objectForKey("activitiesOnly") != nil) {
+            activitiesLeft = defaults?.objectForKey("activitiesOnly") as! NSArray
+        }
+        var globalArray1 = []
+        if (defaults?.objectForKey("globalActivities") != nil) {
+            globalArray1 = defaults?.objectForKey("globalActivities") as! NSArray
+        }
+        globalArray = globalArray.arrayByAddingObjectsFromArray(globalArray1 as! [NSArray])
+        /*if activitiesLeft.count > 0 {
+            globalArray = globalArray.arrayByAddingObjectsFromArray(activitiesLeft as! [NSArray])
+        }*/
         if globalArray.count > 0 {
             thisText.setText(globalArray[0][0] as? String)
             self.setTitle("1 / \(globalArray.count)")
@@ -104,6 +130,10 @@ class ActivityInterfaceController: WKInterfaceController {
         }
         print("Load GLOBAL")
         print(globalArray)
+        if globalArray.count == 0 {
+            self.pushControllerWithName("NoMore", context: self)
+            return
+        }
         var firstobject: NSArray = globalArray[0] as! NSArray
         //print("L FIRST")
         //print(firstobject)
@@ -186,7 +216,9 @@ class ActivityInterfaceController: WKInterfaceController {
                 loadThisPage()
             }
             print(nextType)
+            dismissController()
             pushControllerWithName("\(nextType)", context: self)
+            dismissController()
         } else {
             pushControllerWithName("NoMore", context: self)
         }

@@ -20,7 +20,7 @@ class emoji: WKInterfaceController {
     var activitesCount = 0
     var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
     var thisPageType = "slider"
-    var Nub = 3
+    var Nub = 2
     var janet = "Update"
     @IBOutlet weak var thisText: WKInterfaceLabel!
     var thisSingleActivityInAnArray = []
@@ -82,6 +82,9 @@ class emoji: WKInterfaceController {
         }
         print("Load GLOBAL")
         print(globalArray)
+        if globalArray.count == 0 {
+            self.pushControllerWithName("NoMore", context: self)
+        }
         var firstobject: NSArray = globalArray[0] as! NSArray
         //print("L FIRST")
         //print(firstobject)
@@ -102,7 +105,7 @@ class emoji: WKInterfaceController {
     }
     
     @IBAction func minus() {
-        if Nub != 1 {
+        if Nub != 0 {
             Nub = Nub - 1
         }
         var imgStr = (imageTitleArray[Nub] as! String)
@@ -110,7 +113,7 @@ class emoji: WKInterfaceController {
     }
     
     @IBAction func plus() {
-        if Nub != 5 {
+        if Nub != 4 {
             Nub = Nub + 1
         }
         var imgStr = (imageTitleArray[Nub] as! String)
@@ -139,7 +142,7 @@ class emoji: WKInterfaceController {
         }
         print("Replacing global with this!")
         print(newArray)
-        var defaults = NSUserDefaults(suiteName: "group.UCBAuth")
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.setObject(newArray, forKey: "globalActivities")
         defaults?.synchronize()
         openNext()

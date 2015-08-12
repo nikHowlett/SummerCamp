@@ -29,7 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSNotificationCenter.defaultCenter().postNotificationName("signal", object: nil)
             } else if (identifier == "value"){
                 NSNotificationCenter.defaultCenter().postNotificationName("value", object: nil)
-            }
+            } else if (identifier == "default"){
+                NSNotificationCenter.defaultCenter().postNotificationName("default", object: nil)
+        }
             completionHandler()
     }
     
@@ -65,6 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         valueCategory.identifier = "value"
         var helpfulCategory = UIMutableUserNotificationCategory()
         helpfulCategory.identifier = "helpful"
+        var defaultCategory = UIMutableUserNotificationCategory()
+        defaultCategory.identifier = "default"
         someCategory.setActions(defaultActions, forContext: UIUserNotificationActionContext.Default)
         someCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
         helpfulCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Default)
@@ -73,6 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
         valueCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Default)
         valueCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
+        defaultCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Default)
+        defaultCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert, categories: NSSet(array:[mainCategory, someCategory, helpfulCategory, valueCategory]) as Set<NSObject>))
         

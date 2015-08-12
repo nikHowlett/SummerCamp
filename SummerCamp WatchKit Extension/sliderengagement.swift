@@ -74,6 +74,7 @@ class sliderengagement: WKInterfaceController {
                 loadThisPage()
             }
             print(nextType)
+            dismissController()
             pushControllerWithName("\(nextType)", context: self)
         } else {
             pushControllerWithName("NoMore", context: self)
