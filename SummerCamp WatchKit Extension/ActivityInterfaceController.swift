@@ -54,19 +54,24 @@ class ActivityInterfaceController: WKInterfaceController {
         let firstpart = "?u=\(thisCorpacc)&a=r&id=\(quesid)&r=1"
         print(thisCorpacc)
         let url = NSURL(string: "\(superfirst)\(firstpart)")
-        print(url)
+        print(url!)
+        let dict: Dictionary = ["message": "\(url!)"]
+        WKInterfaceController.openParentApplication(dict, reply: {(reply, error) -> Void in print("URL/Response has been sent to target: parent iOS app - UCB Pharma", appendNewline: false)
+        })
+        /*print(url)
         print("THAT IS THE URL")
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             let json = JSON(data: data)
-        }
+            print("RAWJSON: \(json)")
+        }*/
     }
     
         @IBAction func Open() {
             let dict: Dictionary = ["message": "Yammer"]
             print("opening yammer...", appendNewline: false)
+            responses2Server()
             WKInterfaceController.openParentApplication(dict, reply: {(reply, error) -> Void in print("Data has been sent to target: parent iOS app - UCB Pharma", appendNewline: false)
             })
-            responses2Server()
             //var id = thisSingleActivityInAnArray[3] as! String
             //defaults?.removeObjectForKey("Activity \(id)")
             //globalArray.delete(thisSingleActivityInAnArray)

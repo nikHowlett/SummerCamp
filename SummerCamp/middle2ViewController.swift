@@ -22,6 +22,11 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var tableOutlet: UITableView!
     var globalActivites = []
+    var mustReloadView = false
+    var newItems: [NSArray] {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDelegate.newItems as! [NSArray]
+    }
     
     func handleWatchKitNotification(notification: NSNotification) {
         if let userInfo = notification.object as? [String : String] {
@@ -40,6 +45,8 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     println("App not installed")
                     UIApplication.sharedApplication().openURL(NSURL(string:"https://itunes.apple.com/us/app/yammer/id289559439?mt=8")!)
                 }
+            } else {
+                sendResponse(magikString!)
             }
         }
     }
@@ -117,8 +124,10 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         if self.globalActivites.containsObject(self.activitiesonly[rownumber]) {
             indx = self.globalActivites.indexOfObject(self.activitiesonly[rownumber])
             for (var u = 0; u < self.globalActivites.count-1; u++) {
-                var thisObj = self.globalActivites[u] as! NSArray
-                newArray = newArray.arrayByAddingObject(thisObj)
+                if u != indx {
+                    var thisObj = self.globalActivites[u] as! NSArray
+                    newArray = newArray.arrayByAddingObject(thisObj)
+                }
             }
             defaults?.setObject(newArray, forKey: "globalActivities")
         }
@@ -135,16 +144,6 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         self.title = "Activities"
         self.tableOutlet.addSubview(self.refreshControl)
-        /*let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let fetchRequest : NSFetchRequest = NSFetchRequest(entityName: "Activity")
-        let fetchRequest2 : NSFetchRequest = NSFetchRequest(entityName: "Employee")
-            activitiesonly = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
-                as! [Activity]
-            employees = managedObjectContext?.executeFetchRequest(fetchRequest2, error: nil)
-                as! [Employee]
-        }*/
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         activities = []
         employees = []
         activitiesonly = []
@@ -177,11 +176,8 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 
             }
         }
-        //corpAcc = defaults!.stringForKey("CorpID")!;
-        //corpAcc = defaults!.valueForKey("CorpID")! as? String;
-        //corpAcc = employees[employees.count-1].corpID
-        //defaults?.synchronize()
-        //print(corpAcc)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNewitemsChanged:", name: AppDelegate.newItemsChangedNotification(), object: nil)
+        /*NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleAppIsBroughtToForeground:", name: UIApplicationWillEnterForegroundNotification, object: nil)*/
         checkServer()
         backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
             UIApplication.sharedApplication().endBackgroundTask(self.backgroundTaskIdentifier!)
@@ -198,7 +194,27 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
+    func handleAppIsBroughtToForeground(notification: NSNotification) {
+        if mustReloadView  {
+            tableOutlet.reloadData()
+        }
+        /*for (var x = 0; x < newItems.count; x++) {
+            notifysomeone(newItems[x][1] as! String, type: newItems[x][2] as! String)
+        }*/
+    }
+    
+    func handleNewItemsChanged(notification: NSNotification) {
+        if self.isBeingPresented() {
+            tableOutlet.reloadData()
+        } else {
+            mustReloadView = true
+        }
+        for (var x = 0; x < newItems.count; x++) {
+            notifysomeone(newItems[x][1] as! String, type: newItems[x][2] as! String)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -214,6 +230,15 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
         }()
     
+    func sendResponse(url: String) {
+        var url2use = NSURL(string: "\(url)")
+        print(url)
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url2use!) {(data, response, error) in
+            let json = JSON(data: data)
+            print("RAWJSON: \(json)")
+        }
+        task.resume()
+    }
     
     func checkServer() {
         //check for an update
@@ -335,28 +360,29 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         localNotification.soundName = "beep-01a.wav"
         if icon == "signal.png" {
             localNotification.alertTitle = "Yammer Feedback Requested."
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested."
             localNotification.category = "signal"
         } else if icon == "value.png" {
             localNotification.alertTitle = "Yammer Feedback Requested."
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested."
             localNotification.category = "value"
         } else if icon == "helpful.png" {
             localNotification.alertTitle = "Yammer Feedback Requested."
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested."
             localNotification.category = "helpful"
         } else if icon == "space.png" {
             localNotification.alertTitle = "Yammer Feedback Requested."
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested."
             localNotification.category = "space"
         } else {
         localNotification.alertTitle = "An activity has been sent to you!"
-        localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+        localNotification.alertBody = "New Activity!"
+            //"Please complete the Activity or Question on the Apple Watch! Thank you!"
         localNotification.category = "Default"
         }
         if type != "activity" {
             localNotification.alertTitle = "New Question!"
-            localNotification.alertBody = "Please complete the Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "New Question!"
         }
         localNotification.alertAction = "Now"
         
@@ -367,7 +393,21 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     /*
     // MARK: - Navigation
-
+    //corpAcc = defaults!.stringForKey("CorpID")!;
+    //corpAcc = defaults!.valueForKey("CorpID")! as? String;
+    //corpAcc = employees[employees.count-1].corpID
+    //defaults?.synchronize()
+    //print(corpAcc)
+    /*let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let fetchRequest : NSFetchRequest = NSFetchRequest(entityName: "Activity")
+    let fetchRequest2 : NSFetchRequest = NSFetchRequest(entityName: "Employee")
+    activitiesonly = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+    as! [Activity]
+    employees = managedObjectContext?.executeFetchRequest(fetchRequest2, error: nil)
+    as! [Employee]
+    }*/
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem()
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.

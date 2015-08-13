@@ -31,16 +31,16 @@
                             </items>
                             <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
-                        <group width="1" alignment="left" id="IqH-op-XNg">
+                        <group width="1" height="30" alignment="left" id="IqH-op-XNg">
                             <items>
-                                <button width="49" height="30" alignment="center" title="Yes" id="ppX-6c-clW">
+                                <button width="50" height="30" alignment="center" title="Yes" id="ppX-6c-clW">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="pressYes" destination="hdp-jL-az6" id="8GY-Qp-WK4"/>
                                     </connections>
                                 </button>
-                                <button width="51" height="30" alignment="center" title="No" id="fCr-B3-rQy">
+                                <button width="50" height="30" alignment="center" title="No" id="fCr-B3-rQy">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.80392163991928101" green="0.20000001788139343" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
                                     <connections>
@@ -125,7 +125,7 @@
                             <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
                         <label alignment="center" text="3" numberOfLines="2" id="7qT-aq-Asr"/>
-                        <slider width="1" alignment="left" value="3" maximum="5" steps="5" id="OhT-vQ-Mtd">
+                        <slider width="1" alignment="left" value="3" minimum="1" maximum="5" steps="5" id="OhT-vQ-Mtd">
                             <connections>
                                 <action selector="sleepSliderDidMove:" destination="YLd-H9-QKI" id="p2n-Hb-ypx"/>
                             </connections>
@@ -202,8 +202,8 @@
             <objects>
                 <notificationController id="YCC-NB-fut">
                     <items>
-                        <label alignment="left" text="Alert Label" numberOfLines="4" id="XkS-y5-khE"/>
-                        <imageView width="86" height="88" alignment="center" image="Space_w_Consistency" id="tSW-Pq-hfc"/>
+                        <label alignment="center" text="Alert Label" textAlignment="center" numberOfLines="4" id="XkS-y5-khE"/>
+                        <imageView width="70" height="70" alignment="center" image="Space_w_Consistency" id="tSW-Pq-hfc"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="space" id="JfB-70-Muf">
                         <color key="sashColor" red="0.83529411764705885" green="0.47058823529411764" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -221,8 +221,8 @@
             <objects>
                 <notificationController id="a54-7O-J9d">
                     <items>
-                        <label alignment="left" text="Alert Label" numberOfLines="4" id="BmY-YP-kyJ"/>
-                        <imageView width="63" height="82" alignment="center" image="Noise_to_Signal" id="ngr-Ii-rz3"/>
+                        <label alignment="center" text="Alert Label" textAlignment="center" numberOfLines="4" id="BmY-YP-kyJ"/>
+                        <imageView width="60" height="70" alignment="center" image="Noise_to_Signal" id="ngr-Ii-rz3"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="signal" id="322-9k-zA1">
                         <color key="sashColor" red="0.73725490196078436" green="0.12941176470588237" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -239,8 +239,8 @@
             <objects>
                 <notificationController id="Ncq-N8-cao">
                     <items>
-                        <label alignment="left" text="Alert Label" numberOfLines="4" id="T0I-cj-yvJ"/>
-                        <imageView width="80" height="92" alignment="center" image="Task_to_Value" id="GS8-zc-aU0"/>
+                        <label alignment="center" text="Alert Label" textAlignment="center" numberOfLines="4" id="T0I-cj-yvJ"/>
+                        <imageView width="70" height="70" alignment="center" image="Task_to_Value" id="GS8-zc-aU0"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="value" id="evs-Sj-Iw4">
                         <color key="sashColor" red="0.20784313725490197" green="0.29411764705882354" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -257,8 +257,8 @@
             <objects>
                 <notificationController id="DTe-yi-aDj">
                     <items>
-                        <label alignment="left" text="Alert Label" numberOfLines="4" id="UuQ-DQ-ykB"/>
-                        <imageView width="87" height="75" alignment="center" image="HelpfulnessGenerosity" id="4id-ae-czm"/>
+                        <label alignment="center" text="Alert Label" textAlignment="center" numberOfLines="4" id="UuQ-DQ-ykB"/>
+                        <imageView width="80" height="70" alignment="center" image="HelpfulnessGenerosity" id="4id-ae-czm"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="helpful" id="R2f-gL-bOl">
                         <color key="sashColor" red="0.37254901960784315" green="0.21176470588235294" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -276,7 +276,7 @@
                 <notificationController id="yqg-9b-dPC">
                     <items>
                         <label alignment="center" text="Herman Alert" textAlignment="center" id="UCY-PK-FWw"/>
-                        <imageView width="80" height="92" alignment="center" image="default_herman_question" id="pE7-iv-2hp"/>
+                        <imageView width="60" height="80" alignment="center" image="default_herman_question" id="pE7-iv-2hp"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="default" id="44e-EN-16c"/>
                     <connections>
@@ -347,7 +347,7 @@
                             </items>
                             <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
-                        <group alignment="left" id="niO-cF-tml">
+                        <group width="1" alignment="center" id="niO-cF-tml">
                             <items>
                                 <button width="30" alignment="left" verticalAlignment="center" title="&lt;" id="AKe-vD-Pjo">
                                     <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
@@ -355,7 +355,7 @@
                                         <action selector="minus" destination="XXM-ip-LTf" id="641-9T-J0P"/>
                                     </connections>
                                 </button>
-                                <imageView alignment="center" verticalAlignment="center" image="03_content" id="8Oy-rJ-FnX"/>
+                                <imageView width="50" height="50" alignment="center" verticalAlignment="center" image="03_content" id="8Oy-rJ-FnX"/>
                                 <button width="30" alignment="right" verticalAlignment="center" title="&gt;" id="LOu-32-8CX">
                                     <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>

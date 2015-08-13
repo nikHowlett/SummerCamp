@@ -84,6 +84,7 @@ class emoji: WKInterfaceController {
         print(globalArray)
         if globalArray.count == 0 {
             self.pushControllerWithName("NoMore", context: self)
+            return
         }
         var firstobject: NSArray = globalArray[0] as! NSArray
         //print("L FIRST")
@@ -124,15 +125,22 @@ class emoji: WKInterfaceController {
         let thisCorpacc = thisCorpac
         let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
         var quesid = thisSingleActivityInAnArray[3] as! String
-        let firstpart = "?u=\(thisCorpacc)&a=r&id=\(quesid)&r=\(Nub)"
+        var jub = Nub+1
+        let firstpart = "?u=\(thisCorpacc)&a=r&id=\(quesid)&r=\(jub)"
         print(thisCorpacc)
         let url = NSURL(string: "\(superfirst)\(firstpart)")
-        print(url)
+        print(url!)
+        let dict: Dictionary = ["message": "\(url!)"]
+        WKInterfaceController.openParentApplication(dict, reply: {(reply, error) -> Void in print("URL/Response has been sent to target: parent iOS app - UCB Pharma", appendNewline: false)
+        })
+        /*print(url)
         print("THAT IS THE URL")
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-            let json = JSON(data: data)
-        }
+        let json = JSON(data: data)
+        print("RAWJSON: \(json)")
+        }*/
     }
+
     
     @IBAction func Submit() {
         responses2Server()

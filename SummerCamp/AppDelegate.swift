@@ -13,29 +13,12 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var newItems = []
 
 
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
         NSNotificationCenter.defaultCenter().postNotificationName("WatchKitReq", object: userInfo)
     }
-    
-    func application(application: UIApplication, handleActionWithIdentifier identifier:String?, forLocalNotification notification:UILocalNotification, completionHandler: (() -> Void)){
-            if (identifier == "helpful"){
-                NSNotificationCenter.defaultCenter().postNotificationName("hlpeful", object: nil)
-            } else if (identifier == "space"){
-                NSNotificationCenter.defaultCenter().postNotificationName("space", object: nil)
-                
-            } else if (identifier == "signal"){
-                NSNotificationCenter.defaultCenter().postNotificationName("signal", object: nil)
-            } else if (identifier == "value"){
-                NSNotificationCenter.defaultCenter().postNotificationName("value", object: nil)
-            } else if (identifier == "default"){
-                NSNotificationCenter.defaultCenter().postNotificationName("default", object: nil)
-        }
-            completionHandler()
-    }
-    
-    var backgroundUpdateTask: UIBackgroundTaskIdentifier = 0
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType members\
@@ -57,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         boozeAction.authenticationRequired = false
         
         // Notification category
-        let defaultActions = [boozeAction, snoozeAction]
-        let minimalActions = [boozeAction, snoozeAction]
+        let defaultActions = [boozeAction]
+        let minimalActions = [boozeAction]
         var mainCategory = UIMutableUserNotificationCategory()
         mainCategory.identifier = "space"
         var someCategory = UIMutableUserNotificationCategory()
@@ -85,6 +68,208 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    class func newItemsChangedNotification() -> String {
+        return "\(__FUNCTION__)"
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier:String?, forLocalNotification notification:UILocalNotification, completionHandler: (() -> Void)){
+            if (identifier == "helpful"){
+                NSNotificationCenter.defaultCenter().postNotificationName("helpful", object: nil)
+            } else if (identifier == "space"){
+                NSNotificationCenter.defaultCenter().postNotificationName("space", object: nil)
+                
+            } else if (identifier == "signal"){
+                NSNotificationCenter.defaultCenter().postNotificationName("signal", object: nil)
+            } else if (identifier == "value"){
+                NSNotificationCenter.defaultCenter().postNotificationName("value", object: nil)
+            } else if (identifier == "default"){
+                NSNotificationCenter.defaultCenter().postNotificationName("default", object: nil)
+        }
+            completionHandler()
+    }
+    
+    var backgroundUpdateTask: UIBackgroundTaskIdentifier = 0
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        var charlie = 0
+        var banana = 0
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        if (defaults?.objectForKey("CorpID") != nil) {
+            print("Conditional Discharge")
+            var corpAcc = (defaults?.objectForKey("CorpID") as! String)
+            let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
+            let firstpart = "?u=\(corpAcc)&a=gp"
+            newItems = []
+            let url = NSURL(string: "\(superfirst)\(firstpart)")
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+                let json = JSON(data: data)
+                print("DELEGATOR RAWJSON: \(json)")
+                var stillmoreactivites = true
+                var i = 0
+                while stillmoreactivites {
+                    let type = json[i]["type"].stringValue
+                    let id = json[i]["id"].int
+                    let text = json[i]["text"].stringValue
+                    let icon = json[i]["icon"].stringValue
+                    let response = json[i]["response"].stringValue
+                    if response != "" {
+                        stillmoreactivites = false
+                        charlie++
+                    } else if type == "" {
+                        stillmoreactivites = false
+                        charlie++
+                    } else {
+                        banana++
+                        i++
+                        print("QUESTION ID \(id!)")
+                        print(text)
+                        print(type)
+                        print(icon)
+                        var shit = "\(id!)"
+                        var array = [text, icon, type, shit] as NSArray
+                        self.newItems.arrayByAddingObject(array)
+                        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+                        var globalActivities: NSArray = []
+                        var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
+                        for (var p = 0; p < activitytitlearray!.count-1; p++) {
+                            var thisobjectatindexp = activitytitlearray![p] as? String
+                            if thisobjectatindexp! == "globalActivities" {
+                                globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
+                            }
+                        }
+                        print("CURRENT GLOBAL")
+                        print(globalActivities)
+                        var jeanie = globalActivities.arrayByAddingObject(array)
+                        print("SAVING THIS AS NEW GLOBAL")
+                        print(jeanie)
+                        defaults?.setObject(jeanie, forKey: "globalActivities")
+                        self.notifysomeone(icon, type: type)
+                        print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
+                    }
+                }
+            }
+            task.resume()
+        }
+        if banana != 0 {
+            completionHandler(.NewData)
+        } else {
+            completionHandler(.NoData)
+        }
+    }
+    
+    func fetchNewItems() -> Bool {
+        print("this is the delegator")
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            self.classForCoder.newItemsChangedNotification(),
+            object: nil)
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        defaults?.synchronize()
+        newItems = []
+        var charlie = 0
+        var banana = 0
+        if (defaults?.objectForKey("CorpID") != nil) {
+            var corpAcc = (defaults?.objectForKey("CorpID") as! String)
+        print("checkServer called!!!!!!!!")
+            let thisCorpacc = corpAcc
+            let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
+            let firstpart = "?u=\(thisCorpacc)&a=gp"
+            print(thisCorpacc)
+            let url = NSURL(string: "\(superfirst)\(firstpart)")
+            print(url!)
+            println("THAT IS THE URL DELEGATOR")
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+                let json = JSON(data: data)
+                print("DELEGATOR RAWJSON: \(json)")
+                var stillmoreactivites = true
+                var i = 0
+                while stillmoreactivites {
+                    let type = json[i]["type"].stringValue
+                    let id = json[i]["id"].int
+                    let text = json[i]["text"].stringValue
+                    let icon = json[i]["icon"].stringValue
+                    let response = json[i]["response"].stringValue
+                    if response != "" {
+                        stillmoreactivites = false
+                        charlie++
+                    } else if type == "" {
+                        stillmoreactivites = false
+                        charlie++
+                    } else {
+                        banana++
+                        i++
+                        print("QUESTION ID \(id!)")
+                        print(text)
+                        print(type)
+                        print(icon)
+                        var shit = "\(id!)"
+                        var array = [text, icon, type, shit] as NSArray
+                        self.newItems.arrayByAddingObject(array)
+                        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+                        var globalActivities: NSArray = []
+                        var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
+                        for (var p = 0; p < activitytitlearray!.count-1; p++) {
+                            var thisobjectatindexp = activitytitlearray![p] as? String
+                            if thisobjectatindexp! == "globalActivities" {
+                                globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
+                            }
+                        }
+                        print("CURRENT GLOBAL")
+                        print(globalActivities)
+                        var jeanie = globalActivities.arrayByAddingObject(array)
+                        print("SAVING THIS AS NEW GLOBAL")
+                        print(jeanie)
+                        defaults?.setObject(jeanie, forKey: "globalActivities")
+                        self.notifysomeone(icon, type: type)
+                        print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
+                    }
+                }
+            }
+            task.resume()
+        }
+        if banana != 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func notifysomeone(icon: String, type: String) {
+        print("SENDINGNOTIFICATION")
+        let localNotification = UILocalNotification()
+        localNotification.soundName = "beep-01a.wav"
+        if icon == "signal.png" {
+            localNotification.alertTitle = "Yammer Feedback Requested."
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "signal"
+        } else if icon == "value.png" {
+            localNotification.alertTitle = "Yammer Feedback Requested."
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "value"
+        } else if icon == "helpful.png" {
+            localNotification.alertTitle = "Yammer Feedback Requested."
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "helpful"
+        } else if icon == "space.png" {
+            localNotification.alertTitle = "Yammer Feedback Requested."
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "space"
+        } else {
+            localNotification.alertTitle = "An activity has been sent to you!"
+            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.category = "Default"
+        }
+        if type != "activity" {
+            localNotification.alertTitle = "New Question!"
+            localNotification.alertBody = "Please complete the Question on the Apple Watch! Thank you!"
+        }
+        localNotification.alertAction = "Now"
+        
+        //print(seconds, appendNewline: false)
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 2)
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
+    
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

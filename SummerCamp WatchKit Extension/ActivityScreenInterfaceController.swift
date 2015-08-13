@@ -31,9 +31,13 @@ class ActivityScreenInterfaceController: WKInterfaceController {
         if activitiesLeft.count > 0 {
             globalArray = globalArray.arrayByAddingObjectsFromArray(activitiesLeft as! [NSArray])
         }
+        defaults?.setObject(globalArray, forKey: "globalActivities")
         if globalArray.count > 0 {
             pushControllerWithName("activity", context: self)
         }
+        activitiesLeft = []
+        defaults?.setObject(activitiesLeft, forKey: "activitiesOnly")
+        defaults?.synchronize()
         // Configure interface objects here.
     }
 
