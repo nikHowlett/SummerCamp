@@ -157,11 +157,16 @@
             <objects>
                 <controller identifier="NoMore" id="8jc-VW-Fu4" customClass="ActivityScreenInterfaceController" customModule="SummerCamp_WatchKit_Extension">
                     <items>
-                        <label width="136" height="132" alignment="center" text="No more activites to show" textAlignment="center" numberOfLines="6" id="o4C-OA-qlC"/>
+                        <label width="136" height="106" alignment="center" text="No more activites to show" textAlignment="center" numberOfLines="6" id="o4C-OA-qlC"/>
+                        <button width="1" alignment="left" title="Refresh" id="HMa-oS-UEV">
+                            <connections>
+                                <action selector="ReFreSh" destination="8jc-VW-Fu4" id="VIo-Ol-eAd"/>
+                            </connections>
+                        </button>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="969" y="748"/>
+            <point key="canvasLocation" x="969" y="736"/>
         </scene>
         <!--Interface Controller-->
         <scene sceneID="5k4-aJ-LTI">

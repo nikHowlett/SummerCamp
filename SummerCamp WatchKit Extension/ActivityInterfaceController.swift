@@ -97,6 +97,7 @@ class ActivityInterfaceController: WKInterfaceController {
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         activitiesLeft = activitiesLeft.arrayByAddingObject(thisObj)
         defaults?.setObject(activitiesLeft, forKey: "activitiesOnly")
+        defaults?.synchronize()
         var newArray = [] as NSArray
         for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
             newArray = newArray.arrayByAddingObject(globalArray[miguel])
@@ -132,6 +133,7 @@ class ActivityInterfaceController: WKInterfaceController {
             activitylabel.setText("Activity \(globalArray[0][3])")
         } else if globalArray.count == 0 {
             pushControllerWithName("NoMore", context: self)
+            return
         }
         print("Load GLOBAL")
         print(globalArray)

@@ -87,6 +87,7 @@ class slider: WKInterfaceController {
         globalArray = defaults?.objectForKey("globalActivities") as! NSArray
         if globalArray.count == 0 {
             self.pushControllerWithName("NoMore", context: self)
+            return
         }
         var firstobject: NSArray = globalArray[0] as! NSArray
         var firstobjectype: String = firstobject[2] as! String

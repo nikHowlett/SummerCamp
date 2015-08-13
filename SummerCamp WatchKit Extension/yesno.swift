@@ -61,6 +61,7 @@ class yesno: WKInterfaceController {
         print(globalArray)
         if globalArray.count == 0 {
             self.pushControllerWithName("NoMore", context: self)
+            return
         }
         var firstobject: NSArray = globalArray[0] as! NSArray
         //print("L FIRST")

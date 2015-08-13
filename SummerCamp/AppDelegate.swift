@@ -14,6 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var newItems = []
+    var backgroundTaskIdentifier: UIBackgroundTaskIdentifier =
+    UIBackgroundTaskInvalid
+    
+    var myTimer: NSTimer?
 
 
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
@@ -114,6 +118,91 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let response = json[i]["response"].stringValue
                     if response != "" {
                         stillmoreactivites = false
+                        println("OH NO THE MOB BOSS")
+                        charlie++
+                    } else if type == "" {
+                        stillmoreactivites = false
+                        println("OH NO THE MOB BOSS")
+                        charlie++
+                    } else {
+                        banana++
+                        println("OH NO THE BOB ROSS")
+                        i++
+                        print("QUESTION ID \(id!)")
+                        print(text)
+                        print(type)
+                        print(icon)
+                        var shit = "\(id!)"
+                        var array = [text, icon, type, shit] as NSArray
+                        self.newItems.arrayByAddingObject(array)
+                        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+                        var globalActivities: NSArray = []
+                        var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
+                        for (var p = 0; p < activitytitlearray!.count-1; p++) {
+                            var thisobjectatindexp = activitytitlearray![p] as? String
+                            if thisobjectatindexp! == "globalActivities" {
+                                globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
+                            }
+                        }
+                        print("CURRENT GLOBAL")
+                        print(globalActivities)
+                        var jeanie = globalActivities.arrayByAddingObject(array)
+                        print("SAVING THIS AS NEW GLOBAL")
+                        print(jeanie)
+                        defaults?.setObject(jeanie, forKey: "globalActivities")
+                        self.notifysomeone(icon, type: type)
+                        print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
+                    }
+                }
+            }
+            task.resume()
+        }
+        println("DELEGATOR END")
+        if banana != 0 {
+            completionHandler(.NewData)
+        } else {
+            completionHandler(.NoData)
+        }
+        if self.fetchNewItems() {
+            completionHandler(.NewData)
+        } else {
+            completionHandler(.NoData)
+        }
+    }
+    
+    func fetchNewItemz(sender: NSTimer) -> Bool {
+        print("this is the delegator")
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            self.classForCoder.newItemsChangedNotification(),
+            object: nil)
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        defaults?.synchronize()
+        newItems = []
+        var charlie = 0
+        var banana = 0
+        if (defaults?.objectForKey("CorpID") != nil) {
+            var corpAcc = (defaults?.objectForKey("CorpID") as! String)
+            print("checkServer called!!!!!!!!")
+            let thisCorpacc = corpAcc
+            let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
+            let firstpart = "?u=\(thisCorpacc)&a=gp"
+            print(thisCorpacc)
+            let url = NSURL(string: "\(superfirst)\(firstpart)")
+            print(url!)
+            println("THAT IS THE URL DELEGATOR")
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+                let json = JSON(data: data)
+                print("DELEGATOR RAWJSON: \(json)")
+                var stillmoreactivites = true
+                var i = 0
+                while stillmoreactivites {
+                    let type = json[i]["type"].stringValue
+                    let id = json[i]["id"].int
+                    let text = json[i]["text"].stringValue
+                    let icon = json[i]["icon"].stringValue
+                    let response = json[i]["response"].stringValue
+                    if response != "" {
+                        stillmoreactivites = false
                         charlie++
                     } else if type == "" {
                         stillmoreactivites = false
@@ -151,9 +240,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             task.resume()
         }
         if banana != 0 {
-            completionHandler(.NewData)
+            return true
         } else {
-            completionHandler(.NoData)
+            return false
         }
     }
     
@@ -239,28 +328,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         localNotification.soundName = "beep-01a.wav"
         if icon == "signal.png" {
             localNotification.alertTitle = "Yammer Feedback Requested."
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested"
+            //"Please complete the Activity or Question on the Apple Watch! Thank you!"
             localNotification.category = "signal"
         } else if icon == "value.png" {
             localNotification.alertTitle = "Yammer Feedback Requested."
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested"
             localNotification.category = "value"
         } else if icon == "helpful.png" {
             localNotification.alertTitle = "Yammer Feedback Requested."
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested"
             localNotification.category = "helpful"
         } else if icon == "space.png" {
             localNotification.alertTitle = "Yammer Feedback Requested."
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested"
             localNotification.category = "space"
         } else {
             localNotification.alertTitle = "An activity has been sent to you!"
-            localNotification.alertBody = "Please complete the Activity or Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "Yammer Feedback Requested"
             localNotification.category = "Default"
         }
         if type != "activity" {
             localNotification.alertTitle = "New Question!"
-            localNotification.alertBody = "Please complete the Question on the Apple Watch! Thank you!"
+            localNotification.alertBody = "New Question"
         }
         localNotification.alertAction = "Now"
         
@@ -271,6 +361,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func applicationWillResignActive(application: UIApplication) {
+        fetchNewItems()
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
@@ -287,10 +378,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(application: UIApplication) {
-        if (ViewController().theircorp != "") {
+        fetchNewItems()
+        
+        myTimer = NSTimer.scheduledTimerWithTimeInterval(4.0,
+            target: self,
+            selector: "fetchNewItemz:",
+            userInfo: nil,
+            repeats: true)
+        
+        backgroundTaskIdentifier =
+            application.beginBackgroundTaskWithName("task1",
+                expirationHandler: {[weak self] in
+                    self!.endBackgroundTask()
+                })
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        if (defaults?.objectForKey("CorpID") != nil) {
             print("here we are")
-            let root : UINavigationController = self.window!.rootViewController! as! UINavigationController
-            let master : ActivityTableViewController = root.topViewController as! ActivityTableViewController
+            let root : ViewController = self.window!.rootViewController! as! SummerCamp.ViewController
+            let master : middle2ViewController = middle2ViewController() as middle2ViewController
             let qualityOfServiceClass = QOS_CLASS_BACKGROUND
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         backgroundThread(delay: 30.0, background: {
@@ -304,13 +409,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkServe() {
         print("CheckServe called from AppDelegate.swift")
         let root : UINavigationController = self.window!.rootViewController! as! UINavigationController
-        if let master : ActivityTableViewController = root.topViewController as? ActivityTableViewController {
+        if let master : middle2ViewController = root.topViewController as? middle2ViewController {
             master.checkServer()
         }
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        if backgroundUpdateTask != UIBackgroundTaskInvalid{
+            endBackgroundTask()
+        }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -321,6 +428,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    func endBackgroundTask(){
+        
+        let mainQueue = dispatch_get_main_queue()
+        
+        dispatch_async(mainQueue, {[weak self] in
+            if let timer = self!.myTimer{
+                timer.invalidate()
+                self!.myTimer = nil
+                UIApplication.sharedApplication().endBackgroundTask(
+                    self!.backgroundTaskIdentifier)
+                self!.backgroundTaskIdentifier = UIBackgroundTaskInvalid
+            }
+            })
     }
 
     // MARK: - Core Data stack

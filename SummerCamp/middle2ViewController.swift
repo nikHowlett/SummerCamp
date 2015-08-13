@@ -99,6 +99,10 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             "Have you completed this Activity and would like to remove it from your Activity List?", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default,handler: nil))
         alertController.addAction(UIAlertAction(title:"Yes", style: UIAlertActionStyle.Default,handler: {alertAction in
+            let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
+            var quesid = self.activitiesonly[indexPath.row][3] as! String
+            let firstpart = "?u=\(self.corpAcc!)&a=r&id=\(quesid)&r=1"
+            self.sendResponse("\(superfirst)\(firstpart)")
             self.deletedat(rownumber, sdf: sdf)
         }))
         dispatch_async(dispatch_get_main_queue(), {
@@ -136,6 +140,25 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        defaults?.synchronize()
+        var globalShave = []
+        if (defaults?.objectForKey("globalActivities") != nil) {
+            globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+            globalActivites = defaults?.objectForKey("globalActivities") as! NSArray
+        }
+        if (activitiesonly.count == 0) {
+            for (var y = 0; y < globalShave.count-1; y++) {
+                var wattype = (globalShave[y][2] as! String)
+                if wattype == "activity" {
+                    var activz = activitiesonly as NSArray
+                    if activz.containsObject(globalShave[y] as! NSArray) {
+                    } else {
+                        activitiesonly.append(globalShave[y] as! NSArray)
+                    }
+                }
+            }
+        }
         self.tableOutlet.reloadData()
         refreshControl.endRefreshing()
     }
@@ -176,7 +199,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 
             }
         }
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNewitemsChanged:", name: AppDelegate.newItemsChangedNotification(), object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNewItemsChanged:", name: AppDelegate.newItemsChangedNotification(), object: nil)
         /*NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleAppIsBroughtToForeground:", name: UIApplicationWillEnterForegroundNotification, object: nil)*/
         checkServer()
         backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
@@ -246,8 +269,14 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         Periodically (every 2 mins) the app will request actions from the server (u=U026686&a=q)
         If a polling request exists for the user the server will return the session (s=3+5&a=p)
         */
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        var thisCorpacc = ""
         print("checkServer called!!!!!!!!")
-        let thisCorpacc = corpAcc!
+        if (defaults?.objectForKey("CorpID") != nil) {
+            thisCorpacc = (defaults?.objectForKey("CorpID") as! String)
+        } else {
+            thisCorpacc = corpAcc!
+        }
         let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
         let firstpart = "?u=\(thisCorpacc)&a=gp"
         print(thisCorpacc)

@@ -79,6 +79,7 @@ class emoji: WKInterfaceController {
             activityLabel.setText("Question \(globalArray[0][3])")
         } else if globalArray.count == 0 {
             pushControllerWithName("NoMore", context: self)
+            return
         }
         print("Load GLOBAL")
         print(globalArray)
