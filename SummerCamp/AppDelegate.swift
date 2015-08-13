@@ -222,12 +222,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.newItems.arrayByAddingObject(array)
                         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
                         var globalActivities: NSArray = []
-                        var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
-                        for (var p = 0; p < activitytitlearray!.count-1; p++) {
-                            var thisobjectatindexp = activitytitlearray![p] as? String
-                            if thisobjectatindexp! == "globalActivities" {
-                                globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
-                            }
+                        if (defaults?.objectForKey("globalActivities") != nil) {
+                            //globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+                            globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
                         }
                         print("CURRENT GLOBAL")
                         print(globalActivities)

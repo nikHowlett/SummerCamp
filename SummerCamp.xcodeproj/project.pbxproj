@@ -20,6 +20,7 @@
 		D01FE1601B7A6C9A00425F31 /* 01_sleeping.png in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1571B7A6C9A00425F31 /* 01_sleeping.png */; };
 		D01FE1641B7A967D00425F31 /* App Icon [Rounded] in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1621B7A967D00425F31 /* App Icon [Rounded] */; };
 		D01FE1651B7A967D00425F31 /* App Icon [Squared] in Resources */ = {isa = PBXBuildFile; fileRef = D01FE1631B7A967D00425F31 /* App Icon [Squared] */; };
+		D02004321B7D24F900757AB6 /* V3iewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02004311B7D24F900757AB6 /* V3iewController.swift */; };
 		D0243E841B793202001C5738 /* NoiseNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E831B793202001C5738 /* NoiseNotificationController.swift */; };
 		D0243E861B793211001C5738 /* HelpfulnessNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */; };
 		D0243E881B79321E001C5738 /* SpaceNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E871B79321E001C5738 /* SpaceNotificationController.swift */; };
@@ -184,6 +185,7 @@
 		D01FE1571B7A6C9A00425F31 /* 01_sleeping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 01_sleeping.png; path = ../../../../Downloads/01_sleeping.png; sourceTree = "<group>"; };
 		D01FE1621B7A967D00425F31 /* App Icon [Rounded] */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "App Icon [Rounded]"; path = "../../../../Downloads/App-Icons-Bridge-Options/Option2/App Icon [Rounded]"; sourceTree = "<group>"; };
 		D01FE1631B7A967D00425F31 /* App Icon [Squared] */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "App Icon [Squared]"; path = "../../../../Downloads/App-Icons-Bridge-Options/Option2/App Icon [Squared]"; sourceTree = "<group>"; };
+		D02004311B7D24F900757AB6 /* V3iewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V3iewController.swift; sourceTree = "<group>"; };
 		D0243E831B793202001C5738 /* NoiseNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseNotificationController.swift; sourceTree = "<group>"; };
 		D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpfulnessNotificationController.swift; sourceTree = "<group>"; };
 		D0243E871B79321E001C5738 /* SpaceNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceNotificationController.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				D0E223561B752CEA00319A0B /* middle2ViewController.swift */,
 				D0E222D51B73DAE900319A0B /* ActivityTableViewController.swift */,
 				D0E0F9D41B73B4CF00CDDB0A /* Main.storyboard */,
+				D02004311B7D24F900757AB6 /* V3iewController.swift */,
 				D0E222D71B73DAF500319A0B /* MiddleViewController.swift */,
 				D0E0F9D71B73B4CF00CDDB0A /* Images.xcassets */,
 				D0E0F9D91B73B4CF00CDDB0A /* LaunchScreen.xib */,
@@ -796,6 +799,7 @@
 				D0E223591B7530FC00319A0B /* Employee.swift in Sources */,
 				D0E222D61B73DAE900319A0B /* ActivityTableViewController.swift in Sources */,
 				D0E222E31B73F54B00319A0B /* Activity.swift in Sources */,
+				D02004321B7D24F900757AB6 /* V3iewController.swift in Sources */,
 				D0E0F9D31B73B4CF00CDDB0A /* ViewController.swift in Sources */,
 				D0E222DA1B73EFBC00319A0B /* SwiftyJSON.swift in Sources */,
 				D0E0F9CE1B73B4CF00CDDB0A /* AppDelegate.swift in Sources */,

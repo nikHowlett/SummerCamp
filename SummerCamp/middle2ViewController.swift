@@ -21,7 +21,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var tableOutlet: UITableView!
-    var globalActivites = []
+    var globalActivities = []
     var mustReloadView = false
     var newItems: [NSArray] {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -77,10 +77,10 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             var indx = 0
             var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
             var newArray = []
-            if globalActivites.containsObject(activitiesonly[indexPath.row]) {
-                indx = globalActivites.indexOfObject(activitiesonly[indexPath.row])
-                for (var u = 0; u < globalActivites.count-1; u++) {
-                    var thisObj = globalActivites[u] as! NSArray
+            if globalActivities.containsObject(activitiesonly[indexPath.row]) {
+                indx = globalActivities.indexOfObject(activitiesonly[indexPath.row])
+                for (var u = 0; u < globalActivities.count-1; u++) {
+                    var thisObj = globalActivities[u] as! NSArray
                     newArray = newArray.arrayByAddingObject(thisObj)
                 }
                 defaults?.setObject(newArray, forKey: "globalActivities")
@@ -124,11 +124,11 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         var indx = 0
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         var newArray = []
-        if self.globalActivites.containsObject(self.activitiesonly[rownumber]) {
-            indx = self.globalActivites.indexOfObject(self.activitiesonly[rownumber])
-            for (var u = 0; u < self.globalActivites.count-1; u++) {
+        if self.globalActivities.containsObject(self.activitiesonly[rownumber]) {
+            indx = self.globalActivities.indexOfObject(self.activitiesonly[rownumber])
+            for (var u = 0; u < self.globalActivities.count-1; u++) {
                 if u != indx {
-                    var thisObj = self.globalActivites[u] as! NSArray
+                    var thisObj = self.globalActivities[u] as! NSArray
                     newArray = newArray.arrayByAddingObject(thisObj)
                 }
             }
@@ -144,14 +144,14 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         var globalShave = []
         if (defaults?.objectForKey("globalActivities") != nil) {
             globalShave = defaults?.objectForKey("globalActivities") as! NSArray
-            globalActivites = defaults?.objectForKey("globalActivities") as! NSArray
+            globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
         }
         if (activitiesonly.count == 0) {
-            for (var y = 0; y < globalShave.count-1; y++) {
+            for (var y = 0; y <= globalShave.count-1; y++) {
                 var wattype = (globalShave[y][2] as! String)
                 if wattype == "activity" {
                     var activz = activitiesonly as NSArray
-                    if activz.containsObject(globalShave[y] as! NSArray) {
+                    if activz.containsObject(globalShave[y]) {
                     } else {
                         activitiesonly.append(globalShave[y] as! NSArray)
                     }
@@ -169,20 +169,28 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         activities = []
         employees = []
         activitiesonly = []
-        globalActivites = []
+        globalActivities = []
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
+        thereforeName = defaults?.objectForKey("Name") as? String
+        corpAcc = (defaults?.objectForKey("CorpID") as! String)
+        welcomeLabel.text = "Welcome \(thereforeName!)!"
+        if corpAcc != nil {
+            if thereforeName != nil {
+                checkServer()
+            }
+        }
         var globalShave = []
         if (defaults?.objectForKey("globalActivities") != nil) {
             globalShave = defaults?.objectForKey("globalActivities") as! NSArray
-            globalActivites = defaults?.objectForKey("globalActivities") as! NSArray
+            globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
         }
         if (activitiesonly.count == 0) {
-            for (var y = 0; y < globalShave.count-1; y++) {
+            for (var y = 0; y <= globalShave.count-1; y++) {
                 var wattype = (globalShave[y][2] as! String)
                 if wattype == "activity" {
                     var activz = activitiesonly as NSArray
-                    if activz.containsObject(globalShave[y] as! NSArray) {
+                    if activz.containsObject(globalShave[y]) {
                     } else {
                         activitiesonly.append(globalShave[y] as! NSArray)
                     }
@@ -190,17 +198,9 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             }
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleWatchKitNotification:"), name: "WatchKitReq", object: nil)
-        thereforeName = defaults?.objectForKey("Name") as? String
-        corpAcc = (defaults?.objectForKey("CorpID") as! String)
-        welcomeLabel.text = "Welcome \(thereforeName!)!"
-        if corpAcc != nil {
-            if thereforeName != nil {
-                
-            }
-        }
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNewItemsChanged:", name: AppDelegate.newItemsChangedNotification(), object: nil)
         /*NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleAppIsBroughtToForeground:", name: UIApplicationWillEnterForegroundNotification, object: nil)*/
-        checkServer()
         backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
             UIApplication.sharedApplication().endBackgroundTask(self.backgroundTaskIdentifier!)
         })
