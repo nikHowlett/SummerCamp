@@ -137,17 +137,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.newItems.arrayByAddingObject(array)
                         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
                         var globalActivities: NSArray = []
-                        var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
-                        for (var p = 0; p < activitytitlearray!.count-1; p++) {
-                            var thisobjectatindexp = activitytitlearray![p] as? String
-                            if thisobjectatindexp! == "globalActivities" {
-                                globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
-                            }
+                        if (defaults?.objectForKey("globalActivities") != nil) {
+                            //globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+                            globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
                         }
                         print("CURRENT GLOBAL")
                         print(globalActivities)
                         var beanie: NSArray = [array]
-                        for (var fd = 0; fd < globalActivities.count-1; fd++) {
+                        for (var fd = 0; fd <= globalActivities.count-1; fd++) {
                             beanie = beanie.arrayByAddingObject(globalActivities[fd])
                         }
                         print("SAVING THIS AS NEW GLOBAL")
@@ -298,17 +295,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.newItems.arrayByAddingObject(array)
                         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
                         var globalActivities: NSArray = []
-                        var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
-                        for (var p = 0; p < activitytitlearray!.count-1; p++) {
-                            var thisobjectatindexp = activitytitlearray![p] as? String
-                            if thisobjectatindexp! == "globalActivities" {
-                                globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
-                            }
+                        if (defaults?.objectForKey("globalActivities") != nil) {
+                            //globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+                            globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
                         }
                         print("CURRENT GLOBAL")
                         print(globalActivities)
                         var beanie: NSArray = [array]
-                        for (var fd = 0; fd < globalActivities.count-1; fd++) {
+                        for (var fd = 0; fd <= globalActivities.count-1; fd++) {
                             beanie = beanie.arrayByAddingObject(globalActivities[fd])
                         }
                         print("SAVING THIS AS NEW GLOBAL")

@@ -60,9 +60,12 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
     {
         let cell:UITableViewCell=UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "mycell")
         var shrinkage = activitiesonly[indexPath.row][0] as? String
+        var shrinkage4 = shrinkage! as NSString
         var indexer = "What elements from the workpl"
-        var shrinkage2 = shrinkage!.substringToIndex(indexer.endIndex)
-        var shrinkage3 = "\(shrinkage2)..."
+        if shrinkage4.length > 29 {
+            shrinkage = shrinkage!.substringToIndex(indexer.endIndex)
+        }
+        var shrinkage3 = "\(shrinkage)..."
         cell.textLabel!.text = activitiesonly[indexPath.row][3] as? String
         cell.detailTextLabel!.text = activitiesonly[indexPath.row][0] as? String
         
@@ -146,17 +149,23 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             globalShave = defaults?.objectForKey("globalActivities") as! NSArray
             globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
         }
+        print(globalActivities)
         if (activitiesonly.count == 0) {
+            var activz = activitiesonly as NSArray
             for (var y = 0; y <= globalShave.count-1; y++) {
                 var wattype = (globalShave[y][2] as! String)
                 if wattype == "activity" {
-                    var activz = activitiesonly as NSArray
                     if activz.containsObject(globalShave[y]) {
                     } else {
-                        activitiesonly.append(globalShave[y] as! NSArray)
+                        activz = activz.arrayByAddingObject(globalShave[y])
+                        (globalShave[y] as! NSArray)
+                        print("activz")
+                        print(activz)
+                        print("activzend")
                     }
                 }
             }
+            activitiesonly = activz as! [NSArray]
         }
         self.tableOutlet.reloadData()
         refreshControl.endRefreshing()
@@ -318,13 +327,10 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 var array = [text, icon, type, shit] as NSArray
                 var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
                 var globalActivities: NSArray = []
-                var activitytitlearray = defaults?.dictionaryRepresentation().keys.array
-                for (var p = 0; p < activitytitlearray!.count-1; p++) {
-                    var thisobjectatindexp = activitytitlearray![p] as? String
-                    if thisobjectatindexp! == "globalActivities" {
+                    if (defaults?.objectForKey("globalActivities") != nil) {
+                        //globalShave = defaults?.objectForKey("globalActivities") as! NSArray
                         globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
                     }
-                }
                 /*print("CURRENT GLOBAL")
                     print(globalActivities)
                 /*if defaults?.objectForKey("globalActivities") != nil {
@@ -347,7 +353,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     print("CURRENT GLOBAL")
                     print(globalActivities)
                     var beanie: NSArray = [array]
-                    for (var fd = 0; fd < globalActivities.count-1; fd++) {
+                    for (var fd = 0; fd <= globalActivities.count-1; fd++) {
                         beanie = beanie.arrayByAddingObject(globalActivities[fd])
                     }
                     print("SAVING THIS AS NEW GLOBAL")
