@@ -245,7 +245,7 @@
                 <notificationController id="Ncq-N8-cao">
                     <items>
                         <label alignment="center" text="Alert Label" textAlignment="center" numberOfLines="4" id="T0I-cj-yvJ"/>
-                        <imageView width="70" height="70" alignment="center" image="Task_to_Value" id="GS8-zc-aU0"/>
+                        <imageView width="60" height="70" alignment="center" image="Task_to_Value" id="GS8-zc-aU0"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="value" id="evs-Sj-Iw4">
                         <color key="sashColor" red="0.20784313725490197" green="0.29411764705882354" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

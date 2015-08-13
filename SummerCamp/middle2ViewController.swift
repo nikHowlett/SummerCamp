@@ -108,7 +108,6 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         dispatch_async(dispatch_get_main_queue(), {
             self.presentViewController(alertController, animated: true, completion: nil)
         })
-
         /*if   dataToDisplay[rownumber] == sampleData[0] {
             println("red")
         }*/
@@ -326,7 +325,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                         globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
                     }
                 }
-                print("CURRENT GLOBAL")
+                /*print("CURRENT GLOBAL")
                     print(globalActivities)
                 /*if defaults?.objectForKey("globalActivities") != nil {
                     globalActivities = defaults?.objectForKey("globalActivities") as! NSMutableArray
@@ -334,7 +333,9 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 //defaults?.setObject(array, forKey: "Activity \(id!)")
                 //globalActivities.append(array)
                 //globalActivities.append("hello")
-                var jeanie = globalActivities.arrayByAddingObject(array)
+                    
+                    var beanie: NSArray = [array]
+                var jeanie = beanie.arrayByAddingObject(globalActivities)
                     print("SAVING THIS AS NEW GLOBAL")
                     print(jeanie)
                     //globalActivities.addObject([text, icon, type, shit])
@@ -342,7 +343,16 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 //defaults?.synchronize()
                 //var thethingusaved = defaults?.objectForKey("Activity \(id)") as! NSArray
                 //var thingtext: AnyObject = array[2]
-                //var iconstring = array[1] as? String
+                //var iconstring = array[1] as? String*/
+                    print("CURRENT GLOBAL")
+                    print(globalActivities)
+                    var beanie: NSArray = [array]
+                    for (var fd = 0; fd < globalActivities.count-1; fd++) {
+                        beanie = beanie.arrayByAddingObject(globalActivities[fd])
+                    }
+                    print("SAVING THIS AS NEW GLOBAL")
+                    print(beanie)
+                    defaults?.setObject(beanie, forKey: "globalActivities")
                 self.notifysomeone(icon, type: type)
                 //print(thingtext)
                 print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")

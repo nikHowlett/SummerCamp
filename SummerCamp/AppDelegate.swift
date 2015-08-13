@@ -146,10 +146,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         print("CURRENT GLOBAL")
                         print(globalActivities)
-                        var jeanie = globalActivities.arrayByAddingObject(array)
+                        var beanie: NSArray = [array]
+                        for (var fd = 0; fd < globalActivities.count-1; fd++) {
+                            beanie = beanie.arrayByAddingObject(globalActivities[fd])
+                        }
                         print("SAVING THIS AS NEW GLOBAL")
-                        print(jeanie)
-                        defaults?.setObject(jeanie, forKey: "globalActivities")
+                        print(beanie)
+                        defaults?.setObject(beanie, forKey: "globalActivities")
                         self.notifysomeone(icon, type: type)
                         print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
                     }
@@ -228,10 +231,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         print("CURRENT GLOBAL")
                         print(globalActivities)
-                        var jeanie = globalActivities.arrayByAddingObject(array)
+                        var beanie: NSArray = [array]
+                        for (var fd = 0; fd < globalActivities.count-1; fd++) {
+                            beanie = beanie.arrayByAddingObject(globalActivities[fd])
+                        }
                         print("SAVING THIS AS NEW GLOBAL")
-                        print(jeanie)
-                        defaults?.setObject(jeanie, forKey: "globalActivities")
+                        print(beanie)
+                        defaults?.setObject(beanie, forKey: "globalActivities")
                         self.notifysomeone(icon, type: type)
                         print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
                     }
@@ -304,10 +310,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         print("CURRENT GLOBAL")
                         print(globalActivities)
-                        var jeanie = globalActivities.arrayByAddingObject(array)
+                        var beanie: NSArray = [array]
+                        for (var fd = 0; fd < globalActivities.count-1; fd++) {
+                            beanie = beanie.arrayByAddingObject(globalActivities[fd])
+                        }
                         print("SAVING THIS AS NEW GLOBAL")
-                        print(jeanie)
-                        defaults?.setObject(jeanie, forKey: "globalActivities")
+                        print(beanie)
+                        defaults?.setObject(beanie, forKey: "globalActivities")
                         self.notifysomeone(icon, type: type)
                         print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
                     }
@@ -380,7 +389,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         fetchNewItems()
         
-        myTimer = NSTimer.scheduledTimerWithTimeInterval(4.0,
+        myTimer = NSTimer.scheduledTimerWithTimeInterval(30.0,
             target: self,
             selector: "fetchNewItemz:",
             userInfo: nil,
@@ -391,6 +400,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 expirationHandler: {[weak self] in
                     self!.endBackgroundTask()
                 })
+        
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         if (defaults?.objectForKey("CorpID") != nil) {
             print("here we are")

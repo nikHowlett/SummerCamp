@@ -17,6 +17,22 @@ class ActivityScreenInterfaceController: WKInterfaceController {
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        
+        // Configure interface objects here.
+    }
+    
+    @IBAction func ReFreSh() {
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        var baby = []
+        if (defaults?.objectForKey("globalActivities") != nil) {
+            baby = defaults?.objectForKey("globalActivities") as! NSArray
+        }
+        if baby.count > 0 {
+            pushControllerWithName("activity", context: self)
+        }
+    }
+
+    override func willActivate() {
         activitiesLeft = []
         globalArray = []
         var globalArray1 = []
@@ -41,22 +57,7 @@ class ActivityScreenInterfaceController: WKInterfaceController {
         activitiesLeft = []
         defaults?.setObject(activitiesLeft, forKey: "activitiesOnly")
         defaults?.synchronize()
-        // Configure interface objects here.
-    }
-    
-    @IBAction func ReFreSh() {
-        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
-        var baby = []
-        if (defaults?.objectForKey("globalActivities") != nil) {
-            baby = defaults?.objectForKey("globalActivities") as! NSArray
-        }
-        if baby.count > 0 {
-            pushControllerWithName("activity", context: self)
-        }
-    }
-
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
+        ReFreSh()
         super.willActivate()
     }
 
