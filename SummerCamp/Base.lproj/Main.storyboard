@@ -50,9 +50,6 @@
                                     <action selector="loginattemp:" destination="hj8-40-tK7" eventType="touchUpInside" id="Fgo-4p-aa4"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="ucb_pharma.png15474615 (3).png" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-he-fee">
-                                <rect key="frame" x="200" y="28" width="200" height="82"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome to " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dny-Nd-CJj">
                                 <rect key="frame" x="195" y="151" width="211" height="28"/>
                                 <constraints>
@@ -100,6 +97,9 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="ucbwhitelogofrommedicalvideos copy 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="irM-V9-GAO">
                                 <rect key="frame" x="200" y="522" width="200" height="38"/>
                             </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" image="ucb_pharma.png15474615 (3).png" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-he-fee">
+                                <rect key="frame" x="258" y="25" width="85" height="82"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -111,14 +111,15 @@
                             <constraint firstItem="rOd-67-JoG" firstAttribute="top" secondItem="96H-rz-F0w" secondAttribute="top" id="IRX-P8-eCT"/>
                             <constraint firstItem="Htk-v2-Mnx" firstAttribute="trailing" secondItem="KoA-gR-aYO" secondAttribute="trailing" id="MK3-YP-VNb"/>
                             <constraint firstItem="0Px-DG-jwN" firstAttribute="centerX" secondItem="Qpi-8I-cu2" secondAttribute="centerX" id="MVn-nM-b91"/>
+                            <constraint firstAttribute="centerX" secondItem="ghq-he-fee" secondAttribute="centerX" id="OXP-wk-wst"/>
                             <constraint firstAttribute="bottom" secondItem="Htk-v2-Mnx" secondAttribute="bottom" constant="207" id="So8-P3-T0g"/>
                             <constraint firstItem="Qpi-8I-cu2" firstAttribute="trailing" secondItem="5cP-j3-JwC" secondAttribute="trailing" id="TE5-vF-Irt"/>
-                            <constraint firstItem="pgz-T7-c7m" firstAttribute="top" secondItem="ghq-he-fee" secondAttribute="bottom" constant="5" id="Uby-VD-j5w"/>
+                            <constraint firstItem="pgz-T7-c7m" firstAttribute="top" secondItem="ghq-he-fee" secondAttribute="bottom" constant="8" id="Uby-VD-j5w"/>
                             <constraint firstItem="pgz-T7-c7m" firstAttribute="trailing" secondItem="irM-V9-GAO" secondAttribute="trailing" constant="4" id="UcV-I1-Xqv"/>
                             <constraint firstItem="dny-Nd-CJj" firstAttribute="centerX" secondItem="96H-rz-F0w" secondAttribute="centerX" id="YO8-bT-SVG"/>
                             <constraint firstItem="pgz-T7-c7m" firstAttribute="centerX" secondItem="dny-Nd-CJj" secondAttribute="centerX" id="aBo-rG-q2Z"/>
                             <constraint firstItem="0Px-DG-jwN" firstAttribute="top" secondItem="dny-Nd-CJj" secondAttribute="bottom" constant="8" id="aRC-a8-8Oi"/>
-                            <constraint firstItem="ghq-he-fee" firstAttribute="top" secondItem="mdK-84-zDs" secondAttribute="bottom" constant="8" symbolic="YES" id="adX-kV-a8V"/>
+                            <constraint firstItem="ghq-he-fee" firstAttribute="top" secondItem="mdK-84-zDs" secondAttribute="bottom" constant="5" id="adX-kV-a8V"/>
                             <constraint firstItem="rOd-67-JoG" firstAttribute="leading" secondItem="96H-rz-F0w" secondAttribute="leading" id="bfm-Ak-9CA"/>
                             <constraint firstItem="dny-Nd-CJj" firstAttribute="top" secondItem="pgz-T7-c7m" secondAttribute="bottom" constant="8" symbolic="YES" id="emb-ux-y8P"/>
                             <constraint firstAttribute="centerX" secondItem="KoA-gR-aYO" secondAttribute="centerX" id="hrG-SQ-NXD"/>

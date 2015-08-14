@@ -80,7 +80,7 @@ class ActivityInterfaceController: WKInterfaceController {
             print("GLOBAL")
             print(globalArray)
             var newArray = [] as NSArray
-            for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
+            for (var miguel = 1; miguel < globalArray.count; miguel++) {
                 newArray = newArray.arrayByAddingObject(globalArray[miguel])
             }
             //var jankRay = newArray as! NSMutableArray
@@ -93,15 +93,20 @@ class ActivityInterfaceController: WKInterfaceController {
         }
     
     @IBAction func Later() {
-        var thisObj = globalArray[0] as! NSArray
+        //var thisObj = globalArray[0] as! NSArray
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
-        activitiesLeft = activitiesLeft.arrayByAddingObject(thisObj)
-        defaults?.setObject(activitiesLeft, forKey: "activitiesOnly")
-        defaults?.synchronize()
+        //activitiesLeft = activitiesLeft.arrayByAddingObject(thisObj)
+        //defaults?.setObject(activitiesLeft, forKey: "activitiesOnly")
+        //defaults?.synchronize()
         var newArray = [] as NSArray
-        for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
+        for (var miguel = 1; miguel < globalArray.count; miguel++) {
             newArray = newArray.arrayByAddingObject(globalArray[miguel])
         }
+        print("newArraycount: \(newArray.count)")
+        print(thisSingleActivityInAnArray[0])
+        //newArray.arrayByAddingObject(thisSingleActivityInAnArray)
+        newArray = newArray.arrayByAddingObject(thisSingleActivityInAnArray as NSArray)
+        print("newArraycount: \(newArray.count)")
         defaults?.setObject(newArray, forKey: "globalActivities")
         defaults?.synchronize()
         openNext()
@@ -119,11 +124,9 @@ class ActivityInterfaceController: WKInterfaceController {
         if (defaults?.objectForKey("activitiesOnly") != nil) {
             activitiesLeft = defaults?.objectForKey("activitiesOnly") as! NSArray
         }
-        var globalArray1 = []
         if (defaults?.objectForKey("globalActivities") != nil) {
-            globalArray1 = defaults?.objectForKey("globalActivities") as! NSArray
+            globalArray = defaults?.objectForKey("globalActivities") as! NSArray
         }
-        globalArray = globalArray.arrayByAddingObjectsFromArray(globalArray1 as! [NSArray])
         /*if activitiesLeft.count > 0 {
             globalArray = globalArray.arrayByAddingObjectsFromArray(activitiesLeft as! [NSArray])
         }*/

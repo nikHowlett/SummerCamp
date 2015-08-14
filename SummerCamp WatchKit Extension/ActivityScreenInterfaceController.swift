@@ -14,14 +14,27 @@ class ActivityScreenInterfaceController: WKInterfaceController {
     
     var activitiesLeft = []
     var globalArray = []
+    var firstTime = true
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        if globalArray.count > 0 {
+            pushControllerWithName("activity", context: self)
+        }
+        activitiesLeft = []
+        defaults?.setObject(activitiesLeft, forKey: "activitiesOnly")
+        defaults?.synchronize()
         // Configure interface objects here.
     }
     
+    
+    
     @IBAction func ReFreSh() {
+        self.popToRootController()
+        /*self.dismissController()
+        pushControllerWithName("activity", context: self)
+        self.dismissController()
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         var baby = []
         if (defaults?.objectForKey("globalActivities") != nil) {
@@ -29,10 +42,22 @@ class ActivityScreenInterfaceController: WKInterfaceController {
         }
         if baby.count > 0 {
             pushControllerWithName("activity", context: self)
-        }
+        }*/
     }
 
     override func willActivate() {
+        super.willActivate()
+        print("IS THIS CALLED")
+        if !firstTime {
+            firstTime = false
+            if globalArray.count > 0 {
+                self.popToRootController()
+            }
+            return
+        } else {
+            firstTime = false
+        }
+        print("to see")
         activitiesLeft = []
         globalArray = []
         var globalArray1 = []
@@ -44,21 +69,24 @@ class ActivityScreenInterfaceController: WKInterfaceController {
         if (defaults?.objectForKey("globalActivities") != nil) {
             globalArray1 = defaults?.objectForKey("globalActivities") as! NSArray
         }
-        if activitiesLeft.count > 0 {
+        if globalArray1.count > 0 {
+            self.popToRootController()
+        }
+            /*
             //globalArray = globalArray.arrayByAddingObjectsFromArray(activitiesLeft as! [NSArray])
-            for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
+            for (var miguel = 0; miguel < globalArray1.count; miguel++) {
+                globalArray = globalArray.arrayByAddingObject(globalArray1[miguel])
+            }
+        } else {
+            //self.popToRootController()
+        }*/
+        /*if activitiesLeft.count > 0 {
+            //globalArray = globalArray.arrayByAddingObjectsFromArray(activitiesLeft as! [NSArray])
+            for (var miguel = 0; miguel < globalArray.count; miguel++) {
                 globalArray = globalArray.arrayByAddingObject(activitiesLeft[miguel])
             }
-        }
-        defaults?.setObject(globalArray, forKey: "globalActivities")
-        if globalArray.count > 0 {
-            pushControllerWithName("activity", context: self)
-        }
-        activitiesLeft = []
-        defaults?.setObject(activitiesLeft, forKey: "activitiesOnly")
-        defaults?.synchronize()
-        ReFreSh()
-        super.willActivate()
+        }*/
+        //defaults?.setObject(globalArray, forKey: "globalActivities")
     }
 
     override func didDeactivate() {

@@ -146,7 +146,7 @@ class emoji: WKInterfaceController {
     @IBAction func Submit() {
         responses2Server()
         var newArray = [] as NSArray
-        for (var miguel = 1; miguel < globalArray.count-1; miguel++) {
+        for (var miguel = 1; miguel < globalArray.count; miguel++) {
             newArray = newArray.arrayByAddingObject(globalArray[miguel])
         }
         print("Replacing global with this!")

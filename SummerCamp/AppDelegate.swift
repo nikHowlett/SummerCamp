@@ -226,7 +226,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         print("CURRENT GLOBAL")
                         print(globalActivities)
                         var beanie: NSArray = [array]
-                        for (var fd = 0; fd < globalActivities.count-1; fd++) {
+                        for (var fd = 0; fd < globalActivities.count; fd++) {
                             beanie = beanie.arrayByAddingObject(globalActivities[fd])
                         }
                         print("SAVING THIS AS NEW GLOBAL")
@@ -302,7 +302,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         print("CURRENT GLOBAL")
                         print(globalActivities)
                         var beanie: NSArray = [array]
-                        for (var fd = 0; fd <= globalActivities.count-1; fd++) {
+                        for (var fd = 0; fd < globalActivities.count; fd++) {
                             beanie = beanie.arrayByAddingObject(globalActivities[fd])
                         }
                         print("SAVING THIS AS NEW GLOBAL")

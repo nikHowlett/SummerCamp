@@ -141,6 +141,36 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.tableOutlet.reloadData()
     }
     
+    func handle2() {
+        self.refreshControl.beginRefreshing()
+        self.tableOutlet.beginUpdates()
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        defaults?.synchronize()
+        var globalShave = []
+        if (defaults?.objectForKey("globalActivities") != nil) {
+            globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+            globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
+        }
+        activitiesonly = []
+        var activz = activitiesonly as NSArray
+        print(globalActivities)
+        for (var kl = 0; kl < globalShave.count; kl++) {
+            if globalShave[kl][2] as! String == "activity" {
+                activz = activitiesonly as NSArray
+                if activz.containsObject(globalShave[kl]) {
+                } else {
+                    activz.arrayByAddingObject(globalShave[kl])
+                    activitiesonly.append(globalShave[kl] as! NSArray)
+                }
+            }
+            println("activitesonly")
+            print(activitiesonly)
+        }
+        self.tableOutlet.reloadData()
+        refreshControl.endRefreshing()
+        self.tableOutlet.endUpdates()
+    }
+    
     func handleRefresh(refreshControl: UIRefreshControl) {
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
@@ -149,16 +179,31 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             globalShave = defaults?.objectForKey("globalActivities") as! NSArray
             globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
         }
+        activitiesonly = []
+        var activz = activitiesonly as NSArray
         print(globalActivities)
+        for (var kl = 0; kl < globalShave.count; kl++) {
+            if globalShave[kl][2] as! String == "activity" {
+                activz = activitiesonly as NSArray
+                if activz.containsObject(globalShave[kl]) {
+                } else {
+                    activz.arrayByAddingObject(globalShave[kl])
+                    activitiesonly.append(globalShave[kl] as! NSArray)
+                }
+            }
+            println("activitesonly")
+            print(activitiesonly)
+        }
+        /*
         if (activitiesonly.count == 0) {
             var activz = activitiesonly as NSArray
-            for (var y = 0; y <= globalShave.count-1; y++) {
+            for (var y = 0; y < globalShave.count; y++) {
                 var wattype = (globalShave[y][2] as! String)
                 if wattype == "activity" {
                     if activz.containsObject(globalShave[y]) {
                     } else {
                         activz = activz.arrayByAddingObject(globalShave[y])
-                        (globalShave[y] as! NSArray)
+                        //(globalShave[y] as! NSArray)
                         print("activz")
                         print(activz)
                         print("activzend")
@@ -166,7 +211,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 }
             }
             activitiesonly = activz as! [NSArray]
-        }
+        }*/
         self.tableOutlet.reloadData()
         refreshControl.endRefreshing()
     }
@@ -177,7 +222,6 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.tableOutlet.addSubview(self.refreshControl)
         activities = []
         employees = []
-        activitiesonly = []
         globalActivities = []
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
@@ -194,20 +238,20 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             globalShave = defaults?.objectForKey("globalActivities") as! NSArray
             globalActivities = defaults?.objectForKey("globalActivities") as! NSArray
         }
-        if (activitiesonly.count == 0) {
-            for (var y = 0; y <= globalShave.count-1; y++) {
-                var wattype = (globalShave[y][2] as! String)
-                if wattype == "activity" {
-                    var activz = activitiesonly as NSArray
-                    if activz.containsObject(globalShave[y]) {
-                    } else {
-                        activitiesonly.append(globalShave[y] as! NSArray)
-                    }
+        activitiesonly = []
+        var activz = activitiesonly as NSArray
+        for (var kl = 0; kl < globalShave.count; kl++) {
+            if globalShave[kl][2] as! String == "activity" {
+                activz = activitiesonly as NSArray
+                if activz.containsObject(globalShave[kl]) {
+                } else {
+                    activz.arrayByAddingObject(globalShave[kl])
+                    activitiesonly.append(globalShave[kl] as! NSArray)
                 }
             }
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleWatchKitNotification:"), name: "WatchKitReq", object: nil)
-        
+        handle2()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNewItemsChanged:", name: AppDelegate.newItemsChangedNotification(), object: nil)
         /*NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleAppIsBroughtToForeground:", name: UIApplicationWillEnterForegroundNotification, object: nil)*/
         backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
@@ -353,12 +397,17 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     print("CURRENT GLOBAL")
                     print(globalActivities)
                     var beanie: NSArray = [array]
-                    for (var fd = 0; fd <= globalActivities.count-1; fd++) {
+                    for (var fd = 0; fd < globalActivities.count; fd++) {
                         beanie = beanie.arrayByAddingObject(globalActivities[fd])
                     }
                     print("SAVING THIS AS NEW GLOBAL")
                     print(beanie)
                     defaults?.setObject(beanie, forKey: "globalActivities")
+                    self.refreshControl.beginRefreshing()
+                    self.tableOutlet.beginUpdates()
+                    self.handle2()
+                    self.tableOutlet.endUpdates()
+                    self.refreshControl.endRefreshing()
                 self.notifysomeone(icon, type: type)
                 //print(thingtext)
                 print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
