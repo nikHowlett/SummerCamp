@@ -5,9 +5,11 @@
 //  Created by MAC-ATL019922 on 8/6/15.
 //  Copyright (c) 2015 UCB+nikhowlett. All rights reserved.
 //
+//Hey steve, 
 
 import UIKit
 import CoreData
+import AirshipKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIBackgroundTaskInvalid
     
     var myTimer: NSTimer?
-
 
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
         NSNotificationCenter.defaultCenter().postNotificationName("WatchKitReq", object: userInfo)
@@ -58,22 +59,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaultCategory.identifier = "default"
         someCategory.setActions(defaultActions, forContext: UIUserNotificationActionContext.Default)
         someCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
-        helpfulCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Default)
+        helpfulCategory.setActions(defaultActions, forContext: UIUserNotificationActionContext.Default)
         helpfulCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
-        mainCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Default)
+        mainCategory.setActions(defaultActions, forContext: UIUserNotificationActionContext.Default)
         mainCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
-        valueCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Default)
+        valueCategory.setActions(defaultActions, forContext: UIUserNotificationActionContext.Default)
         valueCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
-        defaultCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Default)
+        defaultCategory.setActions(defaultActions, forContext: UIUserNotificationActionContext.Default)
         defaultCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert, categories: NSSet(array:[mainCategory, someCategory, helpfulCategory, valueCategory]) as Set<NSObject>))
         
+        /*failIfSimulator()
+        
+        // Set log level for debugging config loading (optional)
+        // It will be set to the value in the loaded config upon takeOff
+        UAirship.setLogLevel(UALogLevel.Trace)
+        
+        // Populate AirshipConfig.plist with your app's info from https://go.urbanairship.com
+        // or set runtime properties here.
+        var config:UAConfig = UAConfig.defaultConfig()
+        
+        // You can then programmatically override the plist values:
+        config.developmentAppKey = "YourKey";
+        // etc.
+        
+        // Call takeOff (which creates the UAirship singleton)
+        UAirship.takeOff(config)
+        
+        // Print out the application configuration for debugging (optional)
+        println("Config: \(config.description)");
+        
+        // Set the icon badge to zero on startup (optional)
+        UAPush.shared().resetBadge()
+        //UAirship.push().resetBadge()
+        
+        // Set the notification types required for the app (optional). This value defaults
+        // to badge, alert and sound, so it's only necessary to set it if you want
+        // to add or remove types.
+        UAPush.shared().userNotificationTypes = (UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound)
+        //UAirship.push().userNotificationTypes = UIUserNotificationType.Sound | UIUserNotificationType.Alert
+        // User notifications will not be enabled until userPushNotificationsEnabled is
+        // set "true" on UAPush. Once enabled, the setting will be persisted and the user
+        // will be prompted to allow notifications. You should wait for a more appropriate
+        // time to enable push to increase the likelihood that the user will accept
+        // notifications.
+        UAPush.shared().userPushNotificationsEnabled = true
+        //UAirship.push().userPushNotificationsEnabled = true*/
         return true
     }
 
     class func newItemsChangedNotification() -> String {
         return "\(__FUNCTION__)"
+    }
+    
+    func failIfSimulator(){
+        if (UIDevice.currentDevice().model.rangeOfString("Simulator") != nil){
+            let alert = UIAlertView()
+            alert.title     = "Notice"
+            alert.message   = "You will not be able to receive push notifications in the simulator."
+            alert.addButtonWithTitle("OK")
+            
+            // Let the UI finish launching first so it doesn't complain about the lack of a root view controller
+            // Delay execution of the block for 1/2 second.
+            
+            dispatch_after(
+                dispatch_time(
+                    DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))
+                ),
+                dispatch_get_main_queue())
+                {
+                    alert.show()
+            }
+        }
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier:String?, forLocalNotification notification:UILocalNotification, completionHandler: (() -> Void)){
@@ -160,11 +218,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("DELEGATOR END")
         if banana != 0 {
             completionHandler(.NewData)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                self.classForCoder.newItemsChangedNotification(),
+                object: nil)
         } else {
             completionHandler(.NoData)
         }
         if self.fetchNewItems() {
             completionHandler(.NewData)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                self.classForCoder.newItemsChangedNotification(),
+                object: nil)
         } else {
             completionHandler(.NoData)
         }
@@ -172,9 +238,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func fetchNewItemz(sender: NSTimer) -> Bool {
         print("this is the delegator")
-        NSNotificationCenter.defaultCenter().postNotificationName(
-            self.classForCoder.newItemsChangedNotification(),
-            object: nil)
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         newItems = []
@@ -301,13 +364,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         print("CURRENT GLOBAL")
                         print(globalActivities)
-                        var beanie: NSArray = [array]
+                        var beanie: NSArray = array
+                        var newOrange = []
+                        newOrange = newOrange.arrayByAddingObject(array)
                         for (var fd = 0; fd < globalActivities.count; fd++) {
-                            beanie = beanie.arrayByAddingObject(globalActivities[fd])
+                            if beanie[3] as! String == globalActivities[fd][3] as! String {
+                                
+                            } else {
+                                newOrange = newOrange.arrayByAddingObject(globalActivities[fd])
+                            }
+                            
                         }
                         print("SAVING THIS AS NEW GLOBAL")
-                        print(beanie)
-                        defaults?.setObject(beanie, forKey: "globalActivities")
+                        print(newOrange)
+                        defaults?.setObject(newOrange, forKey: "globalActivities")
                         self.notifysomeone(icon, type: type)
                         print("DIDTHATWORK&&&&&&&&&&&&&&&&&&&&&&&")
                     }
@@ -351,8 +421,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if type != "activity" {
             localNotification.alertTitle = "New Question!"
             localNotification.alertBody = "New Question"
+            localNotification.alertAction = "Now"
         }
-        localNotification.alertAction = "Now"
         
         //print(seconds, appendNewline: false)
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 2)
@@ -365,7 +435,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
-
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        println("Received remote notification (in appDelegate): \(userInfo)")
+        // Optionally provide a delegate that will be used to handle notifications received while the app is running
+        // UAPush.shared().pushNotificationDelegate = your custom push delegate class conforming to the UAPushNotificationDelegate protocol
+        
+        // Reset the badge after a push received (optional)
+        //UAPush.shared().resetBadge()
+        //UAirship.push().resetBadge()
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        println("Received remote notification (in appDelegate): \(userInfo)")
+        // Optionally provide a delegate that will be used to handle notifications received while the app is running
+        // UAPush.shared().pushNotificationDelegate = your custom push delegate class conforming to the UAPushNotificationDelegate protocol
+        
+        // Reset the badge after a push received (optional)
+        
+        if (application.applicationState != UIApplicationState.Background){
+            //UAPush.shared().resetBadge()
+            //UAirship.push().resetBadge()
+        }
+    }
+    
     func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
             if(background != nil){ background!(); }
@@ -416,13 +509,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        if backgroundUpdateTask != UIBackgroundTaskInvalid{
+        print("willenterForeground")
+        if backgroundUpdateTask != UIBackgroundTaskInvalid {
             endBackgroundTask()
         }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
+        print("didbecomeactive")
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //UAPush.shared().resetBadge()
+        //UAirship.push()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -432,6 +529,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func endBackgroundTask(){
+        print("endbackgroundtask")
         
         let mainQueue = dispatch_get_main_queue()
         

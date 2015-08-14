@@ -25,6 +25,10 @@
 		D0243E861B793211001C5738 /* HelpfulnessNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */; };
 		D0243E881B79321E001C5738 /* SpaceNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E871B79321E001C5738 /* SpaceNotificationController.swift */; };
 		D0243E8A1B793226001C5738 /* TaskNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0243E891B793226001C5738 /* TaskNotificationController.swift */; };
+		D098CB831B7E36FB000A35D7 /* AirshipKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D098CB811B7E36FB000A35D7 /* AirshipKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D098CB851B7E3720000A35D7 /* AirshipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D098CB841B7E3720000A35D7 /* AirshipKit.framework */; };
+		D098CB871B7E3782000A35D7 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = D098CB861B7E3782000A35D7 /* AirshipConfig.plist */; };
+		D098CE5D1B7E5390000A35D7 /* AirshipKit.framework in Sources */ = {isa = PBXBuildFile; fileRef = D098CB841B7E3720000A35D7 /* AirshipKit.framework */; };
 		D0C444701B73C6150084111F /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4446F1B73C6150084111F /* Activity.swift */; };
 		D0D80A991B78DEA800EB11FA /* sliderengagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D80A981B78DEA800EB11FA /* sliderengagement.swift */; };
 		D0E0F9CE1B73B4CF00CDDB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F9CD1B73B4CF00CDDB0A /* AppDelegate.swift */; };
@@ -120,6 +124,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D061C9501B7E33D1001EB20F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D061C94C1B7E33D1001EB20F /* AirshipKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 494DD9571B0EB677009C134E;
+			remoteInfo = AirshipKit;
+		};
 		D0E0F9E11B73B4CF00CDDB0A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0E0F9C01B73B4CF00CDDB0A /* Project object */;
@@ -158,6 +169,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D061C9561B7E3432001EB20F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D098CB831B7E36FB000A35D7 /* AirshipKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0E222FC1B73FF0000319A0B /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -190,6 +212,10 @@
 		D0243E851B793211001C5738 /* HelpfulnessNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpfulnessNotificationController.swift; sourceTree = "<group>"; };
 		D0243E871B79321E001C5738 /* SpaceNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceNotificationController.swift; sourceTree = "<group>"; };
 		D0243E891B793226001C5738 /* TaskNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNotificationController.swift; sourceTree = "<group>"; };
+		D061C94C1B7E33D1001EB20F /* AirshipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirshipKit.xcodeproj; path = "../../../Downloads/ios-library-master/AirshipKit/AirshipKit.xcodeproj"; sourceTree = "<group>"; };
+		D098CB811B7E36FB000A35D7 /* AirshipKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AirshipKit.framework; sourceTree = "<group>"; };
+		D098CB841B7E3720000A35D7 /* AirshipKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AirshipKit.framework; path = "../../../Downloads/SwiftShip-e29ffebc2019c17acb5662d912a5292053ae1bf4/AirshipKit.framework"; sourceTree = "<group>"; };
+		D098CB861B7E3782000A35D7 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		D0C4446F1B73C6150084111F /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = ../WatchCoreDataProxy/Activity.swift; sourceTree = "<group>"; };
 		D0C444731B73C76A0084111F /* SummerCamp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SummerCamp.entitlements; sourceTree = "<group>"; };
 		D0C444741B73C7820084111F /* SummerCamp WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "SummerCamp WatchKit Extension.entitlements"; sourceTree = "<group>"; };
@@ -263,6 +289,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D098CB851B7E3720000A35D7 /* AirshipKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,9 +336,20 @@
 			name = appiconb4dploy;
 			sourceTree = "<group>";
 		};
+		D061C94D1B7E33D1001EB20F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D061C9511B7E33D1001EB20F /* AirshipKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D0E0F9BF1B73B4CF00CDDB0A = {
 			isa = PBXGroup;
 			children = (
+				D098CB841B7E3720000A35D7 /* AirshipKit.framework */,
+				D098CB811B7E36FB000A35D7 /* AirshipKit.framework */,
+				D061C94C1B7E33D1001EB20F /* AirshipKit.xcodeproj */,
 				D0E222FD1B74018D00319A0B /* WatchKit.framework */,
 				D0E222DB1B73F34D00319A0B /* CoreData.framework */,
 				D0E0F9CA1B73B4CF00CDDB0A /* SummerCamp */,
@@ -339,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				D0C444731B73C76A0084111F /* SummerCamp.entitlements */,
+				D098CB861B7E3782000A35D7 /* AirshipConfig.plist */,
 				D0E0F9CD1B73B4CF00CDDB0A /* AppDelegate.swift */,
 				D0E0F9D21B73B4CF00CDDB0A /* ViewController.swift */,
 				D0E223561B752CEA00319A0B /* middle2ViewController.swift */,
@@ -499,6 +538,7 @@
 				D0E0F9C51B73B4CF00CDDB0A /* Frameworks */,
 				D0E0F9C61B73B4CF00CDDB0A /* Resources */,
 				D0E222FC1B73FF0000319A0B /* Embed App Extensions */,
+				D061C9561B7E3432001EB20F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -656,6 +696,12 @@
 			mainGroup = D0E0F9BF1B73B4CF00CDDB0A;
 			productRefGroup = D0E0F9C91B73B4CF00CDDB0A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D061C94D1B7E33D1001EB20F /* Products */;
+					ProjectRef = D061C94C1B7E33D1001EB20F /* AirshipKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D0E0F9C71B73B4CF00CDDB0A /* SummerCamp */,
@@ -667,6 +713,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D061C9511B7E33D1001EB20F /* AirshipKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AirshipKit.framework;
+			remoteRef = D061C9501B7E33D1001EB20F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D0E0F9C61B73B4CF00CDDB0A /* Resources */ = {
@@ -693,6 +749,7 @@
 				D0E222F11B73FC3400319A0B /* Task_to_Value.png in Resources */,
 				D0E223101B74F11700319A0B /* results.png in Resources */,
 				D0E223141B74F11700319A0B /* bg-w-title.jpg in Resources */,
+				D098CB871B7E3782000A35D7 /* AirshipConfig.plist in Resources */,
 				D0E2230D1B74F11700319A0B /* ucb-logo (2).jpg in Resources */,
 				D0E222F21B73FC3400319A0B /* bridgetonowhere.jpg in Resources */,
 				D0E2230E1B74F11700319A0B /* title-text-w-bg.jpg in Resources */,
@@ -795,6 +852,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D098CE5D1B7E5390000A35D7 /* AirshipKit.framework in Sources */,
 				D0E222D81B73DAF500319A0B /* MiddleViewController.swift in Sources */,
 				D0E223591B7530FC00319A0B /* Employee.swift in Sources */,
 				D0E222D61B73DAE900319A0B /* ActivityTableViewController.swift in Sources */,
@@ -1001,8 +1059,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SummerCamp/SummerCamp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: scott.barnes@ucb.com (CJHX8BVM6S)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/mac-atl019922/Downloads/SwiftShip-e29ffebc2019c17acb5662d912a5292053ae1bf4",
+				);
 				INFOPLIST_FILE = SummerCamp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1015,8 +1078,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SummerCamp/SummerCamp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: scott.barnes@ucb.com (CJHX8BVM6S)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/mac-atl019922/Downloads/SwiftShip-e29ffebc2019c17acb5662d912a5292053ae1bf4",
+				);
 				INFOPLIST_FILE = SummerCamp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

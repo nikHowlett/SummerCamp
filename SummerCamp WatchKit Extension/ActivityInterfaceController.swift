@@ -30,6 +30,9 @@ class ActivityInterfaceController: WKInterfaceController {
         var activitiesLeft = []
         var thisName = ""
         var thisCorpac = ""
+        @IBOutlet weak var groupObject: WKInterfaceGroup!
+        @IBOutlet weak var yammerButton: WKInterfaceButton!
+        @IBOutlet weak var laterButton: WKInterfaceButton!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -109,6 +112,10 @@ class ActivityInterfaceController: WKInterfaceController {
         print("newArraycount: \(newArray.count)")
         defaults?.setObject(newArray, forKey: "globalActivities")
         defaults?.synchronize()
+        if newArray.count == 1 {
+            pushControllerWithName("NoMore", context: self)
+            return
+        }
         openNext()
     }
     
@@ -134,6 +141,11 @@ class ActivityInterfaceController: WKInterfaceController {
             thisText.setText(globalArray[0][0] as? String)
             self.setTitle("1 / \(globalArray.count)")
             activitylabel.setText("Activity \(globalArray[0][3])")
+            laterButton.setHidden(false)
+            yammerButton.setHidden(false)
+            activitylabel.setHidden(false)
+            groupObject.setHidden(false)
+            thisText.setHidden(false)
         } else if globalArray.count == 0 {
             pushControllerWithName("NoMore", context: self)
             return

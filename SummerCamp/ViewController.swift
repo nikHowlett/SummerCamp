@@ -97,6 +97,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
           NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleWatchKitNotification:"), name: "WatchKitReq", object: nil)
         self.corporateAccountField.borderStyle = UITextBorderStyle.RoundedRect
+        //self.corporateAccountField.
         //self.passwordField.borderStyle = UITextBorderStyle.RoundedRect
         loginButton.layer.cornerRadius = 5
         loginButton.clipsToBounds = true
@@ -207,7 +208,8 @@ class ViewController: UIViewController {
     
     @IBAction func loginattemp(sender: AnyObject) {
         //u=U026686&a=gi
-        let thisCorpacc = corporateAccountField.text
+        var thisCorpacc = corporateAccountField.text
+        thisCorpacc = thisCorpacc.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         let superfirst = "http://sc.ucbweb-acc.com/svc/GetActions"
         //let superfirstpart = "http://172.17.8.66:8080/DocuSign2/dsPollingServlet"
         let firstpart = "?u=\(thisCorpacc!)&a=gi"

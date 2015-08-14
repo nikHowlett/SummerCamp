@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>inProduction</key>
+	<false/>
+	<key>developmentAppKey</key>
+	<string>x2cq8CW4RuyBtXf3Tou9Mw</string>
+	<key>developmentAppSecret</key>
+	<string>7Rx6zzL4RXu7Hzh2ULsqBw</string>
+	<key>productionAppKey</key>
+	<string>x2cq8CW4RuyBtXf3Tou9Mw</string>
+	<key>productionAppSecret</key>
+	<string>7Rx6zzL4RXu7Hzh2ULsqBw</string>
+</dict>
+</plist>

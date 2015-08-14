@@ -9,7 +9,6 @@
 import WatchKit
 import Foundation
 
-
 class ActivityScreenInterfaceController: WKInterfaceController {
     
     var activitiesLeft = []
@@ -28,10 +27,37 @@ class ActivityScreenInterfaceController: WKInterfaceController {
         // Configure interface objects here.
     }
     
-    
+    func restInPeace() {
+        /*if firstTime {
+            firstTime = false
+            if globalArray.count > 0 {
+                self.popToRootController()
+            }
+            return
+        } else {
+            firstTime = true
+        }
+        print("to see")*/
+        var globalArray1 = []
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        /*if (defaults?.objectForKey("activitiesOnly") != nil) {
+            activitiesLeft = defaults?.objectForKey("activitiesOnly") as! NSArray
+            if activitiesLeft.count > 0 {
+                self.popToRootController()
+            }
+        }*/
+        if (defaults?.objectForKey("globalActivities") != nil) {
+            globalArray1 = defaults?.objectForKey("globalActivities") as! NSArray
+            if globalArray1.count > 0 {
+                self.popToRootController()
+            }
+        }
+    }
     
     @IBAction func ReFreSh() {
         self.popToRootController()
+        return
+        //var timer3 = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "restInPeace:", userInfo: nil, repeats: true)
         /*self.dismissController()
         pushControllerWithName("activity", context: self)
         self.dismissController()
@@ -48,31 +74,8 @@ class ActivityScreenInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         print("IS THIS CALLED")
-        if !firstTime {
-            firstTime = false
-            if globalArray.count > 0 {
-                self.popToRootController()
-            }
-            return
-        } else {
-            firstTime = false
-        }
-        print("to see")
-        activitiesLeft = []
-        globalArray = []
-        var globalArray1 = []
-        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
-        defaults?.synchronize()
-        if (defaults?.objectForKey("activitiesOnly") != nil) {
-            activitiesLeft = defaults?.objectForKey("activitiesOnly") as! NSArray
-        }
-        if (defaults?.objectForKey("globalActivities") != nil) {
-            globalArray1 = defaults?.objectForKey("globalActivities") as! NSArray
-        }
-        if globalArray1.count > 0 {
-            self.popToRootController()
-        }
-            /*
+        var timer3 = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "restInPeace", userInfo: nil, repeats: true)
+                    /*
             //globalArray = globalArray.arrayByAddingObjectsFromArray(activitiesLeft as! [NSArray])
             for (var miguel = 0; miguel < globalArray1.count; miguel++) {
                 globalArray = globalArray.arrayByAddingObject(globalArray1[miguel])

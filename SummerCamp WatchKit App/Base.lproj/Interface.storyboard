@@ -237,7 +237,7 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="235" y="1158.5"/>
+            <point key="canvasLocation" x="235" y="1153.5"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="Er6-La-vG2">
@@ -291,19 +291,19 @@
             </objects>
             <point key="canvasLocation" x="488" y="1264"/>
         </scene>
-        <!--2/3-->
+        <!--activity-->
         <scene sceneID="LiJ-N9-0DR">
             <objects>
-                <controller identifier="activity" title="2/3" id="ekW-Fy-6MV" customClass="ActivityInterfaceController" customModule="SummerCamp_WatchKit_Extension">
+                <controller identifier="activity" id="ekW-Fy-6MV" customClass="ActivityInterfaceController" customModule="SummerCamp_WatchKit_Extension">
                     <items>
                         <group width="1" alignment="center" id="B4v-hg-fly">
                             <items>
-                                <label width="136" height="14" alignment="center" text="Activity #2" textAlignment="center" id="tYq-IZ-SOS"/>
+                                <label width="136" height="14" alignment="center" hidden="YES" text="Activity #2" textAlignment="center" id="tYq-IZ-SOS"/>
                             </items>
                         </group>
                         <group alignment="center" id="dUq-CG-okx">
                             <items>
-                                <label width="136" height="89" alignment="center" text="Post your expectations for the day in 3 words." textAlignment="center" numberOfLines="7" id="A4j-fS-iSz">
+                                <label width="136" height="89" alignment="center" hidden="YES" text="Post your expectations for the day in 3 words." textAlignment="center" numberOfLines="7" id="A4j-fS-iSz">
                                     <accessibilityTraits key="accessibilityTraits" none="YES" image="YES"/>
                                     <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                 </label>
@@ -312,14 +312,14 @@
                         </group>
                         <group width="1" alignment="left" id="UPx-eP-XLA">
                             <items>
-                                <button width="69" height="30" alignment="center" title="Yammer" id="A9a-Sc-hlU">
+                                <button width="69" height="30" alignment="center" hidden="YES" title="Yammer" id="A9a-Sc-hlU">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="Open" destination="ekW-Fy-6MV" id="Zh1-FL-7mg"/>
                                     </connections>
                                 </button>
-                                <button width="51" height="30" alignment="center" title="Later" id="isx-Vq-UbL">
+                                <button width="51" height="30" alignment="center" hidden="YES" title="Later" id="isx-Vq-UbL">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.80392163989999998" green="0.20000001789999999" blue="0.12549020350000001" alpha="1" colorSpace="deviceRGB"/>
                                     <connections>
@@ -331,7 +331,10 @@
                     </items>
                     <connections>
                         <outlet property="activitylabel" destination="tYq-IZ-SOS" id="Iep-Rb-eu7"/>
+                        <outlet property="groupObject" destination="dUq-CG-okx" id="Ruz-e9-QJK"/>
+                        <outlet property="laterButton" destination="isx-Vq-UbL" id="bJ5-AY-XuT"/>
                         <outlet property="thisText" destination="A4j-fS-iSz" id="InT-mj-FAD"/>
+                        <outlet property="yammerButton" destination="A9a-Sc-hlU" id="BZg-Pu-MeE"/>
                     </connections>
                 </controller>
             </objects>

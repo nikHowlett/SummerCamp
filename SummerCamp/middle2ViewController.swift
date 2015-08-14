@@ -82,7 +82,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             var newArray = []
             if globalActivities.containsObject(activitiesonly[indexPath.row]) {
                 indx = globalActivities.indexOfObject(activitiesonly[indexPath.row])
-                for (var u = 0; u < globalActivities.count-1; u++) {
+                for (var u = 0; u < globalActivities.count; u++) {
                     var thisObj = globalActivities[u] as! NSArray
                     newArray = newArray.arrayByAddingObject(thisObj)
                 }
@@ -129,7 +129,7 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         var newArray = []
         if self.globalActivities.containsObject(self.activitiesonly[rownumber]) {
             indx = self.globalActivities.indexOfObject(self.activitiesonly[rownumber])
-            for (var u = 0; u < self.globalActivities.count-1; u++) {
+            for (var u = 0; u < self.globalActivities.count; u++) {
                 if u != indx {
                     var thisObj = self.globalActivities[u] as! NSArray
                     newArray = newArray.arrayByAddingObject(thisObj)
@@ -143,7 +143,6 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     func handle2() {
         self.refreshControl.beginRefreshing()
-        self.tableOutlet.beginUpdates()
         var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
         defaults?.synchronize()
         var globalShave = []
@@ -153,11 +152,17 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
         activitiesonly = []
         var activz = activitiesonly as NSArray
+        print("handle2")
         print(globalActivities)
+        var jenny = false
         for (var kl = 0; kl < globalShave.count; kl++) {
             if globalShave[kl][2] as! String == "activity" {
-                activz = activitiesonly as NSArray
-                if activz.containsObject(globalShave[kl]) {
+                for (var lk = 0; lk < activitiesonly.count; lk++) {
+                    if activitiesonly[lk][3] as! String == globalShave[kl][3] as! String {
+                        jenny = true
+                    }
+                }
+                if jenny {
                 } else {
                     activz.arrayByAddingObject(globalShave[kl])
                     activitiesonly.append(globalShave[kl] as! NSArray)
@@ -168,7 +173,32 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
         self.tableOutlet.reloadData()
         refreshControl.endRefreshing()
-        self.tableOutlet.endUpdates()
+    }
+    
+    func nodupes() {
+        var defaults = NSUserDefaults(suiteName: "group.ucb.apps.meetingassist")
+        defaults?.synchronize()
+        var globalShave = []
+        if (defaults?.objectForKey("globalActivities") != nil) {
+            globalShave = defaults?.objectForKey("globalActivities") as! NSArray
+        }
+        print("nodupes")
+        var newArray = []
+        for (var kl = 0; kl < globalShave.count; kl++) {
+            var dontadd = false
+            var thisid = globalShave[kl][3] as! String
+            for (var klx = 0; klx < globalShave.count; klx++) {
+                if klx == kl {
+                    
+                } else if globalShave[klx][3] as! String == thisid {
+                    dontadd = true
+                }
+            }
+            if dontadd == false  {
+                newArray = newArray.arrayByAddingObject(globalShave[kl])
+            }
+        }
+        defaults?.setObject(newArray, forKey: "globalActivities")
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {
@@ -185,7 +215,13 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         for (var kl = 0; kl < globalShave.count; kl++) {
             if globalShave[kl][2] as! String == "activity" {
                 activz = activitiesonly as NSArray
-                if activz.containsObject(globalShave[kl]) {
+                var jenny = false
+                for (var lk = 0; lk < activitiesonly.count; lk++) {
+                    if activitiesonly[lk][3] as! String == globalShave[kl][3] as! String {
+                        jenny = true
+                    }
+                }
+                if jenny {
                 } else {
                     activz.arrayByAddingObject(globalShave[kl])
                     activitiesonly.append(globalShave[kl] as! NSArray)
@@ -251,59 +287,49 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
             }
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleWatchKitNotification:"), name: "WatchKitReq", object: nil)
+        nodupes()
         handle2()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNewItemsChanged:", name: AppDelegate.newItemsChangedNotification(), object: nil)
-        /*NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleAppIsBroughtToForeground:", name: UIApplicationWillEnterForegroundNotification, object: nil)*/
         backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
             UIApplication.sharedApplication().endBackgroundTask(self.backgroundTaskIdentifier!)
         })
         var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
         dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            //self.checkServer()
-            //print("Dispatch Timer")
             var timer2 = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "checkServer", userInfo: nil, repeats: true)
         })
+        /*NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleAppIsBroughtToForeground:", name: UIApplicationWillEnterForegroundNotification, object: nil)*/
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        
+        //self.checkServer()
+        //print("Dispatch Timer")
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     func handleAppIsBroughtToForeground(notification: NSNotification) {
-        if mustReloadView  {
+        /*if mustReloadView  {
             tableOutlet.reloadData()
         }
         /*for (var x = 0; x < newItems.count; x++) {
             notifysomeone(newItems[x][1] as! String, type: newItems[x][2] as! String)
-        }*/
+        }*/*/
     }
     
     func handleNewItemsChanged(notification: NSNotification) {
-        if self.isBeingPresented() {
+        /*if self.isBeingPresented() {
             tableOutlet.reloadData()
         } else {
             mustReloadView = true
         }
         for (var x = 0; x < newItems.count; x++) {
             notifysomeone(newItems[x][1] as! String, type: newItems[x][2] as! String)
-        }
+        }*/
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    lazy var managedObjectContext : NSManagedObjectContext? = {
-        let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        if let managedContext : NSManagedObjectContext? = appDelegate.managedObjectContext {
-            return managedContext
-        } else {
-            return nil
-        }
-        }()
     
     func sendResponse(url: String) {
         var url2use = NSURL(string: "\(url)")
@@ -396,17 +422,27 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 //var iconstring = array[1] as? String*/
                     print("CURRENT GLOBAL")
                     print(globalActivities)
-                    var beanie: NSArray = [array]
-                    for (var fd = 0; fd < globalActivities.count; fd++) {
-                        beanie = beanie.arrayByAddingObject(globalActivities[fd])
-                    }
+                    var beanie: NSArray = array
+                    var newOrange = [] as NSArray
+                    newOrange = newOrange.arrayByAddingObject(array)
+                    newOrange = newOrange.arrayByAddingObjectsFromArray(globalActivities as [AnyObject])
+                    /*for (var fd = 0; fd < globalActivities.count; fd++) {
+                        /*if beanie[3] as! String == globalActivities[fd][3] as! String {
+                            
+                        } else {*/
+                            newOrange = newOrange.arrayByAddingObject(globalActivities[fd])
+                        newOrange.arr
+                       //}
+                        
+                    }*/
+                    
                     print("SAVING THIS AS NEW GLOBAL")
-                    print(beanie)
-                    defaults?.setObject(beanie, forKey: "globalActivities")
+                    print(newOrange)
+                    defaults?.setObject(newOrange, forKey: "globalActivities")
+                    defaults?.synchronize()
+                    self.nodupes()
                     self.refreshControl.beginRefreshing()
-                    self.tableOutlet.beginUpdates()
                     self.handle2()
-                    self.tableOutlet.endUpdates()
                     self.refreshControl.endRefreshing()
                 self.notifysomeone(icon, type: type)
                 //print(thingtext)
@@ -484,7 +520,14 @@ class middle2ViewController: UIViewController,UITableViewDelegate,UITableViewDat
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 2)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
-    
+    /*lazy var managedObjectContext : NSManagedObjectContext? = {
+    let appDelegate : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    if let managedContext : NSManagedObjectContext? = appDelegate.managedObjectContext {
+    return managedContext
+    } else {
+    return nil
+    }
+    }()*/
     /*
     // MARK: - Navigation
     //corpAcc = defaults!.stringForKey("CorpID")!;
